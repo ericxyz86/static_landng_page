@@ -61,4 +61,27 @@ body {
     background-color: rgba(0, 0, 0, 0.1);
 }
 
+/* Privacy Policy dark mode styles */
+.dark .prose h1.text-\[\#2B3990\],
+.dark .prose h2.text-\[\#2B3990\],
+.dark .prose .text-\[\#2B3990\],
+.dark h1 .text-\[\#2B3990\],
+.dark header .text-\[\#2B3990\] {
+    color: #ffffff;
+}
+
+/* Title text in dark mode */
+.dark h1 span.text-\[\#2B3990\],
+.dark h1 span.text-\[\#EE3124\] {
+    color: #ffffff;
+}
+
+.dark .prose .text-gray-700 {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.dark .prose .text-gray-600 {
+    color: rgba(255, 255, 255, 0.6);
+}
+
 /* Add your custom styles here */
