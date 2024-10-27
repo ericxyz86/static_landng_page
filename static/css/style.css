@@ -23,4 +23,29 @@ body {
     transform: translateY(0);
 }
 
+/* Dark mode styles */
+.dark body {
+    background-color: #1a1a1a;
+}
+
+.dark .bg-gradient-to-b {
+    background-image: linear-gradient(to bottom, #ffffff, rgba(43, 57, 144, 0.1));
+}
+
+.dark .text-[#2B3990]/80 {
+    color: rgba(43, 57, 144, 0.8);
+}
+
+.dark footer {
+    background-color: rgba(43, 57, 144, 0.05);
+}
+
+.dark #darkModeToggle svg {
+    color: #2B3990;
+}
+
+.dark .hover\:bg-gray-100:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
 /* Add your custom styles here */

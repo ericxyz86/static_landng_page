@@ -35,3 +35,31 @@ document.addEventListener('DOMContentLoaded', function() {
     const fadeElements = document.querySelectorAll('.fade-in');
     fadeElements.forEach(element => observer.observe(element));
 });
+
+// Dark mode functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const lightIcon = document.getElementById('lightIcon');
+    const darkIcon = document.getElementById('darkIcon');
+    
+    // Check for saved dark mode preference
+    const darkMode = localStorage.getItem('darkMode') === 'enabled';
+    if (darkMode) {
+        document.documentElement.classList.add('dark');
+        lightIcon.classList.add('hidden');
+        darkIcon.classList.remove('hidden');
+    }
+
+    darkModeToggle.addEventListener('click', () => {
+        // Toggle dark mode
+        document.documentElement.classList.toggle('dark');
+        
+        // Toggle icons
+        lightIcon.classList.toggle('hidden');
+        darkIcon.classList.toggle('hidden');
+        
+        // Save preference
+        const isDarkMode = document.documentElement.classList.contains('dark');
+        localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
+    });
+});

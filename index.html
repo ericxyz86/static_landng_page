@@ -18,7 +18,19 @@
                              alt="AI LABS Logo" 
                              class="w-48 h-16 object-contain">
                     </a>
-                    <!-- Removed the extra AI Logo image -->
+                </div>
+                <!-- Dark Mode Switch -->
+                <div class="flex items-center">
+                    <button id="darkModeToggle" class="p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                        <!-- Sun icon for light mode -->
+                        <svg id="lightIcon" class="w-6 h-6 text-[#2B3990]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                        </svg>
+                        <!-- Moon icon for dark mode (hidden by default) -->
+                        <svg id="darkIcon" class="hidden w-6 h-6 text-[#2B3990]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                        </svg>
+                    </button>
                 </div>
             </div>
         </div>
@@ -88,17 +100,19 @@
                     <div class="p-8">
                         <!-- Logo container with enhanced animation -->
                         <div class="w-16 h-16 bg-white rounded-xl mb-6 flex items-center justify-center transform group-hover:scale-125 group-hover:rotate-3 transition-all duration-500 ease-in-out">
-                            <svg class="w-12 h-12 text-[#2B3990]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l4 4m0 0l-4 4m4-4H3"/>
-                            </svg>
+                            <img src="static/images/agile-48x48.png" 
+                                 alt="AI Webpage Summarizer Logo" 
+                                 class="w-12 h-12 object-contain">
                         </div>
                         <!-- Title with enhanced animation -->
-                        <h2 class="text-2xl font-bold text-black mb-3 transform group-hover:translate-x-2 transition-all duration-500 ease-in-out">Coming Soon</h2>
-                        <p class="text-black/80 mb-6 line-clamp-3 group-hover:text-black transition-all duration-500 ease-in-out">Watch this space.</p>
+                        <h2 class="text-2xl font-bold text-black mb-3 transform group-hover:translate-x-2 transition-all duration-500 ease-in-out">AI Webpage Summarizer Chrome Extension</h2>
+                        <p class="text-black/80 mb-3 line-clamp-3 group-hover:text-black transition-all duration-500 ease-in-out">This chrome extension uses AI to summarize a webpage with key takeaways, insights, conclusions, and sentiment.</p>
+                        <!-- Privacy Policy Link -->
+                        <a href="privacy-policy.html" class="inline-block text-[#2B3990] hover:text-[#EE3124] mb-6 transition-colors duration-300">Read Privacy Policy</a>
                         <!-- Button with enhanced animation -->
                         <a href="#" target="_blank" rel="noopener noreferrer" 
                            class="inline-flex items-center px-6 py-3 rounded-xl bg-white text-[#2B3990] border-2 border-[#2B3990] font-bold group transition-all duration-500 ease-in-out transform hover:bg-[#2B3990]/10 hover:scale-105">
-                            <span class="group-hover:text-[#2B3990]">Launch App</span>
+                            <span class="group-hover:text-[#2B3990]">Download Extension</span>
                             <svg class="w-5 h-5 ml-2 transition-transform duration-500 ease-in-out group-hover:translate-x-1 text-[#2B3990]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                             </svg>
