@@ -85,3 +85,8 @@ body {
 }
 
 /* Add your custom styles here */
+
+/* GitHub logo color in dark mode */
+.dark footer svg {
+    color: #ffffff !important;
+}

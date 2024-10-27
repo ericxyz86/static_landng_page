@@ -38,3 +38,7 @@ A modern, responsive landing page for AI Labs' suite of applications, featuring 
 - Firefox (latest)
 - Safari (latest)
 - Edge (latest)
+
+## Links
+
+- GitHub Repository: [https://github.com/ericxyz86/static_landng_page](https://github.com/ericxyz86/static_landng_page)
