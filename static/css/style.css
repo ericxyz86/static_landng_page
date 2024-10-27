@@ -32,12 +32,25 @@ body {
     background-image: linear-gradient(to bottom, #ffffff, rgba(43, 57, 144, 0.1));
 }
 
-.dark .text-[#2B3990]/80 {
+.dark .text-blue-80 {
     color: rgba(43, 57, 144, 0.8);
 }
 
 .dark footer {
     background-color: rgba(43, 57, 144, 0.05);
+}
+
+/* Fixed footer text color selectors for dark mode */
+.dark footer p.text-\[\#2B3990\] {
+    color: #ffffff;
+}
+
+.dark footer a.text-\[\#2B3990\]\/60 {
+    color: #ffffff;
+}
+
+.dark footer a.text-\[\#2B3990\]\/60:hover {
+    color: #EE3124;
 }
 
 .dark #darkModeToggle svg {
