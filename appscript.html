@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Sheet App Script - AI LABS</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="static/css/style.css" rel="stylesheet">
+    <!-- Add Prism.js for code highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css" rel="stylesheet" />
+</head>
+<body class="bg-white font-inter">
+    <!-- Modern Navbar -->
+    <nav class="bg-white fixed w-full z-50 border-b border-[#2B3990]/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-24">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center nav-brand">
+                        <img src="static/images/ailabs.png" 
+                             alt="AI LABS Logo" 
+                             class="w-48 h-16 object-contain">
+                    </a>
+                </div>
+                <!-- Dark Mode Switch -->
+                <div class="flex items-center">
+                    <button id="darkModeToggle" class="p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                        <!-- Sun icon for light mode -->
+                        <svg id="lightIcon" class="w-6 h-6 text-[#2B3990]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                        </svg>
+                        <!-- Moon icon for dark mode (hidden by default) -->
+                        <svg id="darkIcon" class="hidden w-6 h-6 text-[#2B3990]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content Section -->
+    <div class="pt-32 pb-8 md:pt-40 px-4">
+        <div class="max-w-4xl mx-auto">
+            <header class="text-center mb-12">
+                <h1 class="text-3xl md:text-4xl font-bold mb-6 text-[#2B3990]">Google Sheet App Script for AI</h1>
+                <p class="text-gray-600">Last updated: December 12, 2024</p>
+            </header>
+
+            <div class="prose max-w-none mb-8">
+                <!-- Add new description section -->
+                <section class="mb-8 text-center">
+                    <p class="text-lg text-gray-700 max-w-3xl mx-auto">
+                        This App Script integrates AI capabilities directly into your Google Sheets. It primarily uses OpenAI's GPT-4o-mini model 
+                        for text processing and automatically falls back to Google's Gemini-1.5-flash-8b model if there are any issues with the OpenAI service. 
+                        The script includes built-in caching, error handling, and rate limiting to ensure reliable performance.
+                    </p>
+                </section>
+
+                <section class="mb-8">
+                    <h2 class="text-2xl font-semibold text-[#2B3990] mb-4">Installation Instructions</h2>
+                    <ol class="list-decimal pl-6 text-gray-700 mb-6">
+                        <li class="mb-2">Open your Google Sheet</li>
+                        <li class="mb-2">Click on Extensions > Apps Script</li>
+                        <li class="mb-2">Replace the content of Code.gs with the following code</li>
+                        <li class="mb-2">Save the script and close the editor</li>
+                        <li class="mb-2">Refresh your Google Sheet</li>
+                        <li class="mb-2">You can now use the =GPT() function in your cells</li>
+                    </ol>
+                </section>
+
+                <section class="mb-8">
+                    <h2 class="text-2xl font-semibold text-[#2B3990] mb-4">App Script Code</h2>
+                    <div class="bg-gray-900 rounded-lg overflow-hidden relative">
+                        <!-- Copy button -->
+                        <button onclick="copyCode()" class="absolute top-4 right-4 p-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors duration-200">
+                            <svg id="copyIcon" class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/>
+                            </svg>
+                            <svg id="checkIcon" class="hidden w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                        </button>
+                        <pre class="language-javascript text-sm p-4 max-h-[600px] overflow-y-auto"><code id="appScriptCode" class="language-javascript">
+// API Keys
+const OPENAI_API_KEY = 'YOUR_OPENAI_API_KEY'; // Replace with your OpenAI API key
+const GOOGLE_AI_API_KEY = 'YOUR_GOOGLE_AI_API_KEY'; // Replace with your Google AI Studio API key
+
+// Constants
+const CACHE_EXPIRATION = 21600; // Cache expiration in seconds (6 hours)
+const MIN_REQUEST_GAP = 1000; // Minimum time between requests in milliseconds
+let lastRequestTime = 0;
+
+/**
+ * Custom function to call AI models from a cell.
+ * @param {string} prompt The input prompt for the AI model
+ * @param {number} maxTokens The maximum number of tokens for the response. Optional, default is 450.
+ * @return The generated text from the AI model.
+ * @customfunction
+ */
+function GPT(prompt, maxTokens = 450) {
+  // Input validation
+  if (!prompt || typeof prompt !== 'string') {
+    return "Error: Invalid prompt. Please provide a non-empty string.";
+  }
+  
+  if (maxTokens && (typeof maxTokens !== 'number' || maxTokens <= 0)) {
+    return "Error: Invalid maxTokens. Please provide a positive number.";
+  }
+  
+  // API key validation
+  const hasValidOpenAI = isValidOpenAIKey();
+  const hasValidGoogleAI = isValidGoogleAIKey();
+  
+  if (!hasValidOpenAI && !hasValidGoogleAI) {
+    return "Error: No valid API keys found. Please provide either an OpenAI or Google AI Studio API key.";
+  }
+  
+  // Log which service will be used
+  if (!hasValidOpenAI) {
+    console.log("OpenAI API key not valid, using Google AI Studio");
+  }
+  // Get the active spreadsheet and the cell that called this function
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var cell = sheet.getActiveCell();
+
+  // Process the prompt to replace cell references with their values
+  prompt = processCellReferences(prompt, sheet, cell);
+  
+  if (!prompt) {
+    return "Error: Please provide a prompt.";
+  }
+
+  // Try OpenAI first
+  const openAIResponse = callOpenAI(prompt, maxTokens);
+  
+  // If OpenAI fails, fall back to Google AI Studio
+  if (openAIResponse.startsWith("Error:")) {
+    console.log("OpenAI request failed, falling back to Google AI Studio");
+    return callGoogleAI(prompt, maxTokens);
+  }
+  
+  return openAIResponse;
+}
+
+/**
+ * API Validation Functions
+ */
+function isValidOpenAIKey() {
+  // Check if key exists and has the correct format
+  if (!OPENAI_API_KEY || 
+      OPENAI_API_KEY === 'YOUR_OPENAI_API_KEY' || 
+      !OPENAI_API_KEY.startsWith('sk-') ||
+      OPENAI_API_KEY.length < 40) {  // OpenAI keys are typically longer than 40 chars
+    return false;
+  }
+  return true;
+}
+
+function isValidGoogleAIKey() {
+  // Check if key exists and has a reasonable format
+  if (!GOOGLE_AI_API_KEY || 
+      GOOGLE_AI_API_KEY === 'YOUR_GOOGLE_AI_API_KEY' ||
+      GOOGLE_AI_API_KEY.length < 20) {  // Basic length validation
+    return false;
+  }
+  return true;
+}
+
+/**
+ * Validate API response
+ */
+function isValidResponse(response, service) {
+  if (!response || typeof response !== 'object') {
+    return false;
+  }
+
+  try {
+    if (service === 'openai') {
+      return response.choices && 
+             Array.isArray(response.choices) && 
+             response.choices.length > 0 &&
+             response.choices[0].message &&
+             response.choices[0].message.content;
+    } else if (service === 'google') {
+      return response.candidates && 
+             Array.isArray(response.candidates) && 
+             response.candidates.length > 0 &&
+             response.candidates[0].content &&
+             response.candidates[0].content.parts &&
+             response.candidates[0].content.parts[0].text;
+    }
+  } catch (e) {
+    console.error(`Error validating ${service} response:`, e);
+    return false;
+  }
+  
+  return false;
+}
+
+/**
+ * Error handling function
+ */
+function handleAPIError(error, service) {
+  const errorMessage = error.toString().toLowerCase();
+  
+  // Generic error messages
+  if (errorMessage.includes('network') || errorMessage.includes('connection')) {
+    return `Error: Network connectivity issues with ${service}. Please check your internet connection.`;
+  }
+  
+  // Service-specific error handling
+  if (service === 'openai') {
+    if (errorMessage.includes('invalid api key')) {
+      return 'Error: Invalid OpenAI API key';
+    } else if (errorMessage.includes('quota')) {
+      return 'Error: OpenAI API quota exceeded';
+    } else if (errorMessage.includes('rate limit')) {
+      return 'Error: OpenAI rate limit reached';
+    }
+  } else if (service === 'google') {
+    if (errorMessage.includes('invalid api key')) {
+      return 'Error: Invalid Google AI Studio API key';
+    } else if (errorMessage.includes('quota')) {
+      return 'Error: Google AI Studio quota exceeded';
+    } else if (errorMessage.includes('rate limit')) {
+      return 'Error: Google AI Studio rate limit reached';
+    }
+  }
+  
+  return `Error: ${service} API error - ${error}`;
+}
+
+/**
+ * Call OpenAI API
+ */
+function callOpenAI(prompt, maxTokens) {
+  // Check if OpenAI key is valid before making the API call
+  if (!isValidOpenAIKey()) {
+    console.log("Invalid or missing OpenAI API key, falling back to Google AI Studio");
+    return "Error: Invalid OpenAI API key";
+  }
+  const apiUrl = 'https://api.openai.com/v1/chat/completions';
+  const payload = {
+    'model': 'gpt-4o-mini',
+    'messages': [
+      {'role': 'system', 'content': 'You are a helpful data analyst that is an expert in sentiment analysis, categorization, topic modelling, and summarization.'},
+      {'role': 'user', 'content': prompt}
+    ],
+    'max_tokens': maxTokens
+  };
+
+  const options = {
+    'method': 'post',
+    'contentType': 'application/json',
+    'headers': {
+      'Authorization': 'Bearer ' + OPENAI_API_KEY
+    },
+    'payload': JSON.stringify(payload),
+    'muteHttpExceptions': true
+  };
+
+  return fetchWithRetry(apiUrl, options, 'openai');
+}
+
+/**
+ * Call Google AI Studio API
+ */
+function callGoogleAI(prompt, maxTokens) {
+  // Create cache key for Google AI
+  const cacheKey = createCacheKey(prompt, maxTokens);
+  const cachedResponse = getCachedResponse(cacheKey);
+  if (cachedResponse) {
+    return cachedResponse;
+  }
+
+  const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-8b:generateContent';
+  const payload = {
+    'contents': [{
+      'parts': [{
+        'text': prompt
+      }]
+    }],
+    'generationConfig': {
+      'maxOutputTokens': maxTokens,
+      'temperature': 0.7,
+      'topP': 0.8,
+      'topK': 40
+    }
+  };
+
+  const options = {
+    'method': 'post',
+    'contentType': 'application/json',
+    'headers': {
+      'x-goog-api-key': GOOGLE_AI_API_KEY
+    },
+    'payload': JSON.stringify(payload),
+    'muteHttpExceptions': true
+  };
+
+  const response = fetchWithRetry(apiUrl, options, 'google');
+  if (!response.startsWith("Error:")) {
+    cacheResponse(cacheKey, response);
+  }
+  return response;
+}
+
+/**
+ * Unified fetch with retry logic for both APIs
+ */
+function fetchWithRetry(url, options, service) {
+  const maxRetries = 5;
+  const baseDelay = 1000;
+  let retryCount = 0;
+  let lastError = null;
+
+  while (retryCount < maxRetries) {
+    try {
+      // Check request timing
+      const currentTime = new Date().getTime();
+      const timeSinceLastRequest = currentTime - lastRequestTime;
+      if (timeSinceLastRequest < MIN_REQUEST_GAP) {
+        Utilities.sleep(MIN_REQUEST_GAP - timeSinceLastRequest);
+      }
+
+      lastRequestTime = new Date().getTime();
+      const response = UrlFetchApp.fetch(url, options);
+      const responseCode = response.getResponseCode();
+      
+      // Handle various HTTP status codes
+      switch (responseCode) {
+        case 200:
+          const json = JSON.parse(response.getContentText());
+          
+          // Validate response structure
+          if (!isValidResponse(json, service)) {
+            throw new Error(`Invalid ${service} API response structure`);
+          }
+          
+          // Return appropriate content based on service
+          if (service === 'openai') {
+            return json.choices[0].message.content.trim();
+          } else {
+            return json.candidates[0].content.parts[0].text.trim();
+          }
+          
+        case 401:
+          throw new Error(`Invalid ${service} API key`);
+          
+        case 429:
+          throw new Error(`${service} rate limit reached`);
+          
+        case 500:
+          throw new Error(`${service} server error`);
+          
+        default:
+          throw new Error(`${service} API returned status code: ${responseCode}`);
+      }
+      
+    } catch (error) {
+      retryCount++;
+      console.log(`Attempt ${retryCount} failed for ${service}: ${error.toString()}`);
+      
+      if (retryCount === maxRetries) {
+        return `Error: ${error.toString()}. Try again in a few minutes.`;
+      }
+      
+      const delay = baseDelay * Math.pow(2, retryCount) * (0.5 + Math.random());
+      Utilities.sleep(delay);
+    }
+  }
+}
+
+/**
+ * Cache management functions
+ */
+function createCacheKey(prompt, maxTokens) {
+  const stringToHash = prompt + maxTokens.toString();
+  const hash = Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, stringToHash);
+  const hashHex = hash.map(function(byte) {
+    return ('0' + (byte & 0xFF).toString(16)).slice(-2);
+  }).join('');
+  return hashHex.substring(0, 32);
+}
+
+function getCachedResponse(key) {
+  const cache = CacheService.getScriptCache();
+  return cache.get(key);
+}
+
+function cacheResponse(key, value) {
+  const cache = CacheService.getScriptCache();
+  cache.put(key, value, CACHE_EXPIRATION);
+}
+
+/**
+ * Process cell references in the prompt
+ */
+function processCellReferences(prompt, sheet, cell) {
+  var cellRefRegex = /\b[A-Z]+\d+\b/g;
+  return prompt.replace(cellRefRegex, function(match) {
+    try {
+      var value = sheet.getRange(match).getValue();
+      return value.toString();
+    } catch (e) {
+      return match;
+    }
+  });
+}
+
+/**
+ * UI Setup
+ */
+function onOpen() {
+  SpreadsheetApp.getUi()
+    .createMenu('AI Tools')
+    .addItem('Replace AI Formulas with Values', 'replaceGPTFormulasWithValues')
+    .addItem('Clear Cache', 'clearCache')
+    .addToUi();
+}
+
+/**
+ * Clear the response cache
+ */
+function clearCache() {
+  const cache = CacheService.getScriptCache();
+  cache.removeAll();
+  SpreadsheetApp.getUi().alert('Cache cleared successfully!');
+}
+
+/**
+ * Replace formulas with values in selected column
+ */
+function replaceGPTFormulasWithValues() {
+  var sheet = SpreadsheetApp.getActiveSheet();
+  var selection = sheet.getSelection();
+  var range = selection.getActiveRange();
+  
+  if (range.getNumColumns() !== 1) {
+    SpreadsheetApp.getUi().alert('Please select a single column.');
+    return;
+  }
+  
+  var values = range.getValues();
+  var formulas = range.getFormulas();
+  
+  for (var i = 0; i < values.length; i++) {
+    if (formulas[i][0].toLowerCase().startsWith('=gpt(')) {
+      values[i][0] = values[i][0].toString();
+    }
+  }
+  
+  range.setValues(values);
+}</code></pre>
+                    </div>
+                </section>
+
+                <section class="mb-8">
+                    <h2 class="text-2xl font-semibold text-[#2B3990] mb-4">Usage Examples</h2>
+                    <ul class="list-disc pl-6 text-gray-700">
+                        <li class="mb-2">=GPT("Summarize this text: " & A1)</li>
+                        <li class="mb-2">=GPT("Analyze the sentiment of: " & B2)</li>
+                        <li class="mb-2">=GPT("Categorize this product review: " & C3)</li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modern Footer -->
+    <footer class="bg-[#2B3990]/5 py-8 mt-20 border-t border-[#2B3990]/20">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col justify-center items-center space-y-4">
+                <!-- Copyright text -->
+                <p class="text-[#2B3990] dark:text-white text-center">
+                    © 2024 AI LABS. All rights reserved.
+                </p>
+                <!-- GitHub link -->
+                <a href="https://github.com/ericxyz86/static_landng_page" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="hover:opacity-75 transition-opacity duration-300">
+                    <svg class="w-6 h-6 text-[#2B3990] dark:text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="static/js/main.js"></script>
+    <!-- Add Prism.js for code highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-javascript.min.js"></script>
+    <script>
+    function copyCode() {
+        const codeElement = document.getElementById('appScriptCode');
+        const copyIcon = document.getElementById('copyIcon');
+        const checkIcon = document.getElementById('checkIcon');
+        
+        // Create a temporary textarea element to copy the text
+        const textarea = document.createElement('textarea');
+        textarea.value = codeElement.textContent;
+        document.body.appendChild(textarea);
+        textarea.select();
+        
+        try {
+            // Execute the copy command
+            document.execCommand('copy');
+            
+            // Show success state
+            copyIcon.classList.add('hidden');
+            checkIcon.classList.remove('hidden');
+            
+            // Reset after 2 seconds
+            setTimeout(() => {
+                copyIcon.classList.remove('hidden');
+                checkIcon.classList.add('hidden');
+            }, 2000);
+            
+        } catch (err) {
+            console.error('Failed to copy text:', err);
+        } finally {
+            // Clean up
+            document.body.removeChild(textarea);
+        }
+    }
+    </script>
+</body>
+</html> 
