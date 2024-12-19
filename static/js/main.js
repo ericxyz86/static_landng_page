@@ -82,9 +82,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Check credentials
     function checkCredentials() {
-        const username = usernameInput.value;
-        const password = passwordInput.value;
-        return username === 'agileintel' && password === '16f2WorldSquare';
+        const username = usernameInput.value.trim();
+        const password = passwordInput.value.trim();
+        console.log('Password entered:', password); // For debugging
+        return username === 'agileintel' && password === '16f2worldsquare';
     }
 
     // Handle login form submission
@@ -109,4 +110,14 @@ function logout() {
     const loginOverlay = document.getElementById('loginOverlay');
     mainContent.classList.add('hidden');
     loginOverlay.style.display = 'flex';
+}
+
+// Add this function to your existing main.js
+function navigateToApp(url) {
+    if (localStorage.getItem('isLoggedIn') === 'true') {
+        window.open(url, '_blank');
+    } else {
+        alert('Please log in to access this application.');
+        window.location.href = '/index.html';
+    }
 }
