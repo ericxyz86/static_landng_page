@@ -63,3 +63,50 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
     });
 });
+
+// Login functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const loginOverlay = document.getElementById('loginOverlay');
+    const mainContent = document.getElementById('mainContent');
+    const loginForm = document.getElementById('loginForm');
+    const loginError = document.getElementById('loginError');
+    const loginButton = document.getElementById('loginButton');
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
+
+    // Check if user is already logged in
+    if (localStorage.getItem('isLoggedIn') === 'true') {
+        loginOverlay.style.display = 'none';
+        mainContent.classList.remove('hidden');
+    }
+
+    // Check credentials
+    function checkCredentials() {
+        const username = usernameInput.value;
+        const password = passwordInput.value;
+        return username === 'agileintel' && password === '16f2WorldSquare';
+    }
+
+    // Handle login form submission
+    loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        if (checkCredentials()) {
+            localStorage.setItem('isLoggedIn', 'true');
+            loginOverlay.style.display = 'none';
+            mainContent.classList.remove('hidden');
+            loginError.classList.add('hidden');
+        } else {
+            loginError.classList.remove('hidden');
+        }
+    });
+});
+
+// Update logout functionality
+function logout() {
+    localStorage.removeItem('isLoggedIn');
+    const mainContent = document.getElementById('mainContent');
+    const loginOverlay = document.getElementById('loginOverlay');
+    mainContent.classList.add('hidden');
+    loginOverlay.style.display = 'flex';
+}
