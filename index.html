@@ -7,28 +7,37 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
     <link href="static/css/style.css" rel="stylesheet">
 </head>
-<body class="bg-white font-inter">
+<body class="ai-gradient-bg font-inter">
+    <!-- WebGL Shader Background -->
+    <div class="shader-background"></div>
+    
+    <!-- Abstract Shapes -->
+    <div class="abstract-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
     <!-- Login Overlay -->
-    <div id="loginOverlay" class="fixed inset-0 bg-white z-[60] flex items-center justify-center">
-        <div class="bg-white p-8 rounded-2xl shadow-lg max-w-md w-full mx-4 border-2 border-[#2B3990]/20">
+    <div id="loginOverlay" class="login-overlay fixed inset-0 z-[60] flex items-center justify-center">
+        <div class="login-modal p-8 max-w-md w-full mx-4">
             <div class="text-center mb-8">
                 <img src="static/images/ailabs.png" alt="AI LABS Logo" class="w-48 h-16 object-contain mx-auto mb-6">
-                <h2 class="text-2xl font-bold text-[#2B3990]">Login to AI LABS</h2>
+                <h2 class="text-2xl font-bold text-white">Login to AI LABS</h2>
             </div>
             <form id="loginForm" class="space-y-6">
                 <div>
-                    <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Username</label>
-                    <input type="text" id="username" name="username" required
-                        class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2B3990] focus:border-transparent outline-none">
+                    <label for="username" class="block text-sm font-medium text-white mb-2">Username</label>
+                    <input type="text" id="username" name="username" required placeholder="Enter username"
+                        class="login-input">
                 </div>
                 <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                    <input type="password" id="password" name="password" required
-                        class="w-full px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#2B3990] focus:border-transparent outline-none">
+                    <label for="password" class="block text-sm font-medium text-white mb-2">Password</label>
+                    <input type="password" id="password" name="password" required placeholder="Enter password"
+                        class="login-input">
                 </div>
-                <div id="loginError" class="text-red-500 text-sm hidden">Invalid username or password</div>
-                <button type="submit" id="loginButton"
-                    class="w-32 mx-auto block bg-blue-600 text-white py-2 px-4 rounded-md font-bold text-base border-2 border-blue-700 hover:bg-blue-700 transition-colors duration-300">
+                <div id="loginError" class="text-red-300 text-sm hidden">Invalid username or password</div>
+                <button type="submit" id="loginButton" class="login-btn w-full">
                     LOGIN
                 </button>
             </form>
@@ -36,9 +45,9 @@
     </div>
 
     <!-- Main Content Container - Hidden by default -->
-    <div id="mainContent" class="hidden">
+    <div id="mainContent" class="hidden content-overlay">
         <!-- Modern Navbar -->
-        <nav class="bg-white fixed w-full z-50 border-b border-[#2B3990]/20">
+        <nav class="modern-nav fixed w-full z-50">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-24">
                     <div class="flex items-center">
@@ -50,16 +59,16 @@
                     </div>
                     <!-- Dark Mode Switch -->
                     <div class="flex items-center">
-                        <button onclick="logout()" class="mr-4 text-[#2B3990] hover:text-[#EE3124] transition-colors duration-300">
+                        <button onclick="logout()" class="mr-4 text-white hover:text-yellow-300 transition-colors duration-300">
                             Logout
                         </button>
-                        <button id="darkModeToggle" class="p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                        <button id="darkModeToggle" class="p-2 rounded-lg hover:bg-white/10 transition-colors duration-200">
                             <!-- Sun icon for light mode -->
-                            <svg id="lightIcon" class="w-6 h-6 text-[#2B3990]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg id="lightIcon" class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
                             </svg>
                             <!-- Moon icon for dark mode (hidden by default) -->
-                            <svg id="darkIcon" class="hidden w-6 h-6 text-[#2B3990]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg id="darkIcon" class="hidden w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
                             </svg>
                         </button>
@@ -69,152 +78,116 @@
         </nav>
 
         <!-- Hero Section -->
-        <div class="pt-32 pb-8 md:pt-40 px-4 bg-gradient-to-b from-white to-[#2B3990]/5">
+        <div class="pt-32 pb-16 md:pt-40 px-4">
             <div class="max-w-7xl mx-auto">
-                <header class="text-center mb-16">
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-                        Welcome to <span class="text-[#2B3990]">AI</span> <span class="text-[#EE3124]">LABS</span>
-                        <span class="block text-[#2B3990]">App Collection</span>
+                <header class="text-center mb-20 fade-in">
+                    <h1 class="hero-title text-white mb-6">
+                        Welcome to <span class="gradient-text">AI LABS</span>
                     </h1>
-                    <p class="text-xl md:text-2xl text-[#2B3990]/80 max-w-2xl mx-auto">Data analytics applications built with AI</p>
+                    <p class="hero-subtitle text-white">Immerse yourself in a world where artificial intelligence meets innovation. Create, analyze, and transform data with cutting-edge AI tools.</p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
+                        <a href="#apps" class="btn-primary">Explore Apps</a>
+                        <a href="#about" class="btn-secondary">Learn More</a>
+                    </div>
                 </header>
 
                 <!-- App Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 px-4 max-w-7xl mx-auto">
+                <div id="apps" class="app-cards-container fade-in">
                     <!-- App Card 1 - Apple App Store Extractor -->
-                    <div class="group bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500 ease-in-out overflow-hidden border border-gray-200 hover:-translate-y-3 hover:border-[#2B3990] transform">
-                        <div class="p-8">
-                            <!-- Logo container with enhanced animation -->
-                            <div class="w-16 h-16 bg-white rounded-xl mb-6 flex items-center justify-center transform group-hover:scale-125 group-hover:rotate-3 transition-all duration-500 ease-in-out">
-                                <img src="static/images/apple-store-logo.png" 
-                                     alt="Apple App Store Logo" 
-                                     class="w-12 h-12 object-contain">
-                            </div>
-                            <!-- Title with enhanced animation -->
-                            <h2 class="text-2xl font-bold text-black mb-3 transform group-hover:translate-x-2 transition-all duration-500 ease-in-out">Apple App Store Reviews</h2>
-                            <p class="text-black/80 mb-6 line-clamp-3 group-hover:text-black transition-all duration-500 ease-in-out">Extract and analyze data from the Apple App Store with ease.</p>
-                            <!-- Button with enhanced animation -->
-                            <a href="#" onclick="navigateToApp('https://appstore-reviews-extraction.onrender.com')" 
-                               class="inline-flex items-center px-6 py-3 rounded-xl bg-white text-[#2B3990] border-2 border-[#2B3990] font-bold group transition-all duration-500 ease-in-out transform hover:bg-[#2B3990]/10 hover:scale-105">
-                                <span class="group-hover:text-[#2B3990]">Launch App</span>
-                                <svg class="w-5 h-5 ml-2 transition-transform duration-500 ease-in-out group-hover:translate-x-1 text-[#2B3990]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                                </svg>
-                            </a>
+                    <div class="modern-app-card scale-in">
+                        <div class="app-icon-container">
+                            <img src="static/images/apple-store-logo.png" alt="Apple App Store Logo" class="app-icon">
                         </div>
+                        <h2 class="app-title">Apple Store Reviews</h2>
+                        <p class="app-description">Extract and analyze data from the Apple App Store with ease.</p>
+                        <a href="#" onclick="navigateToApp('https://appstore-reviews-extraction.onrender.com')" class="app-launch-btn">
+                            Launch App
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                            </svg>
+                        </a>
                     </div>
 
                     <!-- App Card 2 - Google Play Store Extractor -->
-                    <div class="group bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500 ease-in-out overflow-hidden border border-gray-200 hover:-translate-y-3 hover:border-[#2B3990] transform">
-                        <div class="p-8">
-                            <!-- Logo container with enhanced animation -->
-                            <div class="w-16 h-16 bg-white rounded-xl mb-6 flex items-center justify-center transform group-hover:scale-125 group-hover:rotate-3 transition-all duration-500 ease-in-out">
-                                <img src="static/images/google-play-logo.png" 
-                                     alt="Google Play Store Logo" 
-                                     class="w-12 h-12 object-contain">
-                            </div>
-                            <!-- Title with enhanced animation -->
-                            <h2 class="text-2xl font-bold text-black mb-3 transform group-hover:translate-x-2 transition-all duration-500 ease-in-out">Google Play Store Reviews</h2>
-                            <p class="text-black/80 mb-6 line-clamp-3 group-hover:text-black transition-all duration-500 ease-in-out">Extract and analyze data from the Google Play Store efficiently.</p>
-                            <!-- Button with enhanced animation -->
-                            <a href="#" onclick="navigateToApp('https://playstore-reviews-extraction.onrender.com')" 
-                               class="inline-flex items-center px-6 py-3 rounded-xl bg-white text-[#2B3990] border-2 border-[#2B3990] font-bold group transition-all duration-500 ease-in-out transform hover:bg-[#2B3990]/10 hover:scale-105">
-                                <span class="group-hover:text-[#2B3990]">Launch App</span>
-                                <svg class="w-5 h-5 ml-2 transition-transform duration-500 ease-in-out group-hover:translate-x-1 text-[#2B3990]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                                </svg>
-                            </a>
+                    <div class="modern-app-card scale-in">
+                        <div class="app-icon-container">
+                            <img src="static/images/google-play-logo.png" alt="Google Play Store Logo" class="app-icon">
                         </div>
+                        <h2 class="app-title">Play Store Reviews</h2>
+                        <p class="app-description">Extract and analyze data from the Google Play Store efficiently.</p>
+                        <a href="#" onclick="navigateToApp('https://playstore-reviews-extraction.onrender.com')" class="app-launch-btn">
+                            Launch App
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                            </svg>
+                        </a>
                     </div>
 
                     <!-- App Card 3 -->
-                    <div class="group bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500 ease-in-out overflow-hidden border border-gray-200 hover:-translate-y-3 hover:border-[#2B3990] transform">
-                        <div class="p-8">
-                            <!-- Logo container with enhanced animation -->
-                            <div class="w-16 h-16 bg-white rounded-xl mb-6 flex items-center justify-center transform group-hover:scale-125 group-hover:rotate-3 transition-all duration-500 ease-in-out">
-                                <img src="static/images/agile-48x48.png" 
-                                     alt="AI Webpage Summarizer Logo" 
-                                     class="w-12 h-12 object-contain">
-                            </div>
-                            <!-- Title with enhanced animation -->
-                            <h2 class="text-2xl font-bold text-black mb-3 transform group-hover:translate-x-2 transition-all duration-500 ease-in-out">AI Webpage Summarizer Chrome Extension</h2>
-                            <p class="text-black/80 mb-3 line-clamp-3 group-hover:text-black transition-all duration-500 ease-in-out">This chrome extension uses AI to summarize a webpage with key takeaways, insights, conclusions, and sentiment.</p>
-                            <!-- Privacy Policy Link -->
-                            <a href="privacy-policy.html" class="inline-block text-[#2B3990] hover:text-[#EE3124] mb-6 transition-colors duration-300">Read Privacy Policy</a>
-                            <!-- Button with enhanced animation - Updated href -->
-                            <a href="#" onclick="navigateToApp('https://chromewebstore.google.com/detail/ai-executive-summary/leglfbaoonknnjkehmbpjkcmgljledne')" 
-                               class="inline-flex items-center px-6 py-3 rounded-xl bg-white text-[#2B3990] border-2 border-[#2B3990] font-bold group transition-all duration-500 ease-in-out transform hover:bg-[#2B3990]/10 hover:scale-105">
-                                <span class="group-hover:text-[#2B3990]">Install Extension</span>
-                                <svg class="w-5 h-5 ml-2 transition-transform duration-500 ease-in-out group-hover:translate-x-1 text-[#2B3990]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                                </svg>
-                            </a>
+                    <div class="modern-app-card scale-in">
+                        <div class="app-icon-container">
+                            <img src="static/images/agile-48x48.png" alt="AI Webpage Summarizer Logo" class="app-icon">
                         </div>
+                        <h2 class="app-title">AI Webpage Summarizer</h2>
+                        <p class="app-description">Chrome extension using AI to summarize webpages with key insights and sentiment analysis.</p>
+                        <div class="mb-4">
+                            <a href="privacy-policy.html" class="text-white/70 hover:text-white text-sm transition-colors duration-300">Privacy Policy</a>
+                        </div>
+                        <a href="#" onclick="navigateToApp('https://chromewebstore.google.com/detail/ai-executive-summary/leglfbaoonknnjkehmbpjkcmgljledne')" class="app-launch-btn">
+                            Install Extension
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                            </svg>
+                        </a>
                     </div>
 
                     <!-- App Card 4 -->
-                    <div class="group bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500 ease-in-out overflow-hidden border border-gray-200 hover:-translate-y-3 hover:border-[#2B3990] transform">
-                        <div class="p-8">
-                            <!-- Logo container with enhanced animation -->
-                            <div class="w-16 h-16 bg-white rounded-xl mb-6 flex items-center justify-center transform group-hover:scale-125 group-hover:rotate-3 transition-all duration-500 ease-in-out">
-                                <img src="static/images/convert-48x48.png" 
-                                     alt="Social Media Data Processor Logo" 
-                                     class="w-12 h-12 object-contain">
-                            </div>
-                            <!-- Title with enhanced animation -->
-                            <h2 class="text-2xl font-bold text-black mb-3 transform group-hover:translate-x-2 transition-all duration-500 ease-in-out">Social Media Data Processor</h2>
-                            <p class="text-black/80 mb-6 line-clamp-3 group-hover:text-black transition-all duration-500 ease-in-out">Convert your social media data exports into structured CSV format.</p>
-                            <!-- Button with enhanced animation -->
-                            <a href="#" onclick="navigateToApp('https://social-media-txt-csv.onrender.com/')" 
-                               class="inline-flex items-center px-6 py-3 rounded-xl bg-white text-[#2B3990] border-2 border-[#2B3990] font-bold group transition-all duration-500 ease-in-out transform hover:bg-[#2B3990]/10 hover:scale-105">
-                                <span class="group-hover:text-[#2B3990]">Launch App</span>
-                                <svg class="w-5 h-5 ml-2 transition-transform duration-500 ease-in-out group-hover:translate-x-1 text-[#2B3990]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                                </svg>
-                            </a>
+                    <div class="modern-app-card scale-in">
+                        <div class="app-icon-container">
+                            <img src="static/images/convert-48x48.png" alt="Social Media Data Processor Logo" class="app-icon">
                         </div>
+                        <h2 class="app-title">Social Media Processor</h2>
+                        <p class="app-description">Convert your social media data exports into structured CSV format.</p>
+                        <a href="#" onclick="navigateToApp('https://social-media-txt-csv.onrender.com/')" class="app-launch-btn">
+                            Launch App
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                            </svg>
+                        </a>
                     </div>
 
                     <!-- App Card 5 -->
-                    <div class="group bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500 ease-in-out overflow-hidden border border-gray-200 hover:-translate-y-3 hover:border-[#2B3990] transform">
-                        <div class="p-8">
-                            <!-- Logo container with enhanced animation -->
-                            <div class="w-16 h-16 bg-white rounded-xl mb-6 flex items-center justify-center transform group-hover:scale-125 group-hover:rotate-3 transition-all duration-500 ease-in-out">
-                                <img src="static/images/google-sheets.jpg" 
-                                     alt="Google Sheets Logo" 
-                                     class="w-12 h-12 object-contain">
-                            </div>
-                            <!-- Title with enhanced animation -->
-                            <h2 class="text-2xl font-bold text-black mb-3 transform group-hover:translate-x-2 transition-all duration-500 ease-in-out">Google Sheet App Script for AI</h2>
-                            <p class="text-black/80 mb-6 line-clamp-3 group-hover:text-black transition-all duration-500 ease-in-out">Enhance your Google Sheets with AI capabilities using custom App Scripts.</p>
-                            <!-- Button with enhanced animation -->
-                            <a href="#" onclick="navigateToApp('appscript.html')" 
-                               class="inline-flex items-center px-6 py-3 rounded-xl bg-white text-[#2B3990] border-2 border-[#2B3990] font-bold group transition-all duration-500 ease-in-out transform hover:bg-[#2B3990]/10 hover:scale-105">
-                                <span class="group-hover:text-[#2B3990]">View App Script</span>
-                                <svg class="w-5 h-5 ml-2 transition-transform duration-500 ease-in-out group-hover:translate-x-1 text-[#2B3990]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                                </svg>
-                            </a>
+                    <div class="modern-app-card scale-in">
+                        <div class="app-icon-container">
+                            <img src="static/images/google-sheets.jpg" alt="Google Sheets Logo" class="app-icon">
                         </div>
+                        <h2 class="app-title">Google Sheets AI Script</h2>
+                        <p class="app-description">Enhance your Google Sheets with AI capabilities using custom App Scripts.</p>
+                        <a href="#" onclick="navigateToApp('appscript.html')" class="app-launch-btn">
+                            View Script
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                            </svg>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Modern Footer -->
-        <footer class="bg-[#2B3990]/5 py-8 mt-20 border-t border-[#2B3990]/20">
+        <footer class="modern-footer py-8 mt-20">
             <div class="container mx-auto px-4">
                 <div class="flex flex-col justify-center items-center space-y-4">
                     <!-- Copyright text -->
-                    <p class="text-[#2B3990] dark:text-white text-center">
+                    <p class="text-white text-center opacity-80">
                         © 2024 AI LABS. All rights reserved.
                     </p>
                     <!-- GitHub link -->
                     <a href="https://github.com/ericxyz86/static_landng_page" 
                        target="_blank" 
                        rel="noopener noreferrer" 
-                       class="hover:opacity-75 transition-opacity duration-300">
-                        <svg class="w-6 h-6 text-[#2B3990] dark:text-white" fill="currentColor" viewBox="0 0 24 24">
+                       class="text-white hover:text-yellow-300 transition-colors duration-300">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                             <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/>
                         </svg>
                     </a>
@@ -225,5 +198,6 @@
 
     <script src="static/js/main.js"></script>
     <script src="static/js/auth.js"></script>
+    <script src="static/js/shader-background.js"></script>
 </body>
 </html>
