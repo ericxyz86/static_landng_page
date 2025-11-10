@@ -601,3 +601,9 @@ body {
 .dark .page-content li {
     color: rgba(255, 255, 255, 0.8);
 }
+/* DDBrain logo visibility fix */
+img[alt="DDBrain Logo"] {
+    background: white;
+    padding: 8px;
+    border-radius: 16px;
+}
