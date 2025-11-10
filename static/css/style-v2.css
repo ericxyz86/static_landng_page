@@ -1,0 +1,603 @@
+/* Base styles - Cache bust: 2025-11-10-15:00 */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    overflow-x: hidden;
+}
+
+/* Modern gradient background */
+.modern-gradient-bg {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* AI-themed gradient for main site */
+.ai-gradient-bg {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 25%, #00b4db 50%, #0083b0 75%, #1e3c72 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 20s ease infinite;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* WebGL Shader Background Container */
+.shader-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+    overflow: hidden;
+    opacity: 0.8; /* Blend with gradient background */
+    mix-blend-mode: screen; /* Enhance blending */
+}
+
+/* Ensure shader canvas styling */
+.shader-background canvas {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    z-index: 2 !important;
+    pointer-events: none !important;
+}
+
+/* Performance optimizations for mobile */
+@media (max-width: 768px) {
+    .shader-background {
+        opacity: 0.6; /* Reduce intensity on mobile */
+    }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .shader-background {
+        display: none;
+    }
+}
+
+/* Hide shader on very old browsers or low-end devices */
+@supports not (mix-blend-mode: screen) {
+    .shader-background {
+        display: none;
+    }
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Flowing abstract shapes */
+.abstract-shapes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    z-index: 3;
+}
+
+.shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.3;
+    animation: float 20s ease-in-out infinite;
+}
+
+.shape-1 {
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.1);
+    top: 10%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.shape-2 {
+    width: 200px;
+    height: 200px;
+    background: rgba(0, 180, 219, 0.2);
+    top: 60%;
+    right: 10%;
+    animation-delay: 7s;
+}
+
+.shape-3 {
+    width: 400px;
+    height: 400px;
+    background: rgba(102, 126, 234, 0.15);
+    bottom: 10%;
+    left: 20%;
+    animation-delay: 14s;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33% { transform: translateY(-30px) rotate(120deg); }
+    66% { transform: translateY(15px) rotate(240deg); }
+}
+
+/* Modern typography */
+.gradient-text {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800;
+}
+
+.hero-title {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+}
+
+.hero-subtitle {
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-weight: 400;
+    line-height: 1.6;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto 3rem auto;
+}
+
+/* Modern buttons */
+.btn-primary {
+    background: linear-gradient(135deg, #ff6b6b, #feca57);
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(255, 107, 107, 0.3);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(255, 107, 107, 0.4);
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 14px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+/* Modern navigation */
+.modern-nav {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 50;
+}
+
+/* Modern app cards */
+.app-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Responsive grid with maximum 4 columns */
+@media (min-width: 769px) and (max-width: 1023px) {
+    .app-cards-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+    .app-cards-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1440px) {
+    .app-cards-container {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.modern-app-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 24px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.modern-app-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border-radius: 24px;
+    z-index: -1;
+}
+
+.modern-app-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.app-icon-container {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem auto;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.modern-app-card:hover .app-icon-container {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.app-icon {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+}
+
+.app-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.app-description {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+}
+
+.app-launch-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    backdrop-filter: blur(10px);
+}
+
+.app-launch-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Glassmorphism login modal */
+.login-overlay {
+    background: rgba(0, 0, 0, 0.6); /* Stronger fallback background */
+    position: fixed;
+    z-index: 9999;
+}
+
+/* Add backdrop-filter support check */
+@supports (backdrop-filter: blur(10px)) {
+    .login-overlay {
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(10px);
+    }
+}
+
+.login-modal {
+    background: rgba(255, 255, 255, 0.25); /* Stronger fallback background */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 24px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 10000;
+}
+
+/* Add backdrop-filter support check */
+@supports (backdrop-filter: blur(15px)) {
+    .login-modal {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(15px); /* Reduced from 30px for better performance */
+    }
+}
+
+.login-input {
+    background: rgba(255, 255, 255, 0.3); /* Stronger fallback background */
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 12px;
+    color: #1a1a1a; /* Dark text for better contrast against light background */
+    padding: 14px 16px;
+    width: 100%;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 10001;
+    pointer-events: auto;
+    cursor: text;
+    box-sizing: border-box; /* Ensure proper sizing */
+}
+
+/* Add backdrop-filter for supported browsers */
+@supports (backdrop-filter: blur(5px)) {
+    .login-input {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(5px); /* Reduced from 10px for better performance */
+        color: #1a1a1a; /* Maintain dark text color with backdrop filter */
+    }
+}
+
+.login-input::placeholder {
+    color: rgba(26, 26, 26, 0.6); /* Dark placeholder text for better contrast */
+}
+
+.login-input:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.login-btn {
+    background: linear-gradient(135deg, #ff6b6b, #feca57);
+    border: none;
+    color: white;
+    padding: 14px 28px;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(255, 107, 107, 0.3);
+    position: relative;
+    z-index: 10001;
+    pointer-events: auto;
+}
+
+.login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(255, 107, 107, 0.4);
+}
+
+/* Ensure login form has proper stacking context */
+#loginForm {
+    position: relative;
+    z-index: 10001;
+}
+
+/* Ensure labels are also accessible */
+.login-modal label {
+    position: relative;
+    z-index: 10001;
+    pointer-events: auto;
+}
+
+/* Additional browser compatibility fallbacks */
+/* For older browsers that might not support CSS custom properties */
+.login-overlay {
+    -webkit-transform: translateZ(0); /* Force hardware acceleration */
+    transform: translateZ(0);
+}
+
+.login-modal {
+    -webkit-transform: translateZ(0); /* Force hardware acceleration */
+    transform: translateZ(0);
+}
+
+/* Fix for Safari/iOS touch events */
+.login-input {
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+/* Fix for Firefox focus styles */
+.login-input:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.25);
+    color: #1a1a1a; /* Maintain dark text color on focus */
+}
+
+/* Fix for Internet Explorer/Edge */
+.login-input::-ms-clear {
+    display: none;
+}
+
+/* Ensure form elements are properly rendered on all browsers */
+.login-btn {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Fix for touch devices */
+@media (hover: none) and (pointer: coarse) {
+    .login-input:focus {
+        background: rgba(255, 255, 255, 0.35);
+        border-color: rgba(255, 255, 255, 0.6);
+        color: #1a1a1a; /* Maintain dark text color on touch devices */
+    }
+}
+
+/* Content positioning */
+.content-overlay {
+    position: relative;
+    z-index: 10;
+}
+
+/* Animation classes */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.scale-in {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scale-in.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Dark mode updates */
+.dark .ai-gradient-bg {
+    background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #0f0f23 100%);
+}
+
+.dark .modern-app-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark .modern-nav {
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: clamp(2.5rem, 10vw, 4rem);
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+        padding: 0 1rem;
+    }
+
+    .app-cards-container {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        padding: 0 1rem;
+        gap: 1.5rem;
+    }
+
+    .btn-primary, .btn-secondary {
+        padding: 14px 24px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Extra small screens - ensure single column on very narrow displays */
+@media (max-width: 540px) {
+    .app-cards-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Footer updates */
+.modern-footer {
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 10;
+}
+
+/* Utility classes */
+.text-white {
+    color: white;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Privacy policy and other pages styling */
+.page-content {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 3rem;
+    margin: 2rem;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+}
+
+.dark .page-content {
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+}
+
+.dark .page-content h1,
+.dark .page-content h2 {
+    color: white;
+}
+
+.dark .page-content p,
+.dark .page-content li {
+    color: rgba(255, 255, 255, 0.8);
+}
