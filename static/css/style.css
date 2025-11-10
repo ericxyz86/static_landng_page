@@ -213,9 +213,9 @@ body {
 /* Modern app cards */
 .app-cards-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 0 2rem;
 }
@@ -509,21 +509,28 @@ body {
     .hero-title {
         font-size: clamp(2.5rem, 10vw, 4rem);
     }
-    
+
     .hero-subtitle {
         font-size: 1.1rem;
         padding: 0 1rem;
     }
-    
+
     .app-cards-container {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         padding: 0 1rem;
         gap: 1.5rem;
     }
-    
+
     .btn-primary, .btn-secondary {
         padding: 14px 24px;
         font-size: 0.9rem;
+    }
+}
+
+/* Extra small screens - ensure single column on very narrow displays */
+@media (max-width: 540px) {
+    .app-cards-container {
+        grid-template-columns: 1fr;
     }
 }
 
