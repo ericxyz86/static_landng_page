@@ -215,28 +215,9 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1.5rem;
-    max-width: 1800px;
+    max-width: 100%;
     margin: 0 auto;
     padding: 0 2rem;
-}
-
-/* Responsive grid with maximum 4 columns */
-@media (min-width: 769px) and (max-width: 1023px) {
-    .app-cards-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (min-width: 1024px) and (max-width: 1439px) {
-    .app-cards-container {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media (min-width: 1440px) {
-    .app-cards-container {
-        grid-template-columns: repeat(4, 1fr);
-    }
 }
 
 .modern-app-card {
