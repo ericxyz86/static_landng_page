@@ -213,11 +213,12 @@ body {
 /* Modern app cards */
 .app-cards-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 280px));
     gap: 1.5rem;
     max-width: 100%;
     margin: 0 auto;
     padding: 0 2rem;
+    justify-content: center;
 }
 
 .modern-app-card {
