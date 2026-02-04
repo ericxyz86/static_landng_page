@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reddit Comment Extractor - Local Setup Guide</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 50%, #0a0a1a 100%);
+            min-height: 100vh;
+            color: #e2e8f0;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+        }
+        
+        .step-number {
+            background: linear-gradient(135deg, #EE3124, #ff6b6b);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        
+        .code-block {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #4ecdc4;
+            overflow-x: auto;
+        }
+        
+        .warning-box {
+            background: rgba(255, 209, 102, 0.1);
+            border: 1px solid rgba(255, 209, 102, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        
+        .info-box {
+            background: rgba(78, 205, 196, 0.1);
+            border: 1px solid rgba(78, 205, 196, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        
+        .field-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        
+        .field-table th {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .field-table th:first-child { border-radius: 8px 0 0 0; }
+        .field-table th:last-child { border-radius: 0 8px 0 0; }
+        
+        .field-table td {
+            padding: 10px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.9rem;
+        }
+        
+        .field-table tr:last-child td:first-child { border-radius: 0 0 0 8px; }
+        .field-table tr:last-child td:last-child { border-radius: 0 0 8px 0; }
+        
+        .tab-btn {
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+        
+        .tab-btn.active {
+            background: rgba(238, 49, 36, 0.2);
+            border-color: #EE3124;
+            color: #ff6b6b;
+        }
+        
+        .tab-btn:not(.active) {
+            background: rgba(255, 255, 255, 0.05);
+            color: #94a3b8;
+        }
+        
+        .tab-btn:not(.active):hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #e2e8f0;
+        }
+        
+        .os-content { display: none; }
+        .os-content.active { display: block; }
+        
+        a { color: #4ecdc4; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        .back-btn:hover { color: white; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="max-w-3xl mx-auto px-4 py-12">
+        <!-- Back link -->
+        <a href="index.html" class="back-btn mb-8 inline-flex">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+            Back to AI LABS
+        </a>
+
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl mb-6" style="background: rgba(238, 49, 36, 0.15);">
+                <svg class="w-10 h-10" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="24" cy="24" r="18" fill="#EE3124"/>
+                    <circle cx="18" cy="22" r="2.5" fill="white"/>
+                    <circle cx="30" cy="22" r="2.5" fill="white"/>
+                    <path d="M18 28 Q24 32 30 28" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <h1 class="text-3xl font-bold text-white mb-3">Reddit Comment Extractor</h1>
+            <p class="text-lg text-gray-400">Local Setup Guide</p>
+        </div>
+
+        <!-- Why local? -->
+        <div class="warning-box mb-8">
+            <div class="flex items-start gap-3">
+                <span class="text-2xl">⚠️</span>
+                <div>
+                    <h3 class="font-semibold text-yellow-300 mb-1">Why local installation?</h3>
+                    <p class="text-sm text-gray-300">Reddit's API blocks requests from cloud-hosted servers. To use this tool, you need to run it on your local machine. Don't worry — no programming experience needed! Just follow the steps below.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="glass-card p-6 mb-10">
+            <h2 class="font-semibold text-white mb-4">📋 Table of Contents</h2>
+            <ol class="space-y-2 text-sm">
+                <li><a href="#step1" class="hover:text-white">1. Install Required Software</a></li>
+                <li><a href="#step2" class="hover:text-white">2. Download the App</a></li>
+                <li><a href="#step3" class="hover:text-white">3. Create Reddit API Credentials</a></li>
+                <li><a href="#step4" class="hover:text-white">4. Configure the App</a></li>
+                <li><a href="#step5" class="hover:text-white">5. Run the App</a></li>
+                <li><a href="#step6" class="hover:text-white">6. Using the App</a></li>
+                <li><a href="#step7" class="hover:text-white">7. Stopping the App</a></li>
+                <li><a href="#troubleshooting" class="hover:text-white">8. Troubleshooting</a></li>
+            </ol>
+        </div>
+
+        <!-- Step 1 -->
+        <div id="step1" class="glass-card p-6 mb-6">
+            <div class="flex items-center gap-3 mb-4">
+                <div class="step-number">1</div>
+                <h2 class="text-xl font-bold text-white">Install Required Software</h2>
+            </div>
+            <p class="text-gray-300 mb-4">You need <strong>Node.js</strong> to run the app.</p>
+            
+            <!-- OS Tabs -->
+            <div class="flex gap-2 mb-4">
+                <button class="tab-btn active" onclick="switchOS('mac', this)">🍎 Mac</button>
+                <button class="tab-btn" onclick="switchOS('win', this)">🪟 Windows</button>
+            </div>
+            
+            <div id="mac" class="os-content active">
+                <ol class="space-y-2 text-sm text-gray-300 ml-4 list-decimal">
+                    <li>Open Safari or Chrome</li>
+                    <li>Go to <a href="https://nodejs.org/" target="_blank">https://nodejs.org/</a></li>
+                    <li>Click the <strong>LTS</strong> (green button)</li>
+                    <li>Open the downloaded <code>.pkg</code> file</li>
+                    <li>Click Continue / Agree until installation finishes</li>
+                    <li>Restart your computer</li>
+                </ol>
+                <p class="text-sm text-gray-400 mt-4 mb-2">Verify installation:</p>
+                <div class="code-block">
+                    <span class="text-gray-500"># Press Cmd + Space → type Terminal → Enter</span><br>
+                    node --version
+                </div>
+            </div>
+            
+            <div id="win" class="os-content">
+                <ol class="space-y-2 text-sm text-gray-300 ml-4 list-decimal">
+                    <li>Open Chrome or Edge</li>
+                    <li>Go to <a href="https://nodejs.org/" target="_blank">https://nodejs.org/</a></li>
+                    <li>Click the <strong>LTS</strong> (green button)</li>
+                    <li>Open the downloaded <code>.msi</code> file</li>
+                    <li>Click Next / Agree until installation finishes</li>
+                    <li>Restart your computer</li>
+                </ol>
+                <p class="text-sm text-gray-400 mt-4 mb-2">Verify installation:</p>
+                <div class="code-block">
+                    <span class="text-gray-500"># Press Windows key → type cmd → Enter</span><br>
+                    node --version
+                </div>
+            </div>
+            
+            <div class="info-box mt-4">
+                <p class="text-sm text-gray-300">✅ You should see <code class="text-green-400">v20.x.x</code> or higher.</p>
+            </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div id="step2" class="glass-card p-6 mb-6">
+            <div class="flex items-center gap-3 mb-4">
+                <div class="step-number">2</div>
+                <h2 class="text-xl font-bold text-white">Download the App</h2>
+            </div>
+            
+            <h3 class="font-semibold text-white mb-3">Option A: Download ZIP (Recommended)</h3>
+            <ol class="space-y-2 text-sm text-gray-300 ml-4 list-decimal mb-6">
+                <li>Go to <a href="https://github.com/ericxyz86/reddit-comment-extractor" target="_blank">github.com/ericxyz86/reddit-comment-extractor</a></li>
+                <li>Click <strong>Code</strong> → <strong>Download ZIP</strong></li>
+                <li>Extract the ZIP file</li>
+                <li>Move the folder to your <strong>Desktop</strong></li>
+                <li>Rename it to: <code class="text-yellow-300">reddit-comment-extractor</code></li>
+            </ol>
+            
+            <h3 class="font-semibold text-white mb-3">Option B: Git (If Installed)</h3>
+            <div class="code-block">
+                cd Desktop<br>
+                git clone https://github.com/ericxyz86/reddit-comment-extractor.git
+            </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div id="step3" class="glass-card p-6 mb-6">
+            <div class="flex items-center gap-3 mb-4">
+                <div class="step-number">3</div>
+                <h2 class="text-xl font-bold text-white">Create Reddit API Credentials</h2>
+            </div>
+            
+            <h3 class="font-semibold text-white mb-3">3.1 — Log In</h3>
+            <p class="text-sm text-gray-300 mb-4">Go to <a href="https://www.reddit.com" target="_blank">reddit.com</a> and log in to your account.</p>
+            
+            <h3 class="font-semibold text-white mb-3">3.2 — Create an App</h3>
+            <ol class="space-y-2 text-sm text-gray-300 ml-4 list-decimal mb-4">
+                <li>Go to <a href="https://www.reddit.com/prefs/apps" target="_blank">reddit.com/prefs/apps</a></li>
+                <li>Scroll down</li>
+                <li>Click <strong>"create another app"</strong></li>
+            </ol>
+            
+            <h3 class="font-semibold text-white mb-3">3.3 — App Settings</h3>
+            <table class="field-table mb-4">
+                <thead>
+                    <tr><th>Field</th><th>Value</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Name</td><td class="text-yellow-300">comment-extractor</td></tr>
+                    <tr><td>App Type</td><td class="text-yellow-300">script</td></tr>
+                    <tr><td>Description</td><td class="text-gray-400">Personal comment extraction tool</td></tr>
+                    <tr><td>About URL</td><td class="text-gray-500">(leave blank)</td></tr>
+                    <tr><td>Redirect URI</td><td class="text-yellow-300">http://localhost:3002</td></tr>
+                </tbody>
+            </table>
+            <p class="text-sm text-gray-300 mb-4">Click <strong>Create app</strong>.</p>
+            
+            <h3 class="font-semibold text-white mb-3">3.4 — Save Credentials</h3>
+            <div class="info-box">
+                <p class="text-sm text-gray-300">You need two values:</p>
+                <ul class="text-sm text-gray-300 ml-4 list-disc mt-2">
+                    <li><strong class="text-white">Client ID</strong> — shown under the app name</li>
+                    <li><strong class="text-white">Client Secret</strong> — click <em>edit</em> to reveal</li>
+                </ul>
+                <p class="text-sm text-gray-400 mt-2">Keep these handy for the next step.</p>
+            </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div id="step4" class="glass-card p-6 mb-6">
+            <div class="flex items-center gap-3 mb-4">
+                <div class="step-number">4</div>
+                <h2 class="text-xl font-bold text-white">Configure the App</h2>
+            </div>
+            
+            <ol class="space-y-3 text-sm text-gray-300 ml-4 list-decimal mb-4">
+                <li>Open the <code>reddit-comment-extractor/server</code> folder</li>
+                <li>Copy <code>.env.example</code> and rename it to <code>.env</code></li>
+                <li>Open <code>.env</code> with a text editor and fill in your credentials:</li>
+            </ol>
+            
+            <div class="code-block">
+                REDDIT_CLIENT_ID=your_client_id_here<br>
+                REDDIT_CLIENT_SECRET=your_client_secret_here<br>
+                REDDIT_USERNAME=your_reddit_username<br>
+                REDDIT_PASSWORD=your_reddit_password<br>
+                PORT=3002
+            </div>
+            <p class="text-sm text-gray-400 mt-3">Save and close the file.</p>
+        </div>
+
+        <!-- Step 5 -->
+        <div id="step5" class="glass-card p-6 mb-6">
+            <div class="flex items-center gap-3 mb-4">
+                <div class="step-number">5</div>
+                <h2 class="text-xl font-bold text-white">Run the App</h2>
+            </div>
+            
+            <div class="flex gap-2 mb-4">
+                <button class="tab-btn active" onclick="switchOS('run-mac', this)">🍎 Mac</button>
+                <button class="tab-btn" onclick="switchOS('run-win', this)">🪟 Windows</button>
+            </div>
+            
+            <div id="run-mac" class="os-content active">
+                <p class="text-sm text-gray-400 mb-2">Open Terminal and navigate to the folder:</p>
+                <div class="code-block mb-4">cd ~/Desktop/reddit-comment-extractor</div>
+            </div>
+            
+            <div id="run-win" class="os-content">
+                <p class="text-sm text-gray-400 mb-2">Open Command Prompt and navigate to the folder:</p>
+                <div class="code-block mb-4">cd %USERPROFILE%\Desktop\reddit-comment-extractor</div>
+            </div>
+            
+            <h3 class="font-semibold text-white mb-3">Install Dependencies (First Run Only)</h3>
+            <div class="code-block mb-4">npm install</div>
+            
+            <h3 class="font-semibold text-white mb-3">Start Backend</h3>
+            <div class="code-block mb-2">npm run server</div>
+            <p class="text-sm text-gray-400 mb-4">✅ Expected: <code class="text-green-400">Server running on http://localhost:3002</code></p>
+            
+            <h3 class="font-semibold text-white mb-3">Start Frontend (New Terminal Window)</h3>
+            <div class="code-block mb-2">npm run dev</div>
+            <p class="text-sm text-gray-400 mb-4">✅ Expected: <code class="text-green-400">Local: http://localhost:3001</code></p>
+            
+            <h3 class="font-semibold text-white mb-3">Open the App</h3>
+            <div class="info-box">
+                <p class="text-sm text-gray-300">🚀 Go to <a href="http://localhost:3001" target="_blank"><strong>http://localhost:3001</strong></a> in your browser</p>
+            </div>
+        </div>
+
+        <!-- Step 6 -->
+        <div id="step6" class="glass-card p-6 mb-6">
+            <div class="flex items-center gap-3 mb-4">
+                <div class="step-number">6</div>
+                <h2 class="text-xl font-bold text-white">Using the App</h2>
+            </div>
+            <ol class="space-y-2 text-sm text-gray-300 ml-4 list-decimal">
+                <li>Paste a Reddit post URL into the input field</li>
+                <li>Choose the number of comments to extract</li>
+                <li>Click <strong>Extract</strong></li>
+                <li>Download the results as CSV</li>
+            </ol>
+        </div>
+
+        <!-- Step 7 -->
+        <div id="step7" class="glass-card p-6 mb-6">
+            <div class="flex items-center gap-3 mb-4">
+                <div class="step-number">7</div>
+                <h2 class="text-xl font-bold text-white">Stopping the App</h2>
+            </div>
+            <p class="text-sm text-gray-300 mb-3">To stop the app, go to each terminal window and press:</p>
+            <div class="code-block">Ctrl + C</div>
+        </div>
+
+        <!-- Troubleshooting -->
+        <div id="troubleshooting" class="glass-card p-6 mb-10">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="text-2xl">🔧</span>
+                <h2 class="text-xl font-bold text-white">Troubleshooting</h2>
+            </div>
+            <div class="space-y-4 text-sm">
+                <div>
+                    <p class="font-semibold text-white mb-1">"node" is not recognized</p>
+                    <p class="text-gray-400">Restart your computer after installing Node.js. If it still doesn't work, reinstall Node.js from <a href="https://nodejs.org/" target="_blank">nodejs.org</a>.</p>
+                </div>
+                <div>
+                    <p class="font-semibold text-white mb-1">npm install fails</p>
+                    <p class="text-gray-400">Make sure you're in the <code>reddit-comment-extractor</code> folder, not inside a subfolder.</p>
+                </div>
+                <div>
+                    <p class="font-semibold text-white mb-1">API authentication error</p>
+                    <p class="text-gray-400">Double-check your <code>.env</code> file. Make sure there are no spaces around the <code>=</code> signs and your Reddit credentials are correct.</p>
+                </div>
+                <div>
+                    <p class="font-semibold text-white mb-1">Port already in use</p>
+                    <p class="text-gray-400">Another app is using port 3001 or 3002. Close it or change the PORT in your <code>.env</code> file.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center text-gray-500 text-sm pb-8">
+            <p>© 2026 Agile Intelligence AI LABS. All rights reserved.</p>
+            <a href="index.html" class="back-btn mt-4 inline-flex justify-center">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Back to AI LABS
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function switchOS(id, btn) {
+            // Find the parent card
+            const card = btn.closest('.glass-card');
+            // Deactivate all tabs in this card
+            card.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            card.querySelectorAll('.os-content').forEach(c => c.classList.remove('active'));
+            // Activate selected
+            btn.classList.add('active');
+            card.querySelector('#' + id).classList.add('active');
+        }
+    </script>
+</body>
+</html>
