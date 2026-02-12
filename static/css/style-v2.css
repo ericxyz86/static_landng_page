@@ -565,7 +565,7 @@ html.shader-ready .shader-background {
 }
 
 .dark .modern-app-card {
-    background: linear-gradient(160deg, rgba(30, 38, 64, 0.25), rgba(15, 20, 35, 0.18));
+    background: linear-gradient(160deg, rgba(30, 38, 64, 0.12), rgba(15, 20, 35, 0.08));
     border-color: rgba(255, 255, 255, 0.12);
 }
 
