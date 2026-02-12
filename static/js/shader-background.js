@@ -145,4 +145,7 @@
     resize();
     createParticles();
     draw();
+
+    // Signal CSS that shader is ready (triggers opacity transition)
+    document.documentElement.classList.add('shader-ready');
 })();
