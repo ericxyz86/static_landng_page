@@ -1,9 +1,16 @@
 /* Base styles - Cache bust: 2025-11-10-15:00 */
+html,
+body {
+    min-height: 100%;
+    background-color: #0a1434;
+}
+
 body {
     margin: 0;
     padding: 0;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     overflow-x: hidden;
+    background-color: #0a1434;
 }
 
 /* Modern gradient background */
@@ -17,6 +24,7 @@ body {
 
 /* AI-themed gradient for main site */
 .ai-gradient-bg {
+    background-color: #0e1d4a;
     background: linear-gradient(135deg, #1e3c72 0%, #2a5298 25%, #00b4db 50%, #0083b0 75%, #1e3c72 100%);
     background-size: 400% 400%;
     animation: gradientShift 20s ease infinite;
@@ -26,16 +34,20 @@ body {
 
 /* WebGL Shader Background Container */
 .shader-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
     z-index: 2;
     pointer-events: none;
     overflow: hidden;
-    opacity: 0.8; /* Blend with gradient background */
+    opacity: 0;
+    transition: opacity 0.35s ease;
     mix-blend-mode: screen; /* Enhance blending */
+}
+
+html.shader-ready .shader-background {
+    opacity: 0.8;
 }
 
 /* Ensure shader canvas styling */
@@ -52,7 +64,7 @@ body {
 
 /* Performance optimizations for mobile */
 @media (max-width: 768px) {
-    .shader-background {
+    html.shader-ready .shader-background {
         opacity: 0.6; /* Reduce intensity on mobile */
     }
 }
@@ -79,11 +91,8 @@ body {
 
 /* Flowing abstract shapes */
 .abstract-shapes {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    position: fixed;
+    inset: 0;
     overflow: hidden;
     z-index: 3;
 }
@@ -213,24 +222,38 @@ body {
 /* Modern app cards */
 .app-cards-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 280px));
-    gap: 1.5rem;
-    max-width: 100%;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 0.34rem;
+    max-width: 1760px;
     margin: 0 auto;
-    padding: 0 2rem;
-    justify-content: center;
+    padding: 0 0.5rem;
 }
 
 .modern-app-card {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 24px;
-    padding: 2rem;
-    text-align: center;
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.06));
+    backdrop-filter: blur(18px) saturate(130%);
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    border-radius: 22px;
+    grid-column: span 3;
+    min-height: 338px;
+    padding: 0.65rem 0.65rem 0.95rem;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 18px 40px rgba(4, 7, 16, 0.22);
+}
+
+/* First four cards: large + same size */
+.modern-app-card:nth-child(-n + 4) {
+    grid-column: span 6;
+    min-height: 476px;
+}
+
+.app-cards-container > .card-drop-placeholder:nth-child(-n + 4) {
+    min-height: 476px;
 }
 
 .modern-app-card::before {
@@ -240,60 +263,100 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-    border-radius: 24px;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03));
+    border-radius: 22px;
     z-index: -1;
 }
 
 .modern-app-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
-    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-6px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24), 0 24px 45px rgba(0, 0, 0, 0.28);
+    border-color: rgba(255, 255, 255, 0.34);
 }
 
-.app-icon-container {
-    width: 80px;
-    height: 80px;
-    margin: 0 auto 1.5rem auto;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
+.modern-app-card.card-draggable {
+    cursor: grab;
+    user-select: none;
 }
 
-.modern-app-card:hover .app-icon-container {
-    transform: scale(1.1);
-    background: rgba(255, 255, 255, 0.3);
+.modern-app-card.card-draggable:active {
+    cursor: grabbing;
 }
 
-.app-icon {
-    width: 48px;
-    height: 48px;
-    object-fit: contain;
+.modern-app-card.is-dragging {
+    opacity: 0.35;
+    transform: scale(0.98);
+}
+
+.modern-app-card.is-drop-target {
+    outline: 2px solid rgba(149, 194, 255, 0.75);
+    outline-offset: -2px;
+}
+
+.card-drop-placeholder {
+    border: 1px dashed rgba(149, 194, 255, 0.7);
+    background: rgba(120, 160, 255, 0.08);
+    box-shadow: none;
+}
+
+.app-hero-media {
+    width: 100%;
+    height: 172px;
+    margin-bottom: 0.8rem;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.26);
+    background: radial-gradient(circle at top left, #1e2d52 0%, #090b13 72%);
+}
+
+.modern-app-card:nth-child(-n + 4) .app-hero-media {
+    height: 288px;
+}
+
+.app-hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease, filter 0.5s ease;
+    filter: saturate(1.07) contrast(1.04);
+}
+
+.modern-app-card:hover .app-hero-image {
+    transform: scale(1.04);
+    filter: saturate(1.12) contrast(1.08);
 }
 
 .app-title {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: white;
-    margin-bottom: 1rem;
+    margin-bottom: 0.6rem;
     line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 3.1em;
 }
 
 .app-description {
     color: rgba(255, 255, 255, 0.8);
-    font-size: 0.95rem;
+    font-size: 0.93rem;
     line-height: 1.5;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 3em;
 }
 
 .app-launch-btn {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.16);
     border: 1px solid rgba(255, 255, 255, 0.3);
     color: white;
-    padding: 12px 24px;
+    padding: 10px 20px;
     border-radius: 50px;
     font-weight: 600;
     cursor: pointer;
@@ -303,11 +366,17 @@ body {
     align-items: center;
     gap: 8px;
     backdrop-filter: blur(10px);
+    margin-top: auto;
+    align-self: flex-start;
 }
 
 .app-launch-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.25);
     transform: translateY(-2px);
+}
+
+.app-launch-btn svg {
+    display: none;
 }
 
 /* Glassmorphism login modal */
@@ -496,8 +565,8 @@ body {
 }
 
 .dark .modern-app-card {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.1);
+    background: linear-gradient(160deg, rgba(30, 38, 64, 0.5), rgba(15, 20, 35, 0.38));
+    border-color: rgba(255, 255, 255, 0.16);
 }
 
 .dark .modern-nav {
@@ -506,6 +575,66 @@ body {
 }
 
 /* Responsive design */
+@media (max-width: 1360px) {
+    .app-cards-container {
+        grid-template-columns: repeat(8, minmax(0, 1fr));
+        gap: 0.34rem;
+        padding: 0 0.45rem;
+    }
+
+    .modern-app-card {
+        grid-column: span 2;
+        min-height: 318px;
+    }
+
+    .modern-app-card:nth-child(-n + 4) {
+        grid-column: span 4;
+        min-height: 430px;
+    }
+
+    .app-cards-container > .card-drop-placeholder:nth-child(-n + 4) {
+        min-height: 430px;
+    }
+
+    .app-hero-media {
+        height: 162px;
+    }
+
+    .modern-app-card:nth-child(-n + 4) .app-hero-media {
+        height: 245px;
+    }
+}
+
+@media (max-width: 980px) {
+    .app-cards-container {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0.32rem;
+        padding: 0 0.42rem;
+    }
+
+    .modern-app-card {
+        grid-column: span 2;
+        min-height: 304px;
+    }
+
+    .modern-app-card:nth-child(-n + 4) {
+        grid-column: span 2;
+        min-height: 392px;
+    }
+
+    .app-cards-container > .card-drop-placeholder:nth-child(-n + 4) {
+        min-height: 392px;
+    }
+
+    .app-hero-media {
+        height: 150px;
+    }
+
+    .modern-app-card:nth-child(-n + 4) .app-hero-media {
+        height: 222px;
+    }
+}
+
 @media (max-width: 768px) {
     .hero-title {
         font-size: clamp(2.5rem, 10vw, 4rem);
@@ -517,9 +646,48 @@ body {
     }
 
     .app-cards-container {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        padding: 0 1rem;
-        gap: 1.5rem;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        padding: 0 0.35rem;
+        gap: 0.28rem;
+    }
+
+    .modern-app-card {
+        grid-column: span 1;
+        min-height: 244px;
+        padding: 0.55rem 0.55rem 0.75rem;
+    }
+
+    .modern-app-card:nth-child(-n + 4) {
+        grid-column: span 2;
+        min-height: 340px;
+    }
+
+    .app-cards-container > .card-drop-placeholder:nth-child(-n + 4) {
+        min-height: 340px;
+    }
+
+    .app-hero-media {
+        height: 108px;
+    }
+
+    .modern-app-card:nth-child(-n + 4) .app-hero-media {
+        height: 178px;
+    }
+
+    .app-title {
+        font-size: 0.96rem;
+        min-height: 2.8em;
+    }
+
+    .app-description {
+        font-size: 0.74rem;
+        line-height: 1.4;
+        min-height: 2.8em;
+    }
+
+    .app-launch-btn {
+        padding: 7px 14px;
+        font-size: 0.7rem;
     }
 
     .btn-primary, .btn-secondary {
@@ -528,10 +696,30 @@ body {
     }
 }
 
-/* Extra small screens - ensure single column on very narrow displays */
 @media (max-width: 540px) {
     .app-cards-container {
-        grid-template-columns: 1fr;
+        gap: 0.24rem;
+        padding: 0 0.28rem;
+    }
+
+    .modern-app-card {
+        min-height: 232px;
+    }
+
+    .modern-app-card:nth-child(-n + 4) {
+        min-height: 318px;
+    }
+
+    .app-cards-container > .card-drop-placeholder:nth-child(-n + 4) {
+        min-height: 318px;
+    }
+
+    .app-hero-media {
+        height: 96px;
+    }
+
+    .modern-app-card:nth-child(-n + 4) .app-hero-media {
+        height: 158px;
     }
 }
 
