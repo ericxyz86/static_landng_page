@@ -387,10 +387,5 @@ function logout() {
 
 // Add this function to your existing main.js
 function navigateToApp(url) {
-    if (localStorage.getItem('isLoggedIn') === 'true') {
-        window.open(url, '_blank');
-    } else {
-        alert('Please log in to access this application.');
-        window.location.href = '/index.html';
-    }
+    window.open(url, '_blank');
 }

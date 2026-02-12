@@ -18,34 +18,8 @@
         <div class="shape shape-3"></div>
     </div>
 
-    <!-- Login Overlay -->
-    <div id="loginOverlay" class="login-overlay fixed inset-0 z-[60] flex items-center justify-center">
-        <div class="login-modal p-8 max-w-md w-full mx-4">
-            <div class="text-center mb-8">
-                <img src="static/images/ailabs.png" alt="AI LABS Logo" class="w-48 h-16 object-contain mx-auto mb-6">
-                <h2 class="text-2xl font-bold text-white">Login to AI LABS</h2>
-            </div>
-            <form id="loginForm" class="space-y-6">
-                <div>
-                    <label for="username" class="block text-sm font-medium text-white mb-2">Username</label>
-                    <input type="text" id="username" name="username" required placeholder="Enter username"
-                        class="login-input">
-                </div>
-                <div>
-                    <label for="password" class="block text-sm font-medium text-white mb-2">Password</label>
-                    <input type="password" id="password" name="password" required placeholder="Enter password"
-                        class="login-input">
-                </div>
-                <div id="loginError" class="text-red-300 text-sm hidden">Invalid username or password</div>
-                <button type="submit" id="loginButton" class="login-btn w-full">
-                    LOGIN
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Main Content Container - Hidden by default -->
-    <div id="mainContent" class="hidden content-overlay">
+    <!-- Main Content Container -->
+    <div id="mainContent" class="content-overlay">
         <!-- Modern Navbar -->
         <nav class="modern-nav fixed w-full z-50">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -58,9 +32,6 @@
                         </a>
                     </div>
                     <div class="flex items-center">
-                        <button onclick="logout()" class="mr-4 text-white hover:text-yellow-300 transition-colors duration-300">
-                            Logout
-                        </button>
                     </div>
                 </div>
             </div>
@@ -372,8 +343,8 @@
         </footer>
     </div>
 
-    <script src="static/js/main.js?v=1770915386"></script>
-    <script src="static/js/auth.js?v=1770915386"></script>
+    <script src="static/js/main.js?v=1770917072"></script>
+    <!-- auth.js removed — Cloudflare Access handles authentication -->
     <script src="static/js/shader-background.js?v=1770915386"></script>
 </body>
 </html>
