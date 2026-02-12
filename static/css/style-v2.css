@@ -38,7 +38,7 @@ body {
     inset: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 2;
+    z-index: 20;
     pointer-events: none;
     overflow: hidden;
     opacity: 0;
@@ -58,7 +58,7 @@ html.shader-ready .shader-background {
     width: 100% !important;
     height: 100% !important;
     display: block !important;
-    z-index: 2 !important;
+    z-index: 20 !important;
     pointer-events: none !important;
 }
 
