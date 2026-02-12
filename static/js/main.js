@@ -61,42 +61,187 @@ document.addEventListener('DOMContentLoaded', function() {
         const randomDelay = Math.random() * 5;
         shape.style.animationDelay = `${randomDelay}s`;
     });
+
+    // Enable drag-and-drop card prioritization (top 4 cards are "large slots").
+    initAppCardReorder();
 });
 
-// Dark mode functionality
-document.addEventListener('DOMContentLoaded', () => {
-    const darkModeToggle = document.getElementById('darkModeToggle');
-    const lightIcon = document.getElementById('lightIcon');
-    const darkIcon = document.getElementById('darkIcon');
-    
-    // Check for saved dark mode preference
-    const darkMode = localStorage.getItem('darkMode') === 'enabled';
-    if (darkMode) {
-        document.documentElement.classList.add('dark');
-        lightIcon.classList.add('hidden');
-        darkIcon.classList.remove('hidden');
-    }
+function initAppCardReorder() {
+    const container = document.getElementById('apps');
+    if (!container) return;
 
-    darkModeToggle.addEventListener('click', () => {
-        // Toggle dark mode
-        document.documentElement.classList.toggle('dark');
-        
-        // Toggle icons
-        lightIcon.classList.toggle('hidden');
-        darkIcon.classList.toggle('hidden');
-        
-        // Update shader background colors if available
-        const isDarkMode = document.documentElement.classList.contains('dark');
-        if (window.aiLabsShader && window.aiLabsShader.updateColor) {
-            window.aiLabsShader.updateColor(
-                isDarkMode ? [0.1, 0.3, 0.6] : [0.2, 0.6, 1.0]
-            );
+    const CARD_ORDER_STORAGE_KEY = 'ailabs_app_card_order_v1';
+    let draggedCard = null;
+    let placeholder = null;
+
+    const getCards = () => Array.from(container.querySelectorAll('.modern-app-card'));
+
+    const toSlug = value =>
+        String(value || '')
+            .toLowerCase()
+            .trim()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/^-+|-+$/g, '') || 'card';
+
+    const ensureCardIds = cards => {
+        const used = new Set();
+        cards.forEach((card, index) => {
+            let baseId = card.dataset.cardId;
+            if (!baseId) {
+                const title = card.querySelector('.app-title')?.textContent?.trim() || `card-${index + 1}`;
+                baseId = toSlug(title);
+            }
+
+            let uniqueId = baseId;
+            let suffix = 2;
+            while (used.has(uniqueId)) {
+                uniqueId = `${baseId}-${suffix}`;
+                suffix += 1;
+            }
+
+            used.add(uniqueId);
+            card.dataset.cardId = uniqueId;
+        });
+    };
+
+    const persistOrder = () => {
+        const ids = getCards().map(card => card.dataset.cardId).filter(Boolean);
+        try {
+            localStorage.setItem(CARD_ORDER_STORAGE_KEY, JSON.stringify(ids));
+        } catch (_err) {
+            // Ignore storage failures to keep drag interaction functional.
         }
-        
-        // Save preference
-        localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
+    };
+
+    const applySavedOrder = () => {
+        const cards = getCards();
+        ensureCardIds(cards);
+
+        let savedIds = null;
+        try {
+            savedIds = JSON.parse(localStorage.getItem(CARD_ORDER_STORAGE_KEY) || 'null');
+        } catch (_err) {
+            savedIds = null;
+        }
+
+        if (!Array.isArray(savedIds) || savedIds.length === 0) {
+            return;
+        }
+
+        const cardById = new Map(cards.map(card => [card.dataset.cardId, card]));
+        const ordered = [];
+
+        savedIds.forEach(id => {
+            const card = cardById.get(id);
+            if (card) {
+                ordered.push(card);
+                cardById.delete(id);
+            }
+        });
+
+        cardById.forEach(card => ordered.push(card));
+        ordered.forEach(card => container.appendChild(card));
+    };
+
+    const clearDropTargets = () => {
+        getCards().forEach(card => card.classList.remove('is-drop-target'));
+    };
+
+    const applyDraggableState = () => {
+        getCards().forEach(card => {
+            card.draggable = true;
+            card.classList.add('card-draggable');
+        });
+    };
+
+    const finishDrag = () => {
+        if (!draggedCard) return;
+
+        if (placeholder && placeholder.parentElement === container) {
+            container.insertBefore(draggedCard, placeholder);
+        }
+
+        draggedCard.classList.remove('is-dragging');
+        clearDropTargets();
+
+        if (placeholder && placeholder.parentElement) {
+            placeholder.remove();
+        }
+
+        draggedCard = null;
+        placeholder = null;
+        applyDraggableState();
+        persistOrder();
+    };
+
+    container.addEventListener('dragstart', event => {
+        const card = event.target.closest('.modern-app-card');
+        if (!card || card.parentElement !== container || !card.draggable) {
+            event.preventDefault();
+            return;
+        }
+
+        draggedCard = card;
+        placeholder = document.createElement('div');
+        placeholder.className = 'modern-app-card card-drop-placeholder';
+        placeholder.setAttribute('aria-hidden', 'true');
+
+        card.classList.add('is-dragging');
+        event.dataTransfer.effectAllowed = 'move';
+        event.dataTransfer.setData('text/plain', card.querySelector('.app-title')?.textContent?.trim() || 'card');
+
+        requestAnimationFrame(() => {
+            if (!draggedCard || !placeholder || placeholder.parentElement) return;
+            container.insertBefore(placeholder, draggedCard.nextSibling);
+        });
     });
-});
+
+    container.addEventListener('dragover', event => {
+        if (!draggedCard || !placeholder) return;
+        event.preventDefault();
+
+        const hovered = document
+            .elementFromPoint(event.clientX, event.clientY)
+            ?.closest('.modern-app-card');
+
+        const dropTarget =
+            hovered &&
+            hovered !== draggedCard &&
+            hovered !== placeholder &&
+            hovered.parentElement === container
+                ? hovered
+                : null;
+
+        clearDropTargets();
+
+        if (!dropTarget) {
+            container.appendChild(placeholder);
+            return;
+        }
+
+        dropTarget.classList.add('is-drop-target');
+
+        const rect = dropTarget.getBoundingClientRect();
+        const centerY = rect.top + rect.height / 2;
+        const centerX = rect.left + rect.width / 2;
+        const placeBefore =
+            event.clientY < centerY ||
+            (Math.abs(event.clientY - centerY) < rect.height * 0.18 && event.clientX < centerX);
+
+        container.insertBefore(placeholder, placeBefore ? dropTarget : dropTarget.nextSibling);
+    });
+
+    container.addEventListener('drop', event => {
+        if (!draggedCard) return;
+        event.preventDefault();
+        finishDrag();
+    });
+
+    applySavedOrder();
+    container.addEventListener('dragend', finishDrag);
+    applyDraggableState();
+    persistOrder();
+}
 
 // Login functionality
 document.addEventListener('DOMContentLoaded', function() {
@@ -204,6 +349,7 @@ function triggerAnimations() {
     if (window.aiLabsShader && window.aiLabsShader.resume) {
         window.aiLabsShader.resume();
     }
+
 }
 
 // Add CSS for shake animation
