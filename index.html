@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -57,76 +57,47 @@
                                  class="w-48 h-16 object-contain">
                         </a>
                     </div>
-                    <!-- Dark Mode Switch -->
                     <div class="flex items-center">
                         <button onclick="logout()" class="mr-4 text-white hover:text-yellow-300 transition-colors duration-300">
                             Logout
-                        </button>
-                        <button id="darkModeToggle" class="p-2 rounded-lg hover:bg-white/10 transition-colors duration-200">
-                            <!-- Sun icon for light mode -->
-                            <svg id="lightIcon" class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
-                            </svg>
-                            <!-- Moon icon for dark mode (hidden by default) -->
-                            <svg id="darkIcon" class="hidden w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
-                            </svg>
                         </button>
                     </div>
                 </div>
             </div>
         </nav>
 
-        <!-- Hero Section -->
-        <div class="pt-32 pb-16 md:pt-40 px-4">
+        <div class="pt-28 pb-16 md:pt-32 px-4">
             <div class="mx-auto">
-                <header class="text-center mb-20 fade-in">
-                    <h1 class="hero-title text-white mb-6">
-                        Welcome to <span class="gradient-text">AI LABS</span>
-                    </h1>
-                    <p class="hero-subtitle text-white">Immerse yourself in a world where artificial intelligence meets innovation. Create, analyze, and transform data with cutting-edge AI tools.</p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
-                        <a href="#apps" class="btn-primary">Explore Apps</a>
-                        <a href="#about" class="btn-secondary">Learn More</a>
-                    </div>
-                </header>
-
                 <!-- App Grid -->
                 <div id="apps" class="app-cards-container fade-in">
                     <!-- App Card 1 - Apple App Store Extractor -->
                     <div class="modern-app-card scale-in">
-                        <div class="app-icon-container">
-                            <img src="static/images/apple-store-logo.png" alt="Apple App Store Logo" class="app-icon">
+                        <div class="app-hero-media">
+                            <img src="static/images/app-previews/apple-store-reviews.jpg" alt="Apple Store Reviews App Preview" class="app-hero-image">
                         </div>
                         <h2 class="app-title">Apple Store Reviews</h2>
                         <p class="app-description">Extract and analyze data from the Apple App Store with ease.</p>
                         <a href="#" onclick="navigateToApp('https://appstore.aiailabs.net')" class="app-launch-btn">
                             Launch App
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                            </svg>
                         </a>
                     </div>
 
                     <!-- App Card 2 - Google Play Store Extractor -->
                     <div class="modern-app-card scale-in">
-                        <div class="app-icon-container">
-                            <img src="static/images/google-play-logo.png" alt="Google Play Store Logo" class="app-icon">
+                        <div class="app-hero-media">
+                            <img src="static/images/app-previews/play-store-reviews.jpg" alt="Play Store Reviews App Preview" class="app-hero-image">
                         </div>
                         <h2 class="app-title">Play Store Reviews</h2>
                         <p class="app-description">Extract and analyze data from the Google Play Store efficiently.</p>
                         <a href="#" onclick="navigateToApp('https://playstore.aiailabs.net')" class="app-launch-btn">
                             Launch App
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                            </svg>
                         </a>
                     </div>
 
                     <!-- App Card 3 -->
                     <div class="modern-app-card scale-in">
-                        <div class="app-icon-container">
-                            <img src="static/images/agile-48x48.png" alt="AI Webpage Summarizer Logo" class="app-icon">
+                        <div class="app-hero-media">
+                            <img src="static/images/app-previews/ai-webpage-summarizer.jpg" alt="AI Webpage Summarizer App Preview" class="app-hero-image">
                         </div>
                         <h2 class="app-title">AI Webpage Summarizer</h2>
                         <p class="app-description">Chrome extension using AI to summarize webpages with key insights and sentiment analysis.</p>
@@ -135,191 +106,109 @@
                         </div>
                         <a href="#" onclick="navigateToApp('https://chromewebstore.google.com/detail/ai-executive-summary/leglfbaoonknnjkehmbpjkcmgljledne')" class="app-launch-btn">
                             Install Extension
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                            </svg>
                         </a>
                     </div>
 
                     <!-- App Card 4 -->
                     <div class="modern-app-card scale-in">
-                        <div class="app-icon-container">
-                            <img src="static/images/convert-48x48.png" alt="Social Media Data Processor Logo" class="app-icon">
+                        <div class="app-hero-media">
+                            <img src="static/images/app-previews/social-media-processor.jpg" alt="Social Media Processor App Preview" class="app-hero-image">
                         </div>
                         <h2 class="app-title">Social Media Processor</h2>
                         <p class="app-description">Convert your social media data exports into structured CSV format.</p>
                         <a href="#" onclick="navigateToApp('https://txt-csv.aiailabs.net')" class="app-launch-btn">
                             Launch App
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                            </svg>
                         </a>
                     </div>
 
                     <!-- App Card 5 -->
                     <div class="modern-app-card scale-in">
-                        <div class="app-icon-container">
-                            <img src="static/images/google-sheets.jpg" alt="Google Sheets Logo" class="app-icon">
+                        <div class="app-hero-media">
+                            <img src="static/images/app-previews/google-sheets-ai-script.jpg" alt="Google Sheets AI Script App Preview" class="app-hero-image">
                         </div>
                         <h2 class="app-title">Google Sheets AI Script</h2>
                         <p class="app-description">Enhance your Google Sheets with AI capabilities using custom App Scripts.</p>
                         <a href="#" onclick="navigateToApp('appscript.html')" class="app-launch-btn">
                             View Script
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                            </svg>
                         </a>
                     </div>
 
                     <!-- App Card 6 - DDBrain -->
                     <div class="modern-app-card scale-in">
-                        <div class="app-icon-container">
-                            <img src="static/images/ddbrain-logo.png" alt="DDBrain Logo" class="app-icon">
+                        <div class="app-hero-media">
+                            <img src="static/images/app-previews/ddbrain.jpg" alt="DDBrain App Preview" class="app-hero-image">
                         </div>
                         <h2 class="app-title">DDBrain</h2>
                         <p class="app-description">AI-powered SharePoint document search and Q&A using advanced RAG technology.</p>
                         <a href="#" onclick="navigateToApp('https://ddb-sharepoint-rag.aiailabs.net')" class="app-launch-btn">
                             Launch App
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                            </svg>
                         </a>
                     </div>
 
                     <!-- App Card 7 - Location Parser -->
                     <div class="modern-app-card scale-in">
-                        <div class="app-icon-container">
-                            <svg class="app-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M24 4C16.268 4 10 10.268 10 18C10 28.5 24 44 24 44C24 44 38 28.5 38 18C38 10.268 31.732 4 24 4Z" fill="#EE3124" stroke="#2B3990" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <circle cx="24" cy="18" r="5" fill="white"/>
-                            </svg>
+                        <div class="app-hero-media">
+                            <img src="static/images/app-previews/location-parser-classification.jpg" alt="Location Parser and Classification App Preview" class="app-hero-image">
                         </div>
                         <h2 class="app-title">Location Parser and Classification</h2>
                         <p class="app-description">Extract locations & classify text with AI.</p>
                         <a href="#" onclick="navigateToApp('https://location-parser.aiailabs.net')" class="app-launch-btn">
                             Launch App
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                            </svg>
                         </a>
                     </div>
 
                     <!-- App Card 8 - ISP Complaints -->
                     <div class="modern-app-card scale-in">
-                        <div class="app-icon-container">
-                            <svg class="app-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Cell Tower -->
-                                <path d="M24 8 L20 20 L16 44 L32 44 L28 20 Z" fill="#2B3990" stroke="#2B3990" stroke-width="2" stroke-linejoin="round"/>
-                                <!-- Signal waves (left) -->
-                                <path d="M10 16 Q8 20 10 24" stroke="#EE3124" stroke-width="2" stroke-linecap="round" fill="none"/>
-                                <path d="M6 12 Q3 20 6 28" stroke="#EE3124" stroke-width="2" stroke-linecap="round" fill="none"/>
-                                <!-- Signal waves (right) -->
-                                <path d="M38 16 Q40 20 38 24" stroke="#EE3124" stroke-width="2" stroke-linecap="round" fill="none"/>
-                                <path d="M42 12 Q45 20 42 28" stroke="#EE3124" stroke-width="2" stroke-linecap="round" fill="none"/>
-                                <!-- Top antenna -->
-                                <circle cx="24" cy="8" r="2" fill="#EE3124"/>
-                            </svg>
+                        <div class="app-hero-media">
+                            <img src="static/images/app-previews/telco-complaints-tracking.jpg" alt="Telco Complaints Tracking App Preview" class="app-hero-image">
                         </div>
                         <h2 class="app-title">Telco Complaints Tracking</h2>
                         <p class="app-description">Tracks complaints from Globe, Converge, etc.</p>
                         <a href="#" onclick="navigateToApp('https://isp-complaints.aiailabs.net')" class="app-launch-btn">
                             Launch App
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                            </svg>
                         </a>
                     </div>
 
                     <!-- App Card 9 - Philippine Telco News -->
                     <div class="modern-app-card scale-in">
-                        <div class="app-icon-container">
-                            <svg class="app-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Newspaper -->
-                                <rect x="6" y="8" width="36" height="32" rx="2" fill="white" stroke="#2B3990" stroke-width="2"/>
-                                <!-- Headline -->
-                                <rect x="10" y="12" width="28" height="4" fill="#EE3124"/>
-                                <!-- Text lines -->
-                                <line x1="10" y1="20" x2="26" y2="20" stroke="#2B3990" stroke-width="2"/>
-                                <line x1="10" y1="24" x2="26" y2="24" stroke="#2B3990" stroke-width="2"/>
-                                <line x1="10" y1="28" x2="22" y2="28" stroke="#2B3990" stroke-width="2"/>
-                                <!-- Image box -->
-                                <rect x="30" y="20" width="8" height="8" fill="#EE3124" opacity="0.3"/>
-                                <!-- Bottom text lines -->
-                                <line x1="10" y1="34" x2="38" y2="34" stroke="#2B3990" stroke-width="1.5"/>
-                            </svg>
+                        <div class="app-hero-media">
+                            <img src="static/images/app-previews/philippine-telco-news.jpg" alt="Philippine Telco News App Preview" class="app-hero-image">
                         </div>
                         <h2 class="app-title">Philippine Telco News</h2>
                         <p class="app-description">A news aggregator for Philippine telecommunications industry.</p>
                         <a href="#" onclick="navigateToApp('https://telco-news.aiailabs.net')" class="app-launch-btn">
                             Launch App
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                            </svg>
                         </a>
                     </div>
 
                     <!-- App Card 10 - YouTube Comment Extractor -->
                     <div class="modern-app-card scale-in">
-                        <div class="app-icon-container">
-                            <svg class="app-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- YouTube rectangle -->
-                                <rect x="4" y="12" width="40" height="24" rx="4" fill="#EE3124"/>
-                                <!-- Play button triangle -->
-                                <path d="M19 18 L19 30 L31 24 Z" fill="white"/>
-                            </svg>
+                        <div class="app-hero-media">
+                            <img src="static/images/app-previews/youtube-comment-extractor.jpg" alt="YouTube Comment Extractor App Preview" class="app-hero-image">
                         </div>
                         <h2 class="app-title">YouTube Comment Extractor</h2>
                         <p class="app-description">Extracts real comments from YouTube videos.</p>
                         <a href="#" onclick="navigateToApp('https://youtube.aiailabs.net')" class="app-launch-btn">
                             Launch App
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                            </svg>
                         </a>
                     </div>
 
                     <!-- App Card 11 - Reddit Comment Extractor -->
                     <div class="modern-app-card scale-in">
-                        <div class="app-icon-container">
-                            <svg class="app-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Reddit alien head -->
-                                <circle cx="24" cy="24" r="18" fill="#EE3124"/>
-                                <!-- Antenna -->
-                                <circle cx="15" cy="10" r="3" fill="#EE3124"/>
-                                <line x1="18" y1="12" x2="20" y2="18" stroke="#EE3124" stroke-width="2"/>
-                                <!-- Eyes -->
-                                <circle cx="18" cy="22" r="2.5" fill="white"/>
-                                <circle cx="30" cy="22" r="2.5" fill="white"/>
-                                <!-- Smile -->
-                                <path d="M18 28 Q24 32 30 28" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
-                            </svg>
+                        <div class="app-hero-media">
+                            <img src="static/images/app-previews/reddit-comment-extractor.jpg" alt="Reddit Comment Extractor App Preview" class="app-hero-image">
                         </div>
                         <h2 class="app-title">Reddit Comment Extractor</h2>
                         <p class="app-description">Extracts real Reddit comments using Reddit's official API. Runs locally on your machine.</p>
                         <a href="#" onclick="navigateToApp('reddit-setup.html')" class="app-launch-btn">
                             Setup Guide
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                            </svg>
                         </a>
                     </div>
 
                     <!-- App Card 12 - Keynote2PDF Converter -->
                     <div class="modern-app-card scale-in">
-                        <div class="app-icon-container">
-                            <svg class="app-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- PDF Document -->
-                                <rect x="8" y="6" width="32" height="36" rx="2" fill="white" stroke="#2B3990" stroke-width="2"/>
-                                <!-- Folded corner -->
-                                <path d="M32 6 L32 14 L40 14 Z" fill="#2B3990"/>
-                                <!-- PDF text lines -->
-                                <line x1="14" y1="18" x2="28" y2="18" stroke="#EE3124" stroke-width="2"/>
-                                <line x1="14" y1="23" x2="28" y2="23" stroke="#EE3124" stroke-width="2"/>
-                                <line x1="14" y1="28" x2="22" y2="28" stroke="#EE3124" stroke-width="2"/>
-                                <!-- Arrow symbol -->
-                                <path d="M18 33 L24 35 L18 37" fill="#2B3990"/>
-                                <line x1="12" y1="35" x2="23" y2="35" stroke="#2B3990" stroke-width="2"/>
-                            </svg>
+                        <div class="app-hero-media">
+                            <img src="static/images/app-previews/keynote2pdf-converter.jpg" alt="Keynote2PDF Converter App Preview" class="app-hero-image">
                         </div>
                         <h2 class="app-title">Keynote2PDF Converter</h2>
                         <p class="app-description">Convert multiple Keynote files to PDF at once.</p>
@@ -329,218 +218,82 @@
                         <div class="flex flex-col gap-2 w-full">
                             <a href="https://github.com/ericxyz86/keynote2pdf/releases/download/v1.0.0-security-fixes/Keynote2PDF-Installer.dmg" class="app-launch-btn w-full justify-center" download>
                                 Download
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
-                                </svg>
                             </a>
                             <a href="https://github.com/ericxyz86/keynote2pdf/blob/main/USER_GUIDE.md" target="_blank" rel="noopener noreferrer" class="app-launch-btn w-full justify-center bg-white/10 hover:bg-white/20">
                                 User Guide
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-                                </svg>
                             </a>
                         </div>
                     </div>
 
                     <!-- App Card 13 - CrawlAI -->
                     <div class="modern-app-card scale-in">
-                        <div class="app-icon-container">
-                            <svg class="app-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Spider body -->
-                                <ellipse cx="24" cy="24" rx="8" ry="10" fill="#2B3990"/>
-                                <!-- Spider head -->
-                                <circle cx="24" cy="16" r="5" fill="#2B3990"/>
-                                <!-- Spider eyes -->
-                                <circle cx="21" cy="15" r="1.5" fill="white"/>
-                                <circle cx="27" cy="15" r="1.5" fill="white"/>
-                                <!-- Left legs -->
-                                <path d="M16 20 L8 14" stroke="#EE3124" stroke-width="2" stroke-linecap="round"/>
-                                <path d="M16 24 L6 22" stroke="#EE3124" stroke-width="2" stroke-linecap="round"/>
-                                <path d="M16 28 L8 34" stroke="#EE3124" stroke-width="2" stroke-linecap="round"/>
-                                <path d="M18 32 L12 40" stroke="#EE3124" stroke-width="2" stroke-linecap="round"/>
-                                <!-- Right legs -->
-                                <path d="M32 20 L40 14" stroke="#EE3124" stroke-width="2" stroke-linecap="round"/>
-                                <path d="M32 24 L42 22" stroke="#EE3124" stroke-width="2" stroke-linecap="round"/>
-                                <path d="M32 28 L40 34" stroke="#EE3124" stroke-width="2" stroke-linecap="round"/>
-                                <path d="M30 32 L36 40" stroke="#EE3124" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
+                        <div class="app-hero-media">
+                            <img src="static/images/app-previews/crawlai.jpg" alt="CrawlAI App Preview" class="app-hero-image">
                         </div>
                         <h2 class="app-title">CrawlAI</h2>
                         <p class="app-description">AI-powered website crawler.</p>
                         <a href="#" onclick="navigateToApp('https://crawl.aiailabs.net')" class="app-launch-btn">
                             Launch App
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                            </svg>
                         </a>
                     </div>
 
                     <!-- App Card 14 - Brand Scores Analyzer -->
                     <div class="modern-app-card scale-in">
-                        <div class="app-icon-container">
-                            <svg class="app-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Axes -->
-                                <line x1="8" y1="24" x2="40" y2="24" stroke="#EE3124" stroke-width="2"/>
-                                <line x1="24" y1="8" x2="24" y2="40" stroke="#EE3124" stroke-width="2"/>
-                                <!-- Arrow heads -->
-                                <path d="M40 24 L36 22 L36 26 Z" fill="#EE3124"/>
-                                <path d="M24 8 L22 12 L26 12 Z" fill="#EE3124"/>
-                                <!-- Quadrant 1 (top-right) scatter points -->
-                                <circle cx="30" cy="14" r="2" fill="#2B3990"/>
-                                <circle cx="35" cy="12" r="2" fill="#2B3990"/>
-                                <circle cx="32" cy="18" r="2" fill="#2B3990"/>
-                                <!-- Quadrant 2 (top-left) scatter points -->
-                                <circle cx="16" cy="16" r="2" fill="#2B3990"/>
-                                <circle cx="12" cy="14" r="2" fill="#2B3990"/>
-                                <circle cx="18" cy="12" r="2" fill="#2B3990"/>
-                                <!-- Quadrant 3 (bottom-left) scatter points -->
-                                <circle cx="14" cy="30" r="2" fill="#2B3990"/>
-                                <circle cx="18" cy="32" r="2" fill="#2B3990"/>
-                                <circle cx="16" cy="35" r="2" fill="#2B3990"/>
-                                <!-- Quadrant 4 (bottom-right) scatter points -->
-                                <circle cx="30" cy="30" r="2" fill="#2B3990"/>
-                                <circle cx="34" cy="32" r="2" fill="#2B3990"/>
-                                <circle cx="32" cy="36" r="2" fill="#2B3990"/>
-                            </svg>
+                        <div class="app-hero-media">
+                            <img src="static/images/app-previews/brand-scores-analyzer.jpg" alt="Brand Scores Analyzer App Preview" class="app-hero-image">
                         </div>
                         <h2 class="app-title">Brand Scores Analyzer</h2>
                         <p class="app-description">Analyze brand perception across Traditional-Progressive and Distinct-Conforming axes.</p>
                         <a href="#" onclick="navigateToApp('https://brand-scores.aiailabs.net')" class="app-launch-btn">
                             Launch App
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                            </svg>
                         </a>
                     </div>
 
                     <!-- App Card 15 - BYD Dealer Analytics -->
                     <div class="modern-app-card scale-in">
-                        <div class="app-icon-container">
-                            <svg class="app-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Car body -->
-                                <path d="M8 26 L10 18 L14 14 L34 14 L38 18 L40 26 L38 30 L10 30 Z" fill="#2B3990" stroke="#2B3990" stroke-width="2"/>
-                                <!-- Car roof/cabin -->
-                                <path d="M16 14 L18 10 L30 10 L32 14 Z" fill="#EE3124" stroke="#EE3124" stroke-width="2"/>
-                                <!-- Windows -->
-                                <rect x="18" y="11" width="5" height="3" fill="white" opacity="0.7"/>
-                                <rect x="25" y="11" width="5" height="3" fill="white" opacity="0.7"/>
-                                <!-- Front wheel -->
-                                <circle cx="16" cy="30" r="4" fill="white" stroke="#EE3124" stroke-width="2"/>
-                                <circle cx="16" cy="30" r="2" fill="#EE3124"/>
-                                <!-- Back wheel -->
-                                <circle cx="32" cy="30" r="4" fill="white" stroke="#EE3124" stroke-width="2"/>
-                                <circle cx="32" cy="30" r="2" fill="#EE3124"/>
-                                <!-- Headlight -->
-                                <circle cx="38" cy="22" r="1.5" fill="white"/>
-                                <!-- Detail lines -->
-                                <line x1="14" y1="20" x2="34" y2="20" stroke="white" stroke-width="1" opacity="0.5"/>
-                            </svg>
+                        <div class="app-hero-media">
+                            <img src="static/images/app-previews/byd-dealer-analytics.jpg" alt="BYD Dealer Analytics App Preview" class="app-hero-image">
                         </div>
                         <h2 class="app-title">BYD Dealer Analytics</h2>
                         <p class="app-description">Leads performance dashboard for BYD dealers.</p>
                         <a href="#" onclick="navigateToApp('https://byd-dealer.aiailabs.net')" class="app-launch-btn">
                             Launch App
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                            </svg>
                         </a>
                     </div>
 
                     <!-- App Card - Brand Intelligence Dashboard -->
                     <div class="modern-app-card scale-in">
-                        <div class="app-icon-container">
-                            <svg class="app-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Dashboard screen -->
-                                <rect x="4" y="6" width="40" height="30" rx="3" fill="#2B3990"/>
-                                <rect x="6" y="8" width="36" height="26" rx="2" fill="#0a0a1a"/>
-                                <!-- Sentiment bars -->
-                                <rect x="10" y="18" width="4" height="12" rx="1" fill="#00d4aa"/>
-                                <rect x="16" y="22" width="4" height="8" rx="1" fill="#ffd166"/>
-                                <rect x="22" y="14" width="4" height="16" rx="1" fill="#00d4aa"/>
-                                <rect x="28" y="20" width="4" height="10" rx="1" fill="#ff6b6b"/>
-                                <rect x="34" y="16" width="4" height="14" rx="1" fill="#00d4aa"/>
-                                <!-- Trend line -->
-                                <path d="M10 14 L16 18 L22 12 L28 16 L34 13" stroke="#4ecdc4" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                                <!-- AI sparkle -->
-                                <path d="M38 10 L39 12 L41 13 L39 14 L38 16 L37 14 L35 13 L37 12 Z" fill="#ffd166"/>
-                                <!-- Stand -->
-                                <rect x="20" y="36" width="8" height="2" rx="1" fill="#2B3990"/>
-                                <rect x="16" y="38" width="16" height="2" rx="1" fill="#2B3990"/>
-                                <!-- Beta badge -->
-                                <rect x="8" y="9" width="14" height="5" rx="2" fill="#00d4aa"/>
-                                <text x="15" y="13" text-anchor="middle" fill="#0a0a1a" font-size="4" font-weight="bold" font-family="Arial">BETA</text>
-                            </svg>
+                        <div class="app-hero-media">
+                            <img src="static/images/app-previews/brand-intelligence-dashboard.jpg" alt="Brand Intelligence Dashboard App Preview" class="app-hero-image">
                         </div>
-                        <span style="background: #ffd166; color: #1a1a2e; font-size: 0.65rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em; position: absolute; top: 12px; right: 12px;">NEW</span>
                         <h2 class="app-title">Brand Intelligence Dashboard</h2>
                         <p class="app-description">Unified social listening dashboard for BYD & Kia Philippines with LLM-powered sentiment analysis and AI insights.</p>
                         <a href="#" onclick="navigateToApp('https://byd-kia-brand-dashboard.aiailabs.net')" class="app-launch-btn">
                             Launch App
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                            </svg>
                         </a>
                     </div>
 
                     <!-- App Card - PLDT Fandom Tracker -->
                     <div class="modern-app-card scale-in">
-                        <div class="app-icon-container">
-                            <svg class="app-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Screen/monitor -->
-                                <rect x="4" y="6" width="40" height="28" rx="3" fill="#2B3990"/>
-                                <rect x="6" y="8" width="36" height="24" rx="2" fill="#0a0a1a"/>
-                                <!-- Heart/fandom icon -->
-                                <path d="M24 28 C24 28 14 22 14 16 C14 12 18 10 21 12 L24 15 L27 12 C30 10 34 12 34 16 C34 22 24 28 24 28Z" fill="#EE3124"/>
-                                <!-- Signal/broadcast waves -->
-                                <path d="M10 14 Q8 18 10 22" stroke="#4ecdc4" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-                                <path d="M7 12 Q4 18 7 24" stroke="#4ecdc4" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-                                <path d="M38 14 Q40 18 38 22" stroke="#4ecdc4" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-                                <path d="M41 12 Q44 18 41 24" stroke="#4ecdc4" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-                                <!-- AI sparkle -->
-                                <path d="M36 10 L37 12 L39 13 L37 14 L36 16 L35 14 L33 13 L35 12 Z" fill="#ffd166"/>
-                                <!-- Stand -->
-                                <rect x="20" y="34" width="8" height="2" rx="1" fill="#2B3990"/>
-                                <rect x="16" y="36" width="16" height="2" rx="1" fill="#2B3990"/>
-                                <!-- Beta badge -->
-                                <rect x="8" y="9" width="14" height="5" rx="2" fill="#00d4aa"/>
-                                <text x="15" y="13" text-anchor="middle" fill="#0a0a1a" font-size="4" font-weight="bold" font-family="Arial">BETA</text>
-                            </svg>
+                        <div class="app-hero-media">
+                            <img src="static/images/app-previews/pldt-fandom-tracker.jpg" alt="PLDT Fandom Tracker App Preview" class="app-hero-image">
                         </div>
-                        <span style="background: #ffd166; color: #1a1a2e; font-size: 0.65rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em; position: absolute; top: 12px; right: 12px;">NEW</span>
                         <h2 class="app-title">PLDT Fandom Tracker</h2>
                         <p class="app-description">Track and analyze PLDT Home's fan communities, content performance, and audience engagement with AI-powered insights.</p>
                         <a href="#" onclick="navigateToApp('https://pldt-fandom.aiailabs.net')" class="app-launch-btn">
                             Launch App
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                            </svg>
                         </a>
                     </div>
 
                     <!-- App Card 16 - AI Troll Analyzer -->
                     <div class="modern-app-card scale-in">
-                        <div class="app-icon-container">
-                            <svg class="app-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Shield outline -->
-                                <path d="M24 4 L40 10 L40 22 C40 32 32 40 24 44 C16 40 8 32 8 22 L8 10 Z" fill="#2B3990" stroke="#2B3990" stroke-width="2"/>
-                                <!-- Inner shield highlight -->
-                                <path d="M24 8 L36 12.5 L36 22 C36 29.5 30 36 24 39 C18 36 12 29.5 12 22 L12 12.5 Z" fill="white" opacity="0.2"/>
-                                <!-- Eye/detection symbol -->
-                                <ellipse cx="24" cy="22" rx="10" ry="6" fill="white"/>
-                                <circle cx="24" cy="22" r="4" fill="#EE3124"/>
-                                <circle cx="24" cy="22" r="2" fill="#2B3990"/>
-                                <!-- Warning indicator lines -->
-                                <line x1="24" y1="30" x2="24" y2="34" stroke="#EE3124" stroke-width="2" stroke-linecap="round"/>
-                                <circle cx="24" cy="36" r="1" fill="#EE3124"/>
-                            </svg>
+                        <div class="app-hero-media">
+                            <img src="static/images/app-previews/ai-troll-analyzer.jpg" alt="AI Troll Analyzer App Preview" class="app-hero-image">
                         </div>
                         <h2 class="app-title">AI Troll Analyzer</h2>
                         <p class="app-description">Advanced tool for detecting and analyzing coordinated trolling behavior on social media platforms with AI-powered insights.</p>
                         <a href="#" onclick="navigateToApp('https://troll.aiailabs.net')" class="app-launch-btn">
                             Launch App
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                            </svg>
                         </a>
                     </div>
 
@@ -548,131 +301,49 @@
 
                     <!-- App Card 18 - BYD Brand Saliency Dashboard -->
                     <div class="modern-app-card scale-in">
-                        <div class="app-icon-container">
-                            <svg class="app-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Head silhouette -->
-                                <path d="M24 6 C16 6 10 12 10 20 C10 26 12 30 14 32 L14 38 C14 40 16 42 18 42 L30 42 C32 42 34 40 34 38 L34 32 C36 30 38 26 38 20 C38 12 32 6 24 6 Z" fill="#2B3990"/>
-                                <!-- Brain highlight -->
-                                <path d="M16 18 Q18 14 24 14 Q30 14 32 18" stroke="white" stroke-width="1.5" fill="none" opacity="0.5"/>
-                                <path d="M16 22 Q20 20 24 22 Q28 24 32 22" stroke="white" stroke-width="1.5" fill="none" opacity="0.5"/>
-                                <!-- Saliency waves (left) -->
-                                <path d="M6 18 Q4 22 6 26" stroke="#EE3124" stroke-width="2" stroke-linecap="round" fill="none"/>
-                                <path d="M3 14 Q0 22 3 30" stroke="#EE3124" stroke-width="2" stroke-linecap="round" fill="none"/>
-                                <!-- Saliency waves (right) -->
-                                <path d="M42 18 Q44 22 42 26" stroke="#EE3124" stroke-width="2" stroke-linecap="round" fill="none"/>
-                                <path d="M45 14 Q48 22 45 30" stroke="#EE3124" stroke-width="2" stroke-linecap="round" fill="none"/>
-                                <!-- Lightbulb glow -->
-                                <circle cx="24" cy="20" r="3" fill="#EE3124" opacity="0.8"/>
-                            </svg>
+                        <div class="app-hero-media">
+                            <img src="static/images/app-previews/byd-brand-saliency.jpg" alt="BYD Brand Saliency App Preview" class="app-hero-image">
                         </div>
                         <h2 class="app-title">BYD Brand Saliency</h2>
                         <p class="app-description">Track consumer perception across brand saliency pillars for BYD Philippines.</p>
                         <a href="#" onclick="navigateToApp('https://byd-salience.aiailabs.net')" class="app-launch-btn">
                             Launch App
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                            </svg>
                         </a>
                     </div>
 
                     <!-- App Card 19 - Deep Research -->
                     <div class="modern-app-card scale-in">
-                        <div class="app-icon-container">
-                            <svg class="app-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Magnifying glass -->
-                                <circle cx="20" cy="20" r="12" stroke="#2B3990" stroke-width="3" fill="white"/>
-                                <line x1="29" y1="29" x2="40" y2="40" stroke="#2B3990" stroke-width="4" stroke-linecap="round"/>
-                                <!-- Research nodes inside magnifying glass -->
-                                <circle cx="16" cy="16" r="3" fill="#EE3124"/>
-                                <circle cx="24" cy="16" r="3" fill="#2B3990"/>
-                                <circle cx="20" cy="23" r="3" fill="#EE3124"/>
-                                <!-- Connecting lines (synthesis) -->
-                                <line x1="16" y1="16" x2="24" y2="16" stroke="#2B3990" stroke-width="1.5"/>
-                                <line x1="16" y1="16" x2="20" y2="23" stroke="#EE3124" stroke-width="1.5"/>
-                                <line x1="24" y1="16" x2="20" y2="23" stroke="#2B3990" stroke-width="1.5"/>
-                                <!-- Sparkle/AI indicator -->
-                                <path d="M36 8 L37 11 L40 12 L37 13 L36 16 L35 13 L32 12 L35 11 Z" fill="#EE3124"/>
-                                <!-- Progress arrows (multi-step) -->
-                                <path d="M4 36 L8 36 L8 34 L12 37 L8 40 L8 38 L4 38 Z" fill="#2B3990"/>
-                                <path d="M14 36 L18 36 L18 34 L22 37 L18 40 L18 38 L14 38 Z" fill="#EE3124"/>
-                            </svg>
+                        <div class="app-hero-media">
+                            <img src="static/images/app-previews/deep-research.jpg" alt="Deep Research App Preview" class="app-hero-image">
                         </div>
                         <h2 class="app-title">Deep Research</h2>
                         <p class="app-description">An autonomous research agent that plans, executes, and synthesizes multi-step research tasks.</p>
                         <a href="#" onclick="navigateToApp('https://deep-research.aiailabs.net')" class="app-launch-btn">
                             Launch App
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                            </svg>
                         </a>
                     </div>
 
                     <!-- App Card 20 - LLM Council -->
                     <div class="modern-app-card scale-in">
-                        <div class="app-icon-container">
-                            <svg class="app-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Multiple LLM chat bubbles (council members) -->
-                                <rect x="4" y="8" width="12" height="10" rx="2" fill="#2B3990"/>
-                                <polygon points="10,18 8,22 12,18" fill="#2B3990"/>
-                                <rect x="32" y="8" width="12" height="10" rx="2" fill="#2B3990"/>
-                                <polygon points="38,18 36,22 40,18" fill="#2B3990"/>
-                                <rect x="4" y="26" width="12" height="10" rx="2" fill="#EE3124"/>
-                                <polygon points="10,36 8,40 12,36" fill="#EE3124"/>
-                                <rect x="32" y="26" width="12" height="10" rx="2" fill="#EE3124"/>
-                                <polygon points="38,36 36,40 40,36" fill="#EE3124"/>
-                                <!-- Convergence arrows -->
-                                <path d="M16 13 L20 20" stroke="#2B3990" stroke-width="1.5" stroke-linecap="round"/>
-                                <path d="M32 13 L28 20" stroke="#2B3990" stroke-width="1.5" stroke-linecap="round"/>
-                                <path d="M16 31 L20 26" stroke="#EE3124" stroke-width="1.5" stroke-linecap="round"/>
-                                <path d="M32 31 L28 26" stroke="#EE3124" stroke-width="1.5" stroke-linecap="round"/>
-                                <!-- Chairman/synthesizer bubble (center) -->
-                                <rect x="18" y="18" width="12" height="12" rx="2" fill="#2B3990" stroke="#EE3124" stroke-width="2"/>
-                                <!-- Crown on chairman -->
-                                <path d="M20 16 L22 14 L24 17 L26 14 L28 16" stroke="#EE3124" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                                <!-- Checkmark inside chairman (verified answer) -->
-                                <path d="M21 24 L23 26 L27 21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                        <div class="app-hero-media">
+                            <img src="static/images/app-previews/llm-council.jpg" alt="LLM Council App Preview" class="app-hero-image">
                         </div>
                         <h2 class="app-title">LLM Council</h2>
                         <p class="app-description">Query multiple LLMs via OpenRouter with multi-stage evaluation, then synthesize a higher-quality final answer.</p>
                         <a href="#" onclick="navigateToApp('https://llm-council.aiailabs.net')" class="app-launch-btn">
                             Launch App
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                            </svg>
                         </a>
                     </div>
 
                     <!-- App Card 21 - Video Downloader -->
                     <div class="modern-app-card scale-in">
-                        <div class="app-icon-container">
-                            <svg class="app-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <!-- Video frame/screen -->
-                                <rect x="4" y="8" width="40" height="28" rx="3" fill="#2B3990"/>
-                                <rect x="6" y="10" width="36" height="24" rx="2" fill="white"/>
-                                <!-- Play button -->
-                                <circle cx="24" cy="22" r="10" fill="#EE3124" opacity="0.9"/>
-                                <polygon points="21,17 21,27 30,22" fill="white"/>
-                                <!-- Download arrow -->
-                                <rect x="21" y="34" width="6" height="8" fill="#2B3990"/>
-                                <polygon points="24,46 16,38 20,38 20,34 28,34 28,38 32,38" fill="#2B3990"/>
-                                <!-- Platform indicators (small dots representing 50+ platforms) -->
-                                <circle cx="10" cy="14" r="2" fill="#EE3124"/>
-                                <circle cx="16" cy="14" r="2" fill="#2B3990"/>
-                                <circle cx="32" cy="14" r="2" fill="#EE3124"/>
-                                <circle cx="38" cy="14" r="2" fill="#2B3990"/>
-                                <!-- 50+ badge -->
-                                <circle cx="40" cy="30" r="6" fill="#EE3124"/>
-                                <text x="40" y="32" text-anchor="middle" fill="white" font-size="6" font-weight="bold" font-family="Arial">50+</text>
-                            </svg>
+                        <div class="app-hero-media">
+                            <img src="static/images/app-previews/video-downloader.jpg" alt="Video Downloader App Preview" class="app-hero-image">
                         </div>
                         <h2 class="app-title">Video Downloader</h2>
                         <p class="app-description">Download videos from 50+ platforms including YouTube, Twitter/X, TikTok, Instagram, Reddit, and more.</p>
                         <a href="#" onclick="navigateToApp('https://videos.aiailabs.net')" class="app-launch-btn">
                             Launch App
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                            </svg>
                         </a>
                     </div>
                 </div>
