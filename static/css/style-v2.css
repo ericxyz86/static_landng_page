@@ -1,3 +1,24 @@
+/* NEW / ribbon badges */
+.app-ribbon {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    z-index: 10;
+    padding: 4px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: 8px;
+    line-height: 1.4;
+    pointer-events: none;
+}
+.app-ribbon-new {
+    background: linear-gradient(135deg, #f5c518, #e6a800);
+    color: #1a1a2e;
+    box-shadow: 0 2px 8px rgba(245, 197, 24, 0.35);
+}
+
 /* Base styles - Cache bust: 2025-11-10-15:00 */
 html,
 body {
