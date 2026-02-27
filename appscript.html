@@ -1,96 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Sheet App Script - AI LABS</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <link href="static/css/style-v2.css" rel="stylesheet">
-    <!-- Add Prism.js for code highlighting -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <title>Google Sheets AI Script — AI LABS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="static/css/style-v3.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script>
+    (function(){
+      var t = localStorage.getItem('theme');
+      if (t === 'light' || (!t && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+    </script>
 </head>
-<body class="ai-gradient-bg font-inter">
-    <!-- WebGL Shader Background -->
-    <div class="shader-background"></div>
-    
-    <!-- Abstract Shapes -->
-    <div class="abstract-shapes">
-        <div class="shape shape-1"></div>
-        <div class="shape shape-2"></div>
-        <div class="shape shape-3"></div>
-    </div>
+<body>
 
-    <!-- Modern Navbar -->
-    <nav class="modern-nav fixed w-full z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-24">
-                <div class="flex items-center">
-                    <a href="index.html" class="flex items-center nav-brand">
-                        <img src="static/images/ailabs.png" 
-                             alt="AI LABS Logo" 
-                             class="w-48 h-16 object-contain">
-                    </a>
-                </div>
-                <!-- Dark Mode Switch -->
-                <div class="flex items-center">
-                    <button id="darkModeToggle" class="p-2 rounded-lg hover:bg-white/10 transition-colors duration-200">
-                        <!-- Sun icon for light mode -->
-                        <svg id="lightIcon" class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
-                        </svg>
-                        <!-- Moon icon for dark mode (hidden by default) -->
-                        <svg id="darkIcon" class="hidden w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
-                        </svg>
-                    </button>
-                </div>
+    <!-- Nav -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-brand">
+                <img src="static/images/ailabs.png" alt="AI LABS">
+            </a>
+            <div class="nav-right">
+                <a href="index.html" class="nav-link nav-link-text">Home</a>
+                <a href="apps.html" class="nav-link nav-link-text">All Apps</a>
+                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                    <svg id="icon-sun" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <svg id="icon-moon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                    </svg>
+                </button>
+                <a href="https://github.com/ericxyz86" target="_blank" rel="noopener" class="nav-icon" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                </a>
             </div>
         </div>
     </nav>
 
-    <!-- Content Section -->
-    <div class="pt-32 pb-8 md:pt-40 px-4 content-overlay">
-        <div class="max-w-4xl mx-auto">
-            <header class="text-center mb-12">
-                <h1 class="text-3xl md:text-4xl font-bold mb-6 text-white">Google Sheet App Script for AI</h1>
-                <p class="text-white/70">Last updated: February 12, 2024</p>
-            </header>
+    <!-- Content -->
+    <div class="page-wrap">
+        <div class="page-header">
+            <h1>Google Sheets AI Script</h1>
+            <p>Last updated: February 12, 2024</p>
+        </div>
 
-            <div class="page-content">
-                <!-- Add new description section -->
-                <section class="mb-8 text-center">
-                    <p class="text-lg text-gray-700 max-w-3xl mx-auto">
-                        This App Script integrates AI capabilities directly into your Google Sheets. It primarily uses OpenAI's GPT-4o-mini model 
-                        for text processing and automatically falls back to Google's Gemini-2.0-flash model if there are any issues with the OpenAI service. 
-                        The script includes built-in caching, error handling, and rate limiting to ensure reliable performance.
-                    </p>
-                </section>
+        <div class="page-content">
+            <section>
+                <p>This App Script integrates AI capabilities directly into your Google Sheets. It primarily uses OpenAI's GPT-4o-mini model for text processing and automatically falls back to Google's Gemini-2.0-flash model if there are any issues with the OpenAI service. The script includes built-in caching, error handling, and rate limiting to ensure reliable performance.</p>
+            </section>
 
-                <section class="mb-8">
-                    <h2 class="text-2xl font-semibold text-[#2B3990] mb-4">Installation Instructions</h2>
-                    <ol class="list-decimal pl-6 text-gray-700 mb-6">
-                        <li class="mb-2">Open your Google Sheet</li>
-                        <li class="mb-2">Click on Extensions > Apps Script</li>
-                        <li class="mb-2">Replace the content of Code.gs with the following code</li>
-                        <li class="mb-2">Save the script and close the editor</li>
-                        <li class="mb-2">Refresh your Google Sheet</li>
-                        <li class="mb-2">You can now use the =GPT() function in your cells</li>
-                    </ol>
-                </section>
+            <section>
+                <h2>Installation Instructions</h2>
+                <ol>
+                    <li>Open your Google Sheet</li>
+                    <li>Click on Extensions &gt; Apps Script</li>
+                    <li>Replace the content of Code.gs with the following code</li>
+                    <li>Save the script and close the editor</li>
+                    <li>Refresh your Google Sheet</li>
+                    <li>You can now use the =GPT() function in your cells</li>
+                </ol>
+            </section>
 
-                <section class="mb-8">
-                    <h2 class="text-2xl font-semibold text-[#2B3990] mb-4">App Script Code</h2>
-                    <div class="bg-gray-900 rounded-lg overflow-hidden relative">
-                        <!-- Copy button -->
-                        <button onclick="copyCode()" class="absolute top-4 right-4 p-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors duration-200">
-                            <svg id="copyIcon" class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/>
-                            </svg>
-                            <svg id="checkIcon" class="hidden w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                            </svg>
-                        </button>
-                        <pre class="language-javascript text-sm p-4 max-h-[600px] overflow-y-auto"><code id="appScriptCode" class="language-javascript">
+            <section>
+                <h2>App Script Code</h2>
+                <pre><button class="copy-btn" onclick="copyCode()" aria-label="Copy code">
+                    <svg id="copyIcon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                    <svg id="checkIcon" style="display:none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </button><code id="appScriptCode" class="language-javascript">
 // API Keys
 const OPENAI_API_KEY = 'YOUR_OPENAI_API_KEY'; // Replace with your OpenAI API key
 const GOOGLE_AI_API_KEY = 'YOUR_GOOGLE_AI_API_KEY'; // Replace with your Google AI Studio API key
@@ -108,444 +91,209 @@ let lastRequestTime = 0;
  * @customfunction
  */
 function GPT(prompt, maxTokens = 450) {
-  // Input validation
   if (!prompt || typeof prompt !== 'string') {
     return "Error: Invalid prompt. Please provide a non-empty string.";
   }
-  
-  if (maxTokens && (typeof maxTokens !== 'number' || maxTokens <= 0)) {
+  if (maxTokens && (typeof maxTokens !== 'number' || maxTokens &lt;= 0)) {
     return "Error: Invalid maxTokens. Please provide a positive number.";
   }
-  
-  // API key validation
   const hasValidOpenAI = isValidOpenAIKey();
   const hasValidGoogleAI = isValidGoogleAIKey();
-  
   if (!hasValidOpenAI && !hasValidGoogleAI) {
-    return "Error: No valid API keys found. Please provide either an OpenAI or Google AI Studio API key.";
+    return "Error: No valid API keys found.";
   }
-  
-  // Log which service will be used
-  if (!hasValidOpenAI) {
-    console.log("OpenAI API key not valid, using Google AI Studio");
-  }
-  // Get the active spreadsheet and the cell that called this function
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   var cell = sheet.getActiveCell();
-
-  // Process the prompt to replace cell references with their values
   prompt = processCellReferences(prompt, sheet, cell);
-  
-  if (!prompt) {
-    return "Error: Please provide a prompt.";
-  }
-
-  // Try OpenAI first
+  if (!prompt) { return "Error: Please provide a prompt."; }
   const openAIResponse = callOpenAI(prompt, maxTokens);
-  
-  // If OpenAI fails, fall back to Google AI Studio
   if (openAIResponse.startsWith("Error:")) {
-    console.log("OpenAI request failed, falling back to Google AI Studio");
     return callGoogleAI(prompt, maxTokens);
   }
-  
   return openAIResponse;
 }
 
-/**
- * API Validation Functions
- */
 function isValidOpenAIKey() {
-  // Check if key exists and has the correct format
-  if (!OPENAI_API_KEY || 
-      OPENAI_API_KEY === 'YOUR_OPENAI_API_KEY' || 
-      !OPENAI_API_KEY.startsWith('sk-') ||
-      OPENAI_API_KEY.length < 40) {  // OpenAI keys are typically longer than 40 chars
-    return false;
-  }
-  return true;
+  return OPENAI_API_KEY && OPENAI_API_KEY !== 'YOUR_OPENAI_API_KEY'
+    && OPENAI_API_KEY.startsWith('sk-') && OPENAI_API_KEY.length >= 40;
 }
 
 function isValidGoogleAIKey() {
-  // Check if key exists and has a reasonable format
-  if (!GOOGLE_AI_API_KEY || 
-      GOOGLE_AI_API_KEY === 'YOUR_GOOGLE_AI_API_KEY' ||
-      GOOGLE_AI_API_KEY.length < 20) {  // Basic length validation
-    return false;
-  }
-  return true;
+  return GOOGLE_AI_API_KEY && GOOGLE_AI_API_KEY !== 'YOUR_GOOGLE_AI_API_KEY'
+    && GOOGLE_AI_API_KEY.length >= 20;
 }
 
-/**
- * Validate API response
- */
 function isValidResponse(response, service) {
-  if (!response || typeof response !== 'object') {
-    return false;
-  }
-
+  if (!response || typeof response !== 'object') return false;
   try {
     if (service === 'openai') {
-      return response.choices && 
-             Array.isArray(response.choices) && 
-             response.choices.length > 0 &&
-             response.choices[0].message &&
-             response.choices[0].message.content;
+      return response.choices && response.choices.length > 0
+        && response.choices[0].message && response.choices[0].message.content;
     } else if (service === 'google') {
-      return response.candidates && 
-             Array.isArray(response.candidates) && 
-             response.candidates.length > 0 &&
-             response.candidates[0].content &&
-             response.candidates[0].content.parts &&
-             response.candidates[0].content.parts[0].text;
+      return response.candidates && response.candidates.length > 0
+        && response.candidates[0].content && response.candidates[0].content.parts
+        && response.candidates[0].content.parts[0].text;
     }
-  } catch (e) {
-    console.error(`Error validating ${service} response:`, e);
-    return false;
-  }
-  
+  } catch (e) { return false; }
   return false;
 }
 
-/**
- * Error handling function
- */
-function handleAPIError(error, service) {
-  const errorMessage = error.toString().toLowerCase();
-  
-  // Generic error messages
-  if (errorMessage.includes('network') || errorMessage.includes('connection')) {
-    return `Error: Network connectivity issues with ${service}. Please check your internet connection.`;
-  }
-  
-  // Service-specific error handling
-  if (service === 'openai') {
-    if (errorMessage.includes('invalid api key')) {
-      return 'Error: Invalid OpenAI API key';
-    } else if (errorMessage.includes('quota')) {
-      return 'Error: OpenAI API quota exceeded';
-    } else if (errorMessage.includes('rate limit')) {
-      return 'Error: OpenAI rate limit reached';
-    }
-  } else if (service === 'google') {
-    if (errorMessage.includes('invalid api key')) {
-      return 'Error: Invalid Google AI Studio API key';
-    } else if (errorMessage.includes('quota')) {
-      return 'Error: Google AI Studio quota exceeded';
-    } else if (errorMessage.includes('rate limit')) {
-      return 'Error: Google AI Studio rate limit reached';
-    }
-  }
-  
-  return `Error: ${service} API error - ${error}`;
-}
-
-/**
- * Call OpenAI API
- */
 function callOpenAI(prompt, maxTokens) {
-  // Check if OpenAI key is valid before making the API call
-  if (!isValidOpenAIKey()) {
-    console.log("Invalid or missing OpenAI API key, falling back to Google AI Studio");
-    return "Error: Invalid OpenAI API key";
-  }
+  if (!isValidOpenAIKey()) return "Error: Invalid OpenAI API key";
   const apiUrl = 'https://api.openai.com/v1/chat/completions';
   const payload = {
     'model': 'gpt-4o-mini',
     'messages': [
-      {'role': 'system', 'content': 'You are a helpful data analyst that is an expert in sentiment analysis, categorization, topic modelling, and summarization.'},
+      {'role': 'system', 'content': 'You are a helpful data analyst.'},
       {'role': 'user', 'content': prompt}
     ],
     'max_tokens': maxTokens
   };
-
   const options = {
-    'method': 'post',
-    'contentType': 'application/json',
-    'headers': {
-      'Authorization': 'Bearer ' + OPENAI_API_KEY
-    },
-    'payload': JSON.stringify(payload),
-    'muteHttpExceptions': true
+    'method': 'post', 'contentType': 'application/json',
+    'headers': { 'Authorization': 'Bearer ' + OPENAI_API_KEY },
+    'payload': JSON.stringify(payload), 'muteHttpExceptions': true
   };
-
   return fetchWithRetry(apiUrl, options, 'openai');
 }
 
-/**
- * Call Google AI Studio API
- */
 function callGoogleAI(prompt, maxTokens) {
-  // Create cache key for Google AI
   const cacheKey = createCacheKey(prompt, maxTokens);
   const cachedResponse = getCachedResponse(cacheKey);
-  if (cachedResponse) {
-    return cachedResponse;
-  }
-
+  if (cachedResponse) return cachedResponse;
   const apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
   const payload = {
-    'contents': [{
-      'parts': [{
-        'text': prompt
-      }]
-    }],
-    'generationConfig': {
-      'maxOutputTokens': maxTokens,
-      'temperature': 0.7,
-      'topP': 0.8,
-      'topK': 40
-    }
+    'contents': [{ 'parts': [{ 'text': prompt }] }],
+    'generationConfig': { 'maxOutputTokens': maxTokens, 'temperature': 0.7 }
   };
-
   const options = {
-    'method': 'post',
-    'contentType': 'application/json',
-    'headers': {
-      'x-goog-api-key': GOOGLE_AI_API_KEY
-    },
-    'payload': JSON.stringify(payload),
-    'muteHttpExceptions': true
+    'method': 'post', 'contentType': 'application/json',
+    'headers': { 'x-goog-api-key': GOOGLE_AI_API_KEY },
+    'payload': JSON.stringify(payload), 'muteHttpExceptions': true
   };
-
   const response = fetchWithRetry(apiUrl, options, 'google');
-  if (!response.startsWith("Error:")) {
-    cacheResponse(cacheKey, response);
-  }
+  if (!response.startsWith("Error:")) cacheResponse(cacheKey, response);
   return response;
 }
 
-/**
- * Unified fetch with retry logic for both APIs
- */
 function fetchWithRetry(url, options, service) {
-  const maxRetries = 5;
-  const baseDelay = 1000;
+  const maxRetries = 5, baseDelay = 1000;
   let retryCount = 0;
-  let lastError = null;
-
-  while (retryCount < maxRetries) {
+  while (retryCount &lt; maxRetries) {
     try {
-      // Check request timing
       const currentTime = new Date().getTime();
-      const timeSinceLastRequest = currentTime - lastRequestTime;
-      if (timeSinceLastRequest < MIN_REQUEST_GAP) {
-        Utilities.sleep(MIN_REQUEST_GAP - timeSinceLastRequest);
+      if (currentTime - lastRequestTime &lt; MIN_REQUEST_GAP) {
+        Utilities.sleep(MIN_REQUEST_GAP - (currentTime - lastRequestTime));
       }
-
       lastRequestTime = new Date().getTime();
       const response = UrlFetchApp.fetch(url, options);
-      const responseCode = response.getResponseCode();
-      
-      // Handle various HTTP status codes
-      switch (responseCode) {
-        case 200:
-          const json = JSON.parse(response.getContentText());
-          
-          // Validate response structure
-          if (!isValidResponse(json, service)) {
-            throw new Error(`Invalid ${service} API response structure`);
-          }
-          
-          // Return appropriate content based on service
-          if (service === 'openai') {
-            return json.choices[0].message.content.trim();
-          } else {
-            return json.candidates[0].content.parts[0].text.trim();
-          }
-          
-        case 401:
-          throw new Error(`Invalid ${service} API key`);
-          
-        case 429:
-          throw new Error(`${service} rate limit reached`);
-          
-        case 500:
-          throw new Error(`${service} server error`);
-          
-        default:
-          throw new Error(`${service} API returned status code: ${responseCode}`);
+      if (response.getResponseCode() === 200) {
+        const json = JSON.parse(response.getContentText());
+        if (!isValidResponse(json, service)) throw new Error('Invalid response');
+        return service === 'openai'
+          ? json.choices[0].message.content.trim()
+          : json.candidates[0].content.parts[0].text.trim();
       }
-      
+      throw new Error(service + ' returned ' + response.getResponseCode());
     } catch (error) {
       retryCount++;
-      console.log(`Attempt ${retryCount} failed for ${service}: ${error.toString()}`);
-      
-      if (retryCount === maxRetries) {
-        return `Error: ${error.toString()}. Try again in a few minutes.`;
-      }
-      
-      const delay = baseDelay * Math.pow(2, retryCount) * (0.5 + Math.random());
-      Utilities.sleep(delay);
+      if (retryCount === maxRetries) return 'Error: ' + error + '. Try again later.';
+      Utilities.sleep(baseDelay * Math.pow(2, retryCount) * (0.5 + Math.random()));
     }
   }
 }
 
-/**
- * Cache management functions
- */
 function createCacheKey(prompt, maxTokens) {
-  const stringToHash = prompt + maxTokens.toString();
-  const hash = Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, stringToHash);
-  const hashHex = hash.map(function(byte) {
-    return ('0' + (byte & 0xFF).toString(16)).slice(-2);
-  }).join('');
-  return hashHex.substring(0, 32);
+  const hash = Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, prompt + maxTokens);
+  return hash.map(b => ('0' + (b & 0xFF).toString(16)).slice(-2)).join('').substring(0, 32);
 }
+function getCachedResponse(key) { return CacheService.getScriptCache().get(key); }
+function cacheResponse(key, value) { CacheService.getScriptCache().put(key, value, CACHE_EXPIRATION); }
 
-function getCachedResponse(key) {
-  const cache = CacheService.getScriptCache();
-  return cache.get(key);
-}
-
-function cacheResponse(key, value) {
-  const cache = CacheService.getScriptCache();
-  cache.put(key, value, CACHE_EXPIRATION);
-}
-
-/**
- * Process cell references in the prompt
- */
 function processCellReferences(prompt, sheet, cell) {
-  var cellRefRegex = /\b[A-Z]+\d+\b/g;
-  return prompt.replace(cellRefRegex, function(match) {
-    try {
-      var value = sheet.getRange(match).getValue();
-      return value.toString();
-    } catch (e) {
-      return match;
-    }
+  return prompt.replace(/\b[A-Z]+\d+\b/g, function(match) {
+    try { return sheet.getRange(match).getValue().toString(); }
+    catch (e) { return match; }
   });
 }
 
-/**
- * UI Setup
- */
 function onOpen() {
-  SpreadsheetApp.getUi()
-    .createMenu('AI Tools')
+  SpreadsheetApp.getUi().createMenu('AI Tools')
     .addItem('Replace AI Formulas with Values', 'replaceGPTFormulasWithValues')
     .addItem('Clear Cache', 'clearCache')
     .addToUi();
 }
 
-/**
- * Clear the response cache
- */
 function clearCache() {
-  const cache = CacheService.getScriptCache();
-  cache.removeAll();
-  SpreadsheetApp.getUi().alert('Cache cleared successfully!');
+  CacheService.getScriptCache().removeAll();
+  SpreadsheetApp.getUi().alert('Cache cleared!');
 }
 
-/**
- * Replace formulas with values in selected column
- */
 function replaceGPTFormulasWithValues() {
-  var sheet = SpreadsheetApp.getActiveSheet();
-  var selection = sheet.getSelection();
-  var range = selection.getActiveRange();
-  
+  var range = SpreadsheetApp.getActiveSheet().getSelection().getActiveRange();
   if (range.getNumColumns() !== 1) {
-    SpreadsheetApp.getUi().alert('Please select a single column.');
+    SpreadsheetApp.getUi().alert('Select a single column.');
     return;
   }
-  
-  var values = range.getValues();
-  var formulas = range.getFormulas();
-  
-  for (var i = 0; i < values.length; i++) {
+  var values = range.getValues(), formulas = range.getFormulas();
+  for (var i = 0; i &lt; values.length; i++) {
     if (formulas[i][0].toLowerCase().startsWith('=gpt(')) {
       values[i][0] = values[i][0].toString();
     }
   }
-  
   range.setValues(values);
 }</code></pre>
-                    </div>
-                </section>
+            </section>
 
-                <section class="mb-8">
-                    <h2 class="text-2xl font-semibold text-[#2B3990] mb-4">Usage Examples</h2>
-                    <ul class="list-disc pl-6 text-gray-700">
-                        <li class="mb-2">=GPT("Summarize this text: " & A1)</li>
-                        <li class="mb-2">=GPT("Analyze the sentiment of: " & B2)</li>
-                        <li class="mb-2">=GPT("Categorize this product review: " & C3)</li>
-                    </ul>
-                </section>
+            <section>
+                <h2>Usage Examples</h2>
+                <ul>
+                    <li>=GPT("Summarize this text: " &amp; A1)</li>
+                    <li>=GPT("Analyze the sentiment of: " &amp; B2)</li>
+                    <li>=GPT("Categorize this product review: " &amp; C3)</li>
+                </ul>
+            </section>
 
-                <section class="mb-8">
-                    <h2 class="text-2xl font-semibold text-[#2B3990] mb-4">Important Note</h2>
-                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
-                        <p class="text-yellow-700">
-                            Once you're done using the GPT() function on an entire column, copy that entire column and then right-click->Paste special->Values only. 
-                            This will prevent the appscript from getting triggered again for the entire column when updating the sheet.
-                        </p>
-                    </div>
-                </section>
-            </div>
+            <section>
+                <h2>Important Note</h2>
+                <div class="note-box">
+                    <p>Once you're done using the GPT() function on an entire column, copy that column and then right-click &gt; Paste special &gt; Values only. This prevents the script from re-running when you update the sheet.</p>
+                </div>
+            </section>
         </div>
     </div>
 
-    <!-- Modern Footer -->
-    <footer class="modern-footer py-8 mt-20">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col justify-center items-center space-y-4">
-                <!-- Copyright text -->
-                <p class="text-white text-center opacity-80">
-                    © 2024 AI LABS. All rights reserved.
-                </p>
-                <!-- GitHub link -->
-                <a href="https://github.com/ericxyz86/static_landng_page" 
-                   target="_blank" 
-                   rel="noopener noreferrer" 
-                   class="text-white hover:text-yellow-300 transition-colors duration-300">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                        <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/>
-                    </svg>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <p>&copy; 2026 Agile Intelligence AI LABS &middot; DDB Group Philippines</p>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="apps.html">All Apps</a>
+                <a href="https://github.com/ericxyz86" target="_blank" rel="noopener">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
                 </a>
             </div>
         </div>
     </footer>
 
     <script src="static/js/main.js"></script>
-    <script src="static/js/shader-background.js"></script>
-    <!-- Add Prism.js for code highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-javascript.min.js"></script>
     <script>
     function copyCode() {
-        const codeElement = document.getElementById('appScriptCode');
-        const copyIcon = document.getElementById('copyIcon');
-        const checkIcon = document.getElementById('checkIcon');
-        
-        // Create a temporary textarea element to copy the text
-        const textarea = document.createElement('textarea');
-        textarea.value = codeElement.textContent;
-        document.body.appendChild(textarea);
-        textarea.select();
-        
-        try {
-            // Execute the copy command
-            document.execCommand('copy');
-            
-            // Show success state
-            copyIcon.classList.add('hidden');
-            checkIcon.classList.remove('hidden');
-            
-            // Reset after 2 seconds
-            setTimeout(() => {
-                copyIcon.classList.remove('hidden');
-                checkIcon.classList.add('hidden');
+        var code = document.getElementById('appScriptCode');
+        var copyIcon = document.getElementById('copyIcon');
+        var checkIcon = document.getElementById('checkIcon');
+        navigator.clipboard.writeText(code.textContent).then(function() {
+            copyIcon.style.display = 'none';
+            checkIcon.style.display = 'block';
+            setTimeout(function() {
+                copyIcon.style.display = 'block';
+                checkIcon.style.display = 'none';
             }, 2000);
-            
-        } catch (err) {
-            console.error('Failed to copy text:', err);
-        } finally {
-            // Clean up
-            document.body.removeChild(textarea);
-        }
+        });
     }
     </script>
 </body>
-</html> 
+</html>
