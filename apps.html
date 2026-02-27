@@ -3,365 +3,310 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI LABS</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <link href="static/css/style-v2.css?v=1772000001" rel="stylesheet">
+    <title>All Apps — AI LABS</title>
+    <meta name="description" content="Browse all AI-powered tools built by Agile Intelligence AI LABS.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="static/css/style-v3.css">
+    <script>
+    (function(){
+      var t = localStorage.getItem('theme');
+      if (t === 'light' || (!t && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+    </script>
 </head>
-<body class="ai-gradient-bg font-inter">
-    <!-- WebGL Shader Background -->
-    <div class="shader-background"></div>
-    
-    <!-- Abstract Shapes -->
-    <div class="abstract-shapes">
-        <div class="shape shape-1"></div>
-        <div class="shape shape-2"></div>
-        <div class="shape shape-3"></div>
-    </div>
+<body>
 
-    <!-- Main Content Container -->
-    <div id="mainContent" class="content-overlay">
-        <!-- Modern Navbar -->
-        <nav class="modern-nav fixed w-full z-50">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between h-24">
-                    <div class="flex items-center">
-                        <a href="index.html" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; font-weight: 500; display: flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">← Home</a>
-                        <a href="index.html" class="flex items-center nav-brand">
-                            <img src="static/images/ailabs.png" 
-                                 alt="AI LABS Logo" 
-                                 class="w-48 h-16 object-contain">
-                        </a>
-                    </div>
-                    <div class="flex items-center">
-                        <a href="index.html" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; font-weight: 500; display: flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.05)'">← Home</a>
-                    </div>
-                </div>
-            </div>
-        </nav>
-
-        <div class="pt-28 pb-16 md:pt-32 px-4">
-            <div class="mx-auto">
-                <!-- App Grid -->
-                <div id="apps" class="app-cards-container fade-in">
-                    <!-- App Card 1 - Apple App Store Extractor -->
-                    <div class="modern-app-card scale-in">
-                        <div class="app-hero-media">
-                            <img src="static/images/app-previews/apple-store-reviews.jpg?v=1770917305" alt="Apple Store Reviews App Preview" class="app-hero-image" loading="lazy">
-                        </div>
-                        <h2 class="app-title">Apple Store Reviews</h2>
-                        <p class="app-description">Extract and analyze data from the Apple App Store with ease.</p>
-                        <a href="#" onclick="navigateToApp('https://appstore.aiailabs.net')" class="app-launch-btn">
-                            Launch App
-                        </a>
-                    </div>
-
-                    <!-- App Card 2 - Google Play Store Extractor -->
-                    <div class="modern-app-card scale-in">
-                        <div class="app-hero-media">
-                            <img src="static/images/app-previews/play-store-reviews.jpg?v=1770917305" alt="Play Store Reviews App Preview" class="app-hero-image" loading="lazy">
-                        </div>
-                        <h2 class="app-title">Play Store Reviews</h2>
-                        <p class="app-description">Extract and analyze data from the Google Play Store efficiently.</p>
-                        <a href="#" onclick="navigateToApp('https://playstore.aiailabs.net')" class="app-launch-btn">
-                            Launch App
-                        </a>
-                    </div>
-
-                    <!-- App Card 3 -->
-                    <div class="modern-app-card scale-in">
-                        <div class="app-hero-media">
-                            <img src="static/images/app-previews/ai-webpage-summarizer.jpg?v=1770917305" alt="AI Webpage Summarizer App Preview" class="app-hero-image" loading="lazy">
-                        </div>
-                        <h2 class="app-title">AI Webpage Summarizer</h2>
-                        <p class="app-description">Chrome extension using AI to summarize webpages with key insights and sentiment analysis.</p>
-                        <div class="mb-4">
-                            <a href="privacy-policy.html" class="text-white/70 hover:text-white text-sm transition-colors duration-300">Privacy Policy</a>
-                        </div>
-                        <a href="#" onclick="navigateToApp('https://chromewebstore.google.com/detail/ai-executive-summary/leglfbaoonknnjkehmbpjkcmgljledne')" class="app-launch-btn">
-                            Install Extension
-                        </a>
-                    </div>
-
-                    <!-- App Card 4 -->
-                    <div class="modern-app-card scale-in">
-                        <div class="app-hero-media">
-                            <img src="static/images/app-previews/social-media-processor.jpg?v=1770917305" alt="Social Media Processor App Preview" class="app-hero-image" loading="lazy">
-                        </div>
-                        <h2 class="app-title">Social Media Processor</h2>
-                        <p class="app-description">Convert your social media data exports into structured CSV format.</p>
-                        <a href="#" onclick="navigateToApp('https://txt-csv.aiailabs.net')" class="app-launch-btn">
-                            Launch App
-                        </a>
-                    </div>
-
-                    <!-- App Card 5 -->
-                    <div class="modern-app-card scale-in">
-                        <div class="app-hero-media">
-                            <img src="static/images/app-previews/google-sheets-ai-script.jpg?v=1770917305" alt="Google Sheets AI Script App Preview" class="app-hero-image" loading="lazy">
-                        </div>
-                        <h2 class="app-title">Google Sheets AI Script</h2>
-                        <p class="app-description">Enhance your Google Sheets with AI capabilities using custom App Scripts.</p>
-                        <a href="#" onclick="navigateToApp('appscript.html')" class="app-launch-btn">
-                            View Script
-                        </a>
-                    </div>
-
-                    <!-- App Card 6 - DDBrain -->
-                    <div class="modern-app-card scale-in">
-                        <div class="app-hero-media">
-                            <img src="static/images/app-previews/ddbrain.jpg?v=1770917305" alt="DDBrain App Preview" class="app-hero-image" loading="lazy">
-                        </div>
-                        <h2 class="app-title">DDBrain</h2>
-                        <p class="app-description">AI-powered SharePoint document search and Q&A using advanced RAG technology.</p>
-                        <a href="#" onclick="navigateToApp('https://ddb-sharepoint-rag.aiailabs.net')" class="app-launch-btn">
-                            Launch App
-                        </a>
-                    </div>
-
-                    <!-- App Card 7 - Location Parser -->
-                    <div class="modern-app-card scale-in">
-                        <div class="app-hero-media">
-                            <img src="static/images/app-previews/location-parser-classification.jpg?v=1770917305" alt="Location Parser and Classification App Preview" class="app-hero-image" loading="lazy">
-                        </div>
-                        <h2 class="app-title">Location Parser and Classification</h2>
-                        <p class="app-description">Extract locations & classify text with AI.</p>
-                        <a href="#" onclick="navigateToApp('https://location-parser.aiailabs.net')" class="app-launch-btn">
-                            Launch App
-                        </a>
-                    </div>
-
-                    <!-- App Card 8 - ISP Complaints -->
-                    <div class="modern-app-card scale-in">
-                        <div class="app-hero-media">
-                            <img src="static/images/app-previews/telco-complaints-tracking.jpg?v=1770917305" alt="Telco Complaints Tracking App Preview" class="app-hero-image" loading="lazy">
-                        </div>
-                        <h2 class="app-title">Telco Complaints Tracking</h2>
-                        <p class="app-description">Tracks complaints from Globe, Converge, etc.</p>
-                        <a href="#" onclick="navigateToApp('https://isp-complaints.aiailabs.net')" class="app-launch-btn">
-                            Launch App
-                        </a>
-                    </div>
-
-                    <!-- App Card 9 - Philippine Telco News -->
-                    <div class="modern-app-card scale-in">
-                        <div class="app-hero-media">
-                            <img src="static/images/app-previews/philippine-telco-news.jpg?v=1770917305" alt="Philippine Telco News App Preview" class="app-hero-image" loading="lazy">
-                        </div>
-                        <h2 class="app-title">Philippine Telco News</h2>
-                        <p class="app-description">A news aggregator for Philippine telecommunications industry.</p>
-                        <a href="#" onclick="navigateToApp('https://telco-news.aiailabs.net')" class="app-launch-btn">
-                            Launch App
-                        </a>
-                    </div>
-
-                    <!-- App Card 10 - YouTube Comment Extractor -->
-                    <div class="modern-app-card scale-in">
-                        <div class="app-hero-media">
-                            <img src="static/images/app-previews/youtube-comment-extractor.jpg?v=1770917305" alt="YouTube Comment Extractor App Preview" class="app-hero-image" loading="lazy">
-                        </div>
-                        <h2 class="app-title">YouTube Comment Extractor</h2>
-                        <p class="app-description">Extracts real comments from YouTube videos.</p>
-                        <a href="#" onclick="navigateToApp('https://youtube.aiailabs.net')" class="app-launch-btn">
-                            Launch App
-                        </a>
-                    </div>
-
-                    <!-- App Card 11 - Reddit Comment Extractor -->
-                    <div class="modern-app-card scale-in">
-                        <div class="app-hero-media">
-                            <img src="static/images/app-previews/reddit-comment-extractor.jpg?v=1770917305" alt="Reddit Comment Extractor App Preview" class="app-hero-image" loading="lazy">
-                        </div>
-                        <h2 class="app-title">Reddit Comment Extractor</h2>
-                        <p class="app-description">Extracts real Reddit comments using Reddit's official API. Runs locally on your machine.</p>
-                        <a href="#" onclick="navigateToApp('reddit-setup.html')" class="app-launch-btn">
-                            Setup Guide
-                        </a>
-                    </div>
-
-                    <!-- App Card 12 - Keynote2PDF Converter -->
-                    <div class="modern-app-card scale-in">
-                        <div class="app-hero-media">
-                            <img src="static/images/app-previews/keynote2pdf-converter.jpg?v=1770917305" alt="Keynote2PDF Converter App Preview" class="app-hero-image" loading="lazy">
-                        </div>
-                        <h2 class="app-title">Keynote2PDF Converter</h2>
-                        <p class="app-description">Convert multiple Keynote files to PDF at once.</p>
-                        <div class="mb-4">
-                            <span class="text-white/70 text-sm">🍎 macOS Only</span>
-                        </div>
-                        <div class="flex flex-col gap-2 w-full">
-                            <a href="https://github.com/ericxyz86/keynote2pdf/releases/download/v1.0.0-security-fixes/Keynote2PDF-Installer.dmg" class="app-launch-btn w-full justify-center" download>
-                                Download
-                            </a>
-                            <a href="https://github.com/ericxyz86/keynote2pdf/blob/main/USER_GUIDE.md" target="_blank" rel="noopener noreferrer" class="app-launch-btn w-full justify-center bg-white/10 hover:bg-white/20">
-                                User Guide
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- App Card 13 - CrawlAI -->
-                    <div class="modern-app-card scale-in">
-                        <div class="app-hero-media">
-                            <img src="static/images/app-previews/crawlai.jpg?v=1770917305" alt="CrawlAI App Preview" class="app-hero-image" loading="lazy">
-                        </div>
-                        <h2 class="app-title">CrawlAI</h2>
-                        <p class="app-description">AI-powered website crawler.</p>
-                        <a href="#" onclick="navigateToApp('https://crawl.aiailabs.net')" class="app-launch-btn">
-                            Launch App
-                        </a>
-                    </div>
-
-                    <!-- App Card 14 - Brand Scores Analyzer -->
-                    <div class="modern-app-card scale-in">
-                        <div class="app-hero-media">
-                            <img src="static/images/app-previews/brand-scores-analyzer.jpg?v=1770917305" alt="Brand Scores Analyzer App Preview" class="app-hero-image" loading="lazy">
-                        </div>
-                        <h2 class="app-title">Brand Scores Analyzer</h2>
-                        <p class="app-description">Analyze brand perception across Traditional-Progressive and Distinct-Conforming axes.</p>
-                        <a href="#" onclick="navigateToApp('https://brand-scores.aiailabs.net')" class="app-launch-btn">
-                            Launch App
-                        </a>
-                    </div>
-
-                    <!-- App Card 15 - BYD Dealer Analytics -->
-                    <div class="modern-app-card scale-in">
-                        <div class="app-hero-media">
-                            <img src="static/images/app-previews/byd-dealer-analytics.jpg?v=1770917305" alt="BYD Dealer Analytics App Preview" class="app-hero-image" loading="lazy">
-                        </div>
-                        <h2 class="app-title">BYD Dealer Analytics</h2>
-                        <p class="app-description">Leads performance dashboard for BYD dealers.</p>
-                        <a href="#" onclick="navigateToApp('https://byd-dealer.aiailabs.net')" class="app-launch-btn">
-                            Launch App
-                        </a>
-                    </div>
-
-                    <!-- App Card - Brand Intelligence Dashboard -->
-                    <div class="modern-app-card scale-in">
-                        <div class="app-hero-media">
-                            <img src="static/images/app-previews/brand-intelligence-dashboard.jpg?v=1770917305" alt="Brand Intelligence Dashboard App Preview" class="app-hero-image" loading="lazy">
-                        </div>
-                        <h2 class="app-title">Brand Intelligence Dashboard</h2>
-                        <p class="app-description">Unified social listening dashboard for BYD & Kia Philippines with LLM-powered sentiment analysis and AI insights.</p>
-                        <a href="#" onclick="navigateToApp('https://byd-kia-brand-dashboard.aiailabs.net')" class="app-launch-btn">
-                            Launch App
-                        </a>
-                    </div>
-
-                    <!-- App Card - PLDT Fandom Tracker -->
-                    <div class="modern-app-card scale-in">
-                        <span class="app-ribbon app-ribbon-new">NEW</span>
-                        <div class="app-hero-media">
-                            <img src="static/images/app-previews/pldt-fandom-tracker.jpg?v=1770917305" alt="PLDT Fandom Tracker App Preview" class="app-hero-image" loading="lazy">
-                        </div>
-                        <h2 class="app-title">PLDT Fandom Tracker</h2>
-                        <p class="app-description">Track and analyze PLDT Home's fan communities, content performance, and audience engagement with AI-powered insights.</p>
-                        <a href="#" onclick="navigateToApp('https://pldt-fandom.aiailabs.net')" class="app-launch-btn">
-                            Launch App
-                        </a>
-                    </div>
-
-                    <!-- App Card 16 - AI Troll Analyzer -->
-                    <div class="modern-app-card scale-in">
-                        <div class="app-hero-media">
-                            <img src="static/images/app-previews/ai-troll-analyzer.jpg?v=1770917305" alt="AI Troll Analyzer App Preview" class="app-hero-image" loading="lazy">
-                        </div>
-                        <h2 class="app-title">AI Troll Analyzer</h2>
-                        <p class="app-description">Advanced tool for detecting and analyzing coordinated trolling behavior on social media platforms with AI-powered insights.</p>
-                        <a href="#" onclick="navigateToApp('https://troll.aiailabs.net')" class="app-launch-btn">
-                            Launch App
-                        </a>
-                    </div>
-
-                    <!-- App Card 17 - PNB Dashboard (removed per DMCA) -->
-
-                    <!-- App Card 18 - BYD Brand Saliency Dashboard -->
-                    <div class="modern-app-card scale-in">
-                        <span class="app-ribbon app-ribbon-new">NEW</span>
-                        <div class="app-hero-media">
-                            <img src="static/images/app-previews/byd-brand-saliency.jpg?v=1770917305" alt="BYD Brand Saliency App Preview" class="app-hero-image" loading="lazy">
-                        </div>
-                        <h2 class="app-title">BYD Brand Saliency</h2>
-                        <p class="app-description">Track consumer perception across brand saliency pillars for BYD Philippines.</p>
-                        <a href="#" onclick="navigateToApp('https://byd-salience.aiailabs.net')" class="app-launch-btn">
-                            Launch App
-                        </a>
-                    </div>
-
-                    <!-- App Card 19 - Deep Research -->
-                    <div class="modern-app-card scale-in">
-                        <div class="app-hero-media">
-                            <img src="static/images/app-previews/deep-research.jpg?v=1770917305" alt="Deep Research App Preview" class="app-hero-image" loading="lazy">
-                        </div>
-                        <h2 class="app-title">Deep Research</h2>
-                        <p class="app-description">An autonomous research agent that plans, executes, and synthesizes multi-step research tasks.</p>
-                        <a href="#" onclick="navigateToApp('https://deep-research.aiailabs.net')" class="app-launch-btn">
-                            Launch App
-                        </a>
-                    </div>
-
-                    <!-- App Card 20 - LLM Council -->
-                    <div class="modern-app-card scale-in">
-                        <div class="app-hero-media">
-                            <img src="static/images/app-previews/llm-council.jpg?v=1770917305" alt="LLM Council App Preview" class="app-hero-image" loading="lazy">
-                        </div>
-                        <h2 class="app-title">LLM Council</h2>
-                        <p class="app-description">Query multiple LLMs via OpenRouter with multi-stage evaluation, then synthesize a higher-quality final answer.</p>
-                        <a href="#" onclick="navigateToApp('https://llm-council.aiailabs.net')" class="app-launch-btn">
-                            Launch App
-                        </a>
-                    </div>
-
-                    <!-- App Card 21 - Video Downloader -->
-                    <div class="modern-app-card scale-in">
-                        <div class="app-hero-media">
-                            <img src="static/images/app-previews/video-downloader.jpg?v=1770917305" alt="Video Downloader App Preview" class="app-hero-image" loading="lazy">
-                        </div>
-                        <h2 class="app-title">Video Downloader</h2>
-                        <p class="app-description">Download videos from 50+ platforms including YouTube, Twitter/X, TikTok, Instagram, Reddit, and more.</p>
-                        <a href="#" onclick="navigateToApp('https://videos.aiailabs.net')" class="app-launch-btn">
-                            Launch App
-                        </a>
-                    </div>
-
-                    <!-- App Card 22 - Competitive Ads Dashboard -->
-                    <div class="modern-app-card scale-in">
-                        <span class="app-ribbon app-ribbon-new">NEW</span>
-                        <div class="app-hero-media">
-                            <img src="static/images/app-previews/competitive-ads-dashboard.jpg?v=1771936000" alt="Competitive Ads Dashboard App Preview" class="app-hero-image" loading="lazy">
-                        </div>
-                        <h2 class="app-title">Competitive Ads Dashboard</h2>
-                        <p class="app-description">Monitor competitor ads across Meta, Google, and LinkedIn ad libraries in one unified intelligence dashboard.</p>
-                        <a href="#" onclick="navigateToApp('https://competitive-ads.aiailabs.net/')" class="app-launch-btn">
-                            Launch App
-                        </a>
-                    </div>
-                </div>
+    <!-- Nav -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-brand">
+                <img src="static/images/ailabs.png" alt="AI LABS">
+            </a>
+            <div class="nav-right">
+                <a href="index.html" class="nav-link nav-link-text">Home</a>
+                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                    <svg id="icon-sun" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <svg id="icon-moon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                    </svg>
+                </button>
+                <a href="https://github.com/ericxyz86" target="_blank" rel="noopener" class="nav-icon" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                </a>
             </div>
         </div>
+    </nav>
 
-        <!-- Modern Footer -->
-        <footer class="modern-footer py-8 mt-20">
-            <div class="container mx-auto px-4">
-                <div class="flex flex-col justify-center items-center space-y-4">
-                    <!-- Copyright text -->
-                    <p class="text-white text-center opacity-80">
-                        © 2026 Agile Intelligence AI LABS. All rights reserved.
-                    </p>
-                    <!-- GitHub link -->
-                    <a href="https://github.com/ericxyz86/static_landng_page" 
-                       target="_blank" 
-                       rel="noopener noreferrer" 
-                       class="text-white hover:text-yellow-300 transition-colors duration-300">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/>
-                        </svg>
-                    </a>
+    <!-- Catalog -->
+    <div class="section" style="padding-top:calc(var(--nav-h) + 40px)">
+        <div class="section-inner">
+            <div class="section-title">All Apps</div>
+
+            <!-- ── Data Extraction & Scraping ── -->
+            <div class="cat-label">Data Extraction &amp; Scraping</div>
+            <div class="app-grid">
+
+                <div class="app-card">
+                    <div class="app-card-image"><img src="static/images/app-previews/apple-store-reviews.jpg" alt="Apple Store Reviews" loading="lazy"></div>
+                    <div class="app-card-body">
+                        <h3>Apple Store Reviews</h3>
+                        <p>Extract and analyze data from the Apple App Store with ease.</p>
+                        <a href="#" onclick="event.preventDefault(); navigateToApp('https://appstore.aiailabs.net')" class="btn">Launch App</a>
+                    </div>
                 </div>
+
+                <div class="app-card">
+                    <div class="app-card-image"><img src="static/images/app-previews/play-store-reviews.jpg" alt="Play Store Reviews" loading="lazy"></div>
+                    <div class="app-card-body">
+                        <h3>Play Store Reviews</h3>
+                        <p>Extract and analyze data from the Google Play Store efficiently.</p>
+                        <a href="#" onclick="event.preventDefault(); navigateToApp('https://playstore.aiailabs.net')" class="btn">Launch App</a>
+                    </div>
+                </div>
+
+                <div class="app-card">
+                    <div class="app-card-image"><img src="static/images/app-previews/youtube-comment-extractor.jpg" alt="YouTube Comment Extractor" loading="lazy"></div>
+                    <div class="app-card-body">
+                        <h3>YouTube Comment Extractor</h3>
+                        <p>Extracts real comments from YouTube videos.</p>
+                        <a href="#" onclick="event.preventDefault(); navigateToApp('https://youtube.aiailabs.net')" class="btn">Launch App</a>
+                    </div>
+                </div>
+
+                <div class="app-card">
+                    <div class="app-card-image"><img src="static/images/app-previews/reddit-comment-extractor.jpg" alt="Reddit Comment Extractor" loading="lazy"></div>
+                    <div class="app-card-body">
+                        <h3>Reddit Comment Extractor</h3>
+                        <p>Extracts real Reddit comments using Reddit's official API. Runs locally on your machine.</p>
+                        <a href="#" onclick="event.preventDefault(); navigateToApp('reddit-setup.html')" class="btn">Setup Guide</a>
+                    </div>
+                </div>
+
+                <div class="app-card">
+                    <div class="app-card-image"><img src="static/images/app-previews/social-media-processor.jpg" alt="Social Media Processor" loading="lazy"></div>
+                    <div class="app-card-body">
+                        <h3>Social Media Processor</h3>
+                        <p>Convert your social media data exports into structured CSV format.</p>
+                        <a href="#" onclick="event.preventDefault(); navigateToApp('https://txt-csv.aiailabs.net')" class="btn">Launch App</a>
+                    </div>
+                </div>
+
+                <div class="app-card">
+                    <div class="app-card-image"><img src="static/images/app-previews/crawlai.jpg" alt="CrawlAI" loading="lazy"></div>
+                    <div class="app-card-body">
+                        <h3>CrawlAI</h3>
+                        <p>AI-powered website crawler.</p>
+                        <a href="#" onclick="event.preventDefault(); navigateToApp('https://crawl.aiailabs.net')" class="btn">Launch App</a>
+                    </div>
+                </div>
+
+                <div class="app-card">
+                    <div class="app-card-image"><img src="static/images/app-previews/video-downloader.jpg" alt="Video Downloader" loading="lazy"></div>
+                    <div class="app-card-body">
+                        <h3>Video Downloader</h3>
+                        <p>Download videos from 50+ platforms including YouTube, Twitter/X, TikTok, Instagram, Reddit, and more.</p>
+                        <a href="#" onclick="event.preventDefault(); navigateToApp('https://videos.aiailabs.net')" class="btn">Launch App</a>
+                    </div>
+                </div>
+
             </div>
-        </footer>
+
+            <!-- ── Brand & Market Intelligence ── -->
+            <div class="cat-label">Brand &amp; Market Intelligence</div>
+            <div class="app-grid">
+
+                <div class="app-card">
+                    <div class="app-card-image"><img src="static/images/app-previews/brand-scores-analyzer.jpg" alt="Brand Scores Analyzer" loading="lazy"></div>
+                    <div class="app-card-body">
+                        <h3>Brand Scores Analyzer</h3>
+                        <p>Analyze brand perception across Traditional-Progressive and Distinct-Conforming axes.</p>
+                        <a href="#" onclick="event.preventDefault(); navigateToApp('https://brand-scores.aiailabs.net')" class="btn">Launch App</a>
+                    </div>
+                </div>
+
+                <div class="app-card">
+                    <div class="app-card-image"><img src="static/images/app-previews/brand-intelligence-dashboard.jpg" alt="Brand Intelligence Dashboard" loading="lazy"></div>
+                    <div class="app-card-body">
+                        <h3>Brand Intelligence Dashboard</h3>
+                        <p>Unified social listening dashboard for BYD & Kia Philippines with LLM-powered sentiment analysis and AI insights.</p>
+                        <a href="#" onclick="event.preventDefault(); navigateToApp('https://byd-kia-brand-dashboard.aiailabs.net')" class="btn">Launch App</a>
+                    </div>
+                </div>
+
+                <div class="app-card">
+                    <div class="app-card-image"><img src="static/images/app-previews/byd-dealer-analytics.jpg" alt="BYD Dealer Analytics" loading="lazy"></div>
+                    <div class="app-card-body">
+                        <h3>BYD Dealer Analytics</h3>
+                        <p>Leads performance dashboard for BYD dealers.</p>
+                        <a href="#" onclick="event.preventDefault(); navigateToApp('https://byd-dealer.aiailabs.net')" class="btn">Launch App</a>
+                    </div>
+                </div>
+
+                <div class="app-card">
+                    <div class="app-card-image"><img src="static/images/app-previews/byd-brand-saliency.jpg" alt="BYD Brand Saliency" loading="lazy"></div>
+                    <div class="app-card-body">
+                        <h3>BYD Brand Saliency <span class="badge-new">New</span></h3>
+                        <p>Track consumer perception across brand saliency pillars for BYD Philippines.</p>
+                        <a href="#" onclick="event.preventDefault(); navigateToApp('https://byd-salience.aiailabs.net')" class="btn">Launch App</a>
+                    </div>
+                </div>
+
+                <div class="app-card">
+                    <div class="app-card-image"><img src="static/images/app-previews/competitive-ads-dashboard.jpg" alt="Competitive Ads Dashboard" loading="lazy"></div>
+                    <div class="app-card-body">
+                        <h3>Competitive Ads Dashboard <span class="badge-new">New</span></h3>
+                        <p>Monitor competitor ads across Meta, Google, and LinkedIn ad libraries in one unified intelligence dashboard.</p>
+                        <a href="#" onclick="event.preventDefault(); navigateToApp('https://competitive-ads.aiailabs.net')" class="btn">Launch App</a>
+                    </div>
+                </div>
+
+                <div class="app-card">
+                    <div class="app-card-image"><img src="static/images/app-previews/pldt-fandom-tracker.jpg" alt="PLDT Fandom Tracker" loading="lazy"></div>
+                    <div class="app-card-body">
+                        <h3>PLDT Fandom Tracker <span class="badge-new">New</span></h3>
+                        <p>Track and analyze PLDT Home's fan communities, content performance, and audience engagement with AI-powered insights.</p>
+                        <a href="#" onclick="event.preventDefault(); navigateToApp('https://pldt-fandom.aiailabs.net')" class="btn">Launch App</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ── Telecom & Industry ── -->
+            <div class="cat-label">Telecom &amp; Industry</div>
+            <div class="app-grid">
+
+                <div class="app-card">
+                    <div class="app-card-image"><img src="static/images/app-previews/telco-complaints-tracking.jpg" alt="Telco Complaints Tracking" loading="lazy"></div>
+                    <div class="app-card-body">
+                        <h3>Telco Complaints Tracking</h3>
+                        <p>Tracks complaints from Globe, Converge, PLDT and more with AI classification and geocoded heatmaps.</p>
+                        <a href="#" onclick="event.preventDefault(); navigateToApp('https://isp-complaints.aiailabs.net')" class="btn">Launch App</a>
+                    </div>
+                </div>
+
+                <div class="app-card">
+                    <div class="app-card-image"><img src="static/images/app-previews/philippine-telco-news.jpg" alt="Philippine Telco News" loading="lazy"></div>
+                    <div class="app-card-body">
+                        <h3>Philippine Telco News</h3>
+                        <p>A news aggregator for the Philippine telecommunications industry.</p>
+                        <a href="#" onclick="event.preventDefault(); navigateToApp('https://telco-news.aiailabs.net')" class="btn">Launch App</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ── AI & Research Tools ── -->
+            <div class="cat-label">AI &amp; Research Tools</div>
+            <div class="app-grid">
+
+                <div class="app-card">
+                    <div class="app-card-image"><img src="static/images/app-previews/ddbrain.jpg" alt="DDBrain" loading="lazy"></div>
+                    <div class="app-card-body">
+                        <h3>DDBrain</h3>
+                        <p>AI-powered SharePoint document search and Q&A using advanced RAG technology.</p>
+                        <a href="#" onclick="event.preventDefault(); navigateToApp('https://ddb-sharepoint-rag.aiailabs.net')" class="btn">Launch App</a>
+                    </div>
+                </div>
+
+                <div class="app-card">
+                    <div class="app-card-image"><img src="static/images/app-previews/deep-research.jpg" alt="Deep Research" loading="lazy"></div>
+                    <div class="app-card-body">
+                        <h3>Deep Research</h3>
+                        <p>An autonomous research agent that plans, executes, and synthesizes multi-step research tasks.</p>
+                        <a href="#" onclick="event.preventDefault(); navigateToApp('https://deep-research.aiailabs.net')" class="btn">Launch App</a>
+                    </div>
+                </div>
+
+                <div class="app-card">
+                    <div class="app-card-image"><img src="static/images/app-previews/llm-council.jpg" alt="LLM Council" loading="lazy"></div>
+                    <div class="app-card-body">
+                        <h3>LLM Council</h3>
+                        <p>Query multiple LLMs via OpenRouter with multi-stage evaluation, then synthesize a higher-quality final answer.</p>
+                        <a href="#" onclick="event.preventDefault(); navigateToApp('https://llm-council.aiailabs.net')" class="btn">Launch App</a>
+                    </div>
+                </div>
+
+                <div class="app-card">
+                    <div class="app-card-image"><img src="static/images/app-previews/ai-troll-analyzer.jpg" alt="AI Troll Analyzer" loading="lazy"></div>
+                    <div class="app-card-body">
+                        <h3>AI Troll Analyzer</h3>
+                        <p>Advanced tool for detecting and analyzing coordinated trolling behavior on social media platforms.</p>
+                        <a href="#" onclick="event.preventDefault(); navigateToApp('https://troll.aiailabs.net')" class="btn">Launch App</a>
+                    </div>
+                </div>
+
+                <div class="app-card">
+                    <div class="app-card-image"><img src="static/images/app-previews/location-parser-classification.jpg" alt="Location Parser and Classification" loading="lazy"></div>
+                    <div class="app-card-body">
+                        <h3>Location Parser and Classification</h3>
+                        <p>Extract locations and classify text with AI.</p>
+                        <a href="#" onclick="event.preventDefault(); navigateToApp('https://location-parser.aiailabs.net')" class="btn">Launch App</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ── Productivity & Utilities ── -->
+            <div class="cat-label">Productivity &amp; Utilities</div>
+            <div class="app-grid">
+
+                <div class="app-card">
+                    <div class="app-card-image"><img src="static/images/app-previews/ai-webpage-summarizer.jpg" alt="AI Webpage Summarizer" loading="lazy"></div>
+                    <div class="app-card-body">
+                        <h3>AI Webpage Summarizer</h3>
+                        <p>Chrome extension using AI to summarize webpages with key insights and sentiment analysis.</p>
+                        <div class="btn-row">
+                            <a href="#" onclick="event.preventDefault(); navigateToApp('https://chromewebstore.google.com/detail/ai-executive-summary/leglfbaoonknnjkehmbpjkcmgljledne')" class="btn">Install Extension</a>
+                            <a href="privacy-policy.html" class="btn">Privacy Policy</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="app-card">
+                    <div class="app-card-image"><img src="static/images/app-previews/google-sheets-ai-script.jpg" alt="Google Sheets AI Script" loading="lazy"></div>
+                    <div class="app-card-body">
+                        <h3>Google Sheets AI Script</h3>
+                        <p>Enhance your Google Sheets with AI capabilities using custom App Scripts.</p>
+                        <a href="#" onclick="event.preventDefault(); navigateToApp('appscript.html')" class="btn">View Script</a>
+                    </div>
+                </div>
+
+                <div class="app-card">
+                    <div class="app-card-image"><img src="static/images/app-previews/keynote2pdf-converter.jpg" alt="Keynote2PDF Converter" loading="lazy"></div>
+                    <div class="app-card-body">
+                        <h3>Keynote2PDF Converter</h3>
+                        <p>Convert multiple Keynote files to PDF at once. macOS only.</p>
+                        <div class="btn-row">
+                            <a href="https://github.com/ericxyz86/keynote2pdf/releases/download/v1.0.0-security-fixes/Keynote2PDF-Installer.dmg" class="btn" download>Download</a>
+                            <a href="https://github.com/ericxyz86/keynote2pdf/blob/main/USER_GUIDE.md" target="_blank" rel="noopener noreferrer" class="btn">User Guide</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
     </div>
 
-    <script src="static/js/main.js?v=1770917072"></script>
-    <!-- auth.js removed — Cloudflare Access handles authentication -->
-    <script src="static/js/shader-background.js?v=1770917644"></script>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <p>&copy; 2026 Agile Intelligence AI LABS &middot; DDB Group Philippines</p>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="https://github.com/ericxyz86" target="_blank" rel="noopener">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="static/js/main.js"></script>
 </body>
 </html>
