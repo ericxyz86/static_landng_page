@@ -252,52 +252,97 @@
         .pillar-spot h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.75rem; letter-spacing: -0.01em; }
         .pillar-spot p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; }
 
-        /* ── Sticky Card Stack Showcase ── */
+        /* ── Accordion Slider Showcase ── */
         .showcase-section { padding: 80px 2rem 60px; }
         .showcase-header { max-width: 1280px; margin: 0 auto 3rem; }
-        .cards-stack { max-width: 900px; margin: 0 auto; padding-bottom: 120px; }
 
-        .stack-card {
-            position: sticky; border-radius: 20px; padding: 2.5rem 2.5rem 2rem;
-            margin-bottom: 28px; min-height: 280px;
-            display: flex; flex-direction: column; justify-content: flex-end;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            transition: transform 0.1s ease; will-change: transform;
-            text-decoration: none; color: inherit; cursor: pointer;
-            border: 1px solid rgba(255,255,255,0.06);
-            overflow: hidden; position: relative;
+        .accordion-showcase {
+            max-width: 1200px; margin: 0 auto;
+            display: flex; gap: 6px;
+            height: 65vh; min-height: 420px; max-height: 580px;
         }
-        .stack-card:hover { border-color: rgba(255,255,255,0.12); }
-        .stack-card:nth-child(1) { top: 80px; z-index: 1; }
-        .stack-card:nth-child(2) { top: 100px; z-index: 2; }
-        .stack-card:nth-child(3) { top: 120px; z-index: 3; }
-        .stack-card:nth-child(4) { top: 140px; z-index: 4; }
-        .stack-card:nth-child(5) { top: 160px; z-index: 5; }
-        .stack-card:nth-child(6) { top: 180px; z-index: 6; }
-        .stack-card:nth-child(7) { top: 200px; z-index: 7; }
+        .acc-panel {
+            flex: 1; border-radius: 16px; overflow: hidden;
+            position: relative; cursor: pointer;
+            transition: flex 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .acc-panel:hover, .acc-panel.active { flex: 5; }
 
-        .stack-card .card-tag {
+        .acc-panel-bg {
+            position: absolute; inset: 0;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .acc-panel:hover .acc-panel-bg,
+        .acc-panel.active .acc-panel-bg { transform: scale(1.05); }
+
+        .acc-panel-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(6,8,15,0.9) 0%, rgba(6,8,15,0.4) 35%, rgba(6,8,15,0.15) 60%, transparent 100%);
+        }
+
+        .acc-panel-collapsed {
+            position: absolute; bottom: 28px; left: 16px;
+            font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em;
+            text-transform: uppercase; writing-mode: vertical-rl;
+            text-orientation: mixed; z-index: 2;
+            transition: opacity 0.3s; color: var(--text-secondary);
+        }
+        .acc-panel:hover .acc-panel-collapsed,
+        .acc-panel.active .acc-panel-collapsed { opacity: 0; }
+
+        .acc-panel-content {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            padding: 28px 24px; z-index: 2;
+        }
+        .acc-panel-num {
+            font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+            margin-bottom: 8px; font-weight: 600;
+            opacity: 0; transform: translateY(8px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+        }
+        .acc-panel-h3 {
+            font-size: 1.35rem; font-weight: 700; letter-spacing: -0.01em;
+            margin-bottom: 6px;
+            opacity: 0; transform: translateY(10px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
+        }
+        .acc-panel-desc {
+            font-size: 0.85rem; color: rgba(241,245,249,0.7); line-height: 1.55;
+            max-width: 32ch;
+            opacity: 0; transform: translateY(10px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+        }
+        .acc-panel-link {
             display: inline-flex; align-items: center; gap: 6px;
-            font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
-            padding: 5px 12px; border-radius: 8px; margin-bottom: 0.75rem; width: fit-content;
+            font-size: 0.78rem; font-weight: 600; color: white;
+            margin-top: 12px; text-decoration: none;
+            opacity: 0; transform: translateY(8px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.25s;
         }
-        .tag-listening { background: rgba(59,130,246,0.15); color: var(--accent-blue); }
-        .tag-analytics { background: rgba(139,92,246,0.15); color: var(--accent-purple); }
-        .tag-research { background: rgba(6,182,212,0.15); color: var(--accent-cyan); }
-        .tag-new { background: rgba(16,185,129,0.15); color: var(--accent-green); }
-        .tag-ai { background: rgba(236,72,153,0.15); color: var(--accent-pink); }
+        .acc-panel:hover .acc-panel-num,
+        .acc-panel:hover .acc-panel-h3,
+        .acc-panel:hover .acc-panel-desc,
+        .acc-panel:hover .acc-panel-link,
+        .acc-panel.active .acc-panel-num,
+        .acc-panel.active .acc-panel-h3,
+        .acc-panel.active .acc-panel-desc,
+        .acc-panel.active .acc-panel-link {
+            opacity: 1; transform: translateY(0);
+        }
 
-        .stack-card h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: -0.01em; }
-        .stack-card p { color: rgba(255,255,255,0.7); font-size: 0.95rem; line-height: 1.6; max-width: 60ch; }
-        .stack-card .card-arrow {
-            position: absolute; top: 1.5rem; right: 1.5rem;
-            width: 40px; height: 40px; border-radius: 10px;
-            background: rgba(255,255,255,0.08);
-            display: flex; align-items: center; justify-content: center;
-            opacity: 0; transform: translate(-4px, 4px);
-            transition: all 0.3s ease; font-size: 1.2rem; color: rgba(255,255,255,0.7);
+        @media (max-width: 768px) {
+            .accordion-showcase {
+                flex-direction: column; height: auto;
+                min-height: auto; max-height: none;
+            }
+            .acc-panel { height: 56px; flex: none !important; }
+            .acc-panel:hover, .acc-panel.active { height: 260px; flex: none !important; }
+            .acc-panel-collapsed {
+                writing-mode: horizontal-tb;
+                position: absolute; bottom: auto; top: 50%; left: 20px;
+                transform: translateY(-50%);
+            }
         }
-        .stack-card:hover .card-arrow { opacity: 1; transform: translate(0, 0); }
 
         /* ── Nox Section ── */
         .nox-section {
@@ -521,64 +566,99 @@
         </section>
 
         <!-- ═══════════════════════════════════════════════════ -->
-        <!-- STICKY CARD STACK — FEATURED WORK                    -->
+        <!-- ACCORDION SLIDER — FEATURED WORK                     -->
         <!-- ═══════════════════════════════════════════════════ -->
         <section id="showcase" class="showcase-section">
             <div class="showcase-header fade-up">
                 <div class="section-label">Featured Work</div>
                 <div class="section-title">Built for real client challenges</div>
-                <p class="section-desc">Each tool solves a specific business problem — from competitive intelligence to complaint monitoring.</p>
+                <p class="section-desc">Hover to explore — each tool solves a specific business problem.</p>
             </div>
 
-            <div class="cards-stack">
-                <a href="https://byd-kia-brand-dashboard.aiailabs.net" class="stack-card" style="background: #0f1a2e;" onclick="event.preventDefault(); navigateToApp(this.href)">
-                    <div class="card-arrow">↗</div>
-                    <div class="card-tag tag-listening">Social Listening</div>
-                    <h3>Brand Intelligence Dashboard</h3>
-                    <p>Unified social listening for BYD & Kia Philippines — LLM-powered sentiment analysis, daily automated briefings, and competitive intelligence across 6 platforms.</p>
-                </a>
+            <div class="accordion-showcase">
+                <div class="acc-panel active" onclick="navigateToApp('https://byd-kia-brand-dashboard.aiailabs.net')">
+                    <div class="acc-panel-bg" style="background: linear-gradient(135deg, #0c1a3a 0%, #1a2d5a 50%, #0f1a2e 100%);"></div>
+                    <div class="acc-panel-overlay"></div>
+                    <div class="acc-panel-collapsed">Brand Intel</div>
+                    <div class="acc-panel-content">
+                        <div class="acc-panel-num" style="color: var(--accent-blue);">01 — Social Listening</div>
+                        <div class="acc-panel-h3">Brand Intelligence Dashboard</div>
+                        <div class="acc-panel-desc">Unified social listening for BYD & Kia — LLM sentiment analysis, daily briefings, competitive intel across 6 platforms.</div>
+                        <a class="acc-panel-link" onclick="event.stopPropagation()">Explore ↗</a>
+                    </div>
+                </div>
 
-                <a href="https://isp-complaints.aiailabs.net" class="stack-card" style="background: #0a1f2e;" onclick="event.preventDefault(); navigateToApp(this.href)">
-                    <div class="card-arrow">↗</div>
-                    <div class="card-tag tag-new">✦ New</div>
-                    <h3>ISP Complaint Intelligence</h3>
-                    <p>Globe, Converge & PLDT complaints tracked with AI classification, geocoded heatmaps, and GPT-5 powered trend analysis.</p>
-                </a>
+                <div class="acc-panel" onclick="navigateToApp('https://isp-complaints.aiailabs.net')">
+                    <div class="acc-panel-bg" style="background: linear-gradient(135deg, #082030 0%, #0d3350 50%, #0a1f2e 100%);"></div>
+                    <div class="acc-panel-overlay"></div>
+                    <div class="acc-panel-collapsed">ISP Intel</div>
+                    <div class="acc-panel-content">
+                        <div class="acc-panel-num" style="color: var(--accent-green);">02 — ✦ New</div>
+                        <div class="acc-panel-h3">ISP Complaint Intelligence</div>
+                        <div class="acc-panel-desc">Globe, Converge & PLDT complaints — AI classification, geocoded heatmaps, GPT-5 trend analysis.</div>
+                        <a class="acc-panel-link" onclick="event.stopPropagation()">Explore ↗</a>
+                    </div>
+                </div>
 
-                <a href="https://competitive-ads.aiailabs.net" class="stack-card" style="background: #1a0f2e;" onclick="event.preventDefault(); navigateToApp(this.href)">
-                    <div class="card-arrow">↗</div>
-                    <div class="card-tag tag-new">✦ New</div>
-                    <h3>Competitive Ads</h3>
-                    <p>Monitor competitor ads across Meta, Google & LinkedIn in one unified view.</p>
-                </a>
+                <div class="acc-panel" onclick="navigateToApp('https://competitive-ads.aiailabs.net')">
+                    <div class="acc-panel-bg" style="background: linear-gradient(135deg, #1a0c30 0%, #2d1a50 50%, #1a0f2e 100%);"></div>
+                    <div class="acc-panel-overlay"></div>
+                    <div class="acc-panel-collapsed">Comp Ads</div>
+                    <div class="acc-panel-content">
+                        <div class="acc-panel-num" style="color: var(--accent-purple);">03 — ✦ New</div>
+                        <div class="acc-panel-h3">Competitive Ads</div>
+                        <div class="acc-panel-desc">Monitor competitor ads across Meta, Google & LinkedIn in one unified view.</div>
+                        <a class="acc-panel-link" onclick="event.stopPropagation()">Explore ↗</a>
+                    </div>
+                </div>
 
-                <a href="https://pldt-fandom.aiailabs.net" class="stack-card" style="background: #2e0f1a;" onclick="event.preventDefault(); navigateToApp(this.href)">
-                    <div class="card-arrow">↗</div>
-                    <div class="card-tag tag-analytics">Fandom Analytics</div>
-                    <h3>PLDT Fandom Tracker</h3>
-                    <p>Fan community tracking with AI-powered audience engagement insights.</p>
-                </a>
+                <div class="acc-panel" onclick="navigateToApp('https://pldt-fandom.aiailabs.net')">
+                    <div class="acc-panel-bg" style="background: linear-gradient(135deg, #2e0818 0%, #4a1030 50%, #2e0f1a 100%);"></div>
+                    <div class="acc-panel-overlay"></div>
+                    <div class="acc-panel-collapsed">Fandom</div>
+                    <div class="acc-panel-content">
+                        <div class="acc-panel-num" style="color: var(--accent-pink);">04 — Fandom Analytics</div>
+                        <div class="acc-panel-h3">PLDT Fandom Tracker</div>
+                        <div class="acc-panel-desc">Fan community tracking with AI-powered audience engagement insights across all platforms.</div>
+                        <a class="acc-panel-link" onclick="event.stopPropagation()">Explore ↗</a>
+                    </div>
+                </div>
 
-                <a href="https://culturesoup.aiailabs.net" class="stack-card" style="background: #2e1a0a;" onclick="event.preventDefault(); navigateToApp(this.href)">
-                    <div class="card-arrow">↗</div>
-                    <div class="card-tag tag-research">Trend Intel</div>
-                    <h3>CultureSoup</h3>
-                    <p>Emerging trend scanner across 5 platforms — catch cultural moments early.</p>
-                </a>
+                <div class="acc-panel" onclick="navigateToApp('https://culturesoup.aiailabs.net')">
+                    <div class="acc-panel-bg" style="background: linear-gradient(135deg, #2e1808 0%, #4a2810 50%, #2e1a0a 100%);"></div>
+                    <div class="acc-panel-overlay"></div>
+                    <div class="acc-panel-collapsed">Culture</div>
+                    <div class="acc-panel-content">
+                        <div class="acc-panel-num" style="color: var(--accent-cyan);">05 — Trend Intel</div>
+                        <div class="acc-panel-h3">CultureSoup</div>
+                        <div class="acc-panel-desc">Emerging trend scanner across 5 platforms — catch cultural moments early.</div>
+                        <a class="acc-panel-link" onclick="event.stopPropagation()">Explore ↗</a>
+                    </div>
+                </div>
 
-                <a href="https://byd-salience.aiailabs.net" class="stack-card" style="background: #0f2e1a;" onclick="event.preventDefault(); navigateToApp(this.href)">
-                    <div class="card-arrow">↗</div>
-                    <div class="card-tag tag-analytics">Brand Strategy</div>
-                    <h3>BYD Brand Saliency</h3>
-                    <p>Consumer perception tracking across brand saliency pillars — measuring what makes BYD meaningful, different, and salient in the Philippine market.</p>
-                </a>
+                <div class="acc-panel" onclick="navigateToApp('https://byd-salience.aiailabs.net')">
+                    <div class="acc-panel-bg" style="background: linear-gradient(135deg, #0c2e18 0%, #105020 50%, #0f2e1a 100%);"></div>
+                    <div class="acc-panel-overlay"></div>
+                    <div class="acc-panel-collapsed">Saliency</div>
+                    <div class="acc-panel-content">
+                        <div class="acc-panel-num" style="color: var(--accent-green);">06 — Brand Strategy</div>
+                        <div class="acc-panel-h3">BYD Brand Saliency</div>
+                        <div class="acc-panel-desc">Consumer perception tracking — measuring what makes BYD meaningful, different, and salient.</div>
+                        <a class="acc-panel-link" onclick="event.stopPropagation()">Explore ↗</a>
+                    </div>
+                </div>
 
-                <a href="https://deep-research.aiailabs.net" class="stack-card" style="background: #0f152e;" onclick="event.preventDefault(); navigateToApp(this.href)">
-                    <div class="card-arrow">↗</div>
-                    <div class="card-tag tag-ai">AI Agent</div>
-                    <h3>Deep Research</h3>
-                    <p>Autonomous research agent that plans, executes multi-step investigations, and synthesizes findings into structured reports.</p>
-                </a>
+                <div class="acc-panel" onclick="navigateToApp('https://deep-research.aiailabs.net')">
+                    <div class="acc-panel-bg" style="background: linear-gradient(135deg, #0c1030 0%, #151d50 50%, #0f152e 100%);"></div>
+                    <div class="acc-panel-overlay"></div>
+                    <div class="acc-panel-collapsed">Research</div>
+                    <div class="acc-panel-content">
+                        <div class="acc-panel-num" style="color: var(--accent-pink);">07 — AI Agent</div>
+                        <div class="acc-panel-h3">Deep Research</div>
+                        <div class="acc-panel-desc">Autonomous research agent — plans, executes multi-step investigations, synthesizes findings.</div>
+                        <a class="acc-panel-link" onclick="event.stopPropagation()">Explore ↗</a>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -681,22 +761,15 @@
             });
         })();
 
-        // ── Sticky Card Stack Scale-Down ──
+        // ── Accordion Click Lock ──
         (function() {
-            var cards = document.querySelectorAll('.stack-card');
-            cards.forEach(function(card, i) {
-                if (i < cards.length - 1) {
-                    gsap.to(card, {
-                        scale: 0.92,
-                        opacity: 0.5,
-                        scrollTrigger: {
-                            trigger: cards[i + 1],
-                            start: 'top 85%',
-                            end: 'top 25%',
-                            scrub: true
-                        }
-                    });
-                }
+            document.querySelectorAll('.acc-panel').forEach(function(panel) {
+                panel.addEventListener('click', function(e) {
+                    if (e.target.closest('.acc-panel-link')) return;
+                    var siblings = panel.parentElement.children;
+                    for (var i = 0; i < siblings.length; i++) siblings[i].classList.remove('active');
+                    panel.classList.add('active');
+                });
             });
         })();
 
