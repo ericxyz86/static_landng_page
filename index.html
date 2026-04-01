@@ -127,12 +127,22 @@
         .curtain-left .curtain-sub { right: 24px; }
         .curtain-right .curtain-sub { left: 24px; }
 
+        /* Scroll-synced video canvas */
+        .hero-canvas {
+            position: absolute; inset: 0; z-index: 0;
+            width: 100%; height: 100%; object-fit: cover;
+        }
+        .hero-canvas-overlay {
+            position: absolute; inset: 0; z-index: 0;
+            background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(6,8,15,0.3) 0%, rgba(6,8,15,0.75) 70%, var(--bg-primary) 100%);
+            pointer-events: none;
+        }
+
         /* Hero content revealed behind curtain */
         .hero-revealed {
             position: absolute; inset: 0; z-index: 1;
             display: flex; align-items: center; justify-content: center;
             text-align: center; padding: 140px 2rem 100px;
-            background: linear-gradient(180deg, var(--bg-primary) 0%, rgba(6,8,15,0.95) 50%, var(--bg-primary) 100%);
         }
         .hero-inner { max-width: 880px; }
         .hero-badge {
@@ -483,6 +493,10 @@
         <!-- ═══════════════════════════════════════════════════ -->
         <section class="curtain-section">
             <div class="curtain-sticky">
+                <!-- Scroll-synced video canvas -->
+                <canvas id="heroCanvas" class="hero-canvas"></canvas>
+                <div class="hero-canvas-overlay"></div>
+
                 <!-- Content revealed behind curtain -->
                 <div class="hero-revealed">
                     <div class="hero-inner">
@@ -746,9 +760,40 @@
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
-        // ── Curtain Reveal ──
+        // ── Scroll-Synced Video Hero ──
+        (function() {
+            var canvas = document.getElementById('heroCanvas');
+            var ctx = canvas.getContext('2d');
+            var frameCount = 49;
+            var frames = [];
+            var loaded = 0;
+
+            function pad(n) { return n < 10 ? '00' + n : n < 100 ? '0' + n : '' + n; }
+
+            for (var i = 1; i <= frameCount; i++) {
+                var img = new Image();
+                img.src = 'static/frames/frame-' + pad(i) + '.jpg';
+                img.onload = function() {
+                    loaded++;
+                    if (loaded === frameCount) {
+                        canvas.width = frames[0].width;
+                        canvas.height = frames[0].height;
+                        ctx.drawImage(frames[0], 0, 0);
+                    }
+                };
+                frames.push(img);
+            }
+
+            // Store frames on canvas element for scroll handler
+            canvas._frames = frames;
+        })();
+
+        // ── Curtain Reveal + Frame Scrub ──
         (function() {
             var cs = document.querySelector('.curtain-section');
+            var canvas = document.getElementById('heroCanvas');
+            var ctx = canvas.getContext('2d');
+
             gsap.to('#cLeft', {
                 xPercent: -100,
                 ease: 'power2.inOut',
@@ -758,6 +803,28 @@
                 xPercent: 100,
                 ease: 'power2.inOut',
                 scrollTrigger: { trigger: cs, start: 'top top', end: '60% top', scrub: 0.5 }
+            });
+
+            // Scrub video frames synced to scroll
+            var frameObj = { frame: 0 };
+            gsap.to(frameObj, {
+                frame: 48,
+                snap: 'frame',
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: cs,
+                    start: 'top top',
+                    end: 'bottom top',
+                    scrub: 0.3
+                },
+                onUpdate: function() {
+                    var idx = Math.round(frameObj.frame);
+                    var f = canvas._frames;
+                    if (f && f[idx] && f[idx].complete) {
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        ctx.drawImage(f[idx], 0, 0);
+                    }
+                }
             });
         })();
 
