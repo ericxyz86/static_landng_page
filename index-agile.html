@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agile Intelligence — Data That Drives Decisions</title>
+<meta name="description" content="We transform raw data into competitive intelligence — powering strategy for the Philippines' biggest brands.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Oswald:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+/* ═══════════════════════════════════════════════
+   DESIGN TOKENS
+   ═══════════════════════════════════════════════ */
+:root {
+  --bg: #06080f;
+  --surface: #0c1021;
+  --surface-2: #111827;
+  --primary: #0ea5e9;
+  --accent: #06b6d4;
+  --secondary: #3b82f6;
+  --text: #f1f5f9;
+  --muted: #94a3b8;
+  --dim: #475569;
+  --border: rgba(255,255,255,0.06);
+  --glow: rgba(14,165,233,0.15);
+}
+
+/* ═══════════════════════════════════════════════
+   RESET & BASE
+   ═══════════════════════════════════════════════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+a { color: var(--primary); text-decoration: none; }
+img { display: block; max-width: 100%; }
+
+/* ═══════════════════════════════════════════════
+   § 1. CURTAIN REVEAL HERO + SCROLL-SYNCED VIDEO
+   ═══════════════════════════════════════════════ */
+.curtain-section {
+  position: relative;
+  height: 300vh;
+}
+.curtain-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+.curtain-panel {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  background: var(--bg);
+}
+.curtain-panel--left { left: 0; justify-content: flex-end; padding-right: 1vw; }
+.curtain-panel--right { right: 0; justify-content: flex-start; padding-left: 1vw; }
+.curtain-text {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(80px, 18vw, 220px);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text);
+  user-select: none;
+  line-height: 1;
+}
+.curtain-text--glow {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Canvas behind curtain */
+.hero-canvas-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+#heroCanvas {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Content revealed after curtain */
+.hero-revealed {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  opacity: 0;
+}
+.hero-tag {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+}
+.hero-headline {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(2rem, 7vw, 5.5rem);
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  line-height: 1.05;
+  max-width: 900px;
+}
+.hero-headline span {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-sub {
+  font-size: clamp(0.95rem, 1.8vw, 1.2rem);
+  color: var(--muted);
+  max-width: 600px;
+  margin-top: 1.5rem;
+  line-height: 1.7;
+}
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2.5rem;
+  padding: 0.9rem 2.2rem;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.hero-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(14,165,233,0.3);
+}
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 15;
+  font-size: 0.7rem;
+  color: var(--dim);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  animation: float 2s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { opacity: 0.4; transform: translateX(-50%) translateY(0); }
+  50% { opacity: 1; transform: translateX(-50%) translateY(-6px); }
+}
+
+/* ═══════════════════════════════════════════════
+   § 2. SPOTLIGHT BORDER PILLARS
+   ═══════════════════════════════════════════════ */
+.pillars-section {
+  padding: 8rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+.section-tag {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.section-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin-bottom: 4rem;
+}
+.pillar-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  --mx: 0.5;
+  --my: 0.5;
+}
+.pillar-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+.pillar-card:hover { transform: translateY(-4px); }
+.pillar-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  background: radial-gradient(
+    600px circle at calc(var(--mx) * 100%) calc(var(--my) * 100%),
+    rgba(14,165,233,0.12), transparent 40%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.pillar-card:hover::before { opacity: 1; }
+.pillar-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+.pillar-name {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.pillar-desc {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.pillar-services {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.pillar-services span {
+  font-size: 0.7rem;
+  padding: 0.25rem 0.7rem;
+  background: rgba(14,165,233,0.08);
+  color: var(--primary);
+  border-radius: 20px;
+  border: 1px solid rgba(14,165,233,0.15);
+}
+
+/* ═══════════════════════════════════════════════
+   § 3. ACCORDION SLIDER — SERVICES SHOWCASE
+   ═══════════════════════════════════════════════ */
+.accordion-section {
+  padding: 8rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.accordion-panels {
+  display: flex;
+  gap: 8px;
+  height: 500px;
+  overflow: hidden;
+  border-radius: 20px;
+}
+.accordion-panel {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: flex 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.accordion-panel:hover { flex: 5; }
+.accordion-panel-bg {
+  position: absolute;
+  inset: 0;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.accordion-panel:hover .accordion-panel-bg { transform: scale(1.05); }
+.accordion-panel-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
+}
+.accordion-panel-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem;
+  z-index: 2;
+}
+.accordion-panel-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--primary);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.4s 0.2s;
+}
+.accordion-panel:hover .accordion-panel-num {
+  opacity: 1;
+  transform: translateY(0);
+}
+.accordion-panel-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transition: all 0.4s;
+}
+.accordion-panel:hover .accordion-panel-title {
+  writing-mode: horizontal-tb;
+  font-size: 1.4rem;
+}
+.accordion-panel-desc {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 400px;
+  margin-top: 0.5rem;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.4s 0.15s;
+}
+.accordion-panel:hover .accordion-panel-desc {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ═══════════════════════════════════════════════
+   § 4. ODOMETER STATS
+   ═══════════════════════════════════════════════ */
+.stats-section {
+  padding: 8rem 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  text-align: center;
+}
+.stat-item {
+  padding: 2.5rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+}
+.odometer {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: -0.03em;
+  overflow: hidden;
+  height: 1.15em;
+  display: flex;
+  justify-content: center;
+}
+.odo-digit {
+  display: inline-block;
+  overflow: hidden;
+  height: 1.15em;
+  position: relative;
+}
+.odo-strip {
+  display: flex;
+  flex-direction: column;
+  transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.odo-strip span {
+  display: block;
+  height: 1.15em;
+  line-height: 1.15;
+}
+.stat-suffix {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 700;
+  color: var(--primary);
+  vertical-align: top;
+}
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 0.5rem;
+  letter-spacing: 0.02em;
+}
+
+/* ═══════════════════════════════════════════════
+   § 5. KINETIC MARQUEE — CLIENTS
+   ═══════════════════════════════════════════════ */
+.marquee-section {
+  padding: 6rem 0;
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.marquee-row {
+  display: flex;
+  white-space: nowrap;
+  will-change: transform;
+  padding: 1rem 0;
+}
+.marquee-row + .marquee-row { margin-top: 0.5rem; }
+.marquee-content {
+  display: flex;
+  align-items: center;
+}
+.marquee-item {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+/* Row 1: Giant text */
+.marquee-giant .marquee-item {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--text);
+  padding: 0 2.5rem;
+}
+.marquee-giant .dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--primary);
+  margin: 0 2rem;
+  opacity: 0.5;
+}
+/* Row 2: Outlined text */
+.marquee-outline .marquee-item {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--dim);
+  padding: 0 2.5rem;
+}
+.marquee-outline .dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid var(--dim);
+  margin: 0 2rem;
+}
+/* Row 3: Tag pills */
+.marquee-tags .marquee-item {
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.6rem 1.2rem;
+  margin: 0 0.4rem;
+  border-radius: 50px;
+  background: rgba(14,165,233,0.08);
+  color: var(--primary);
+  border: 1px solid rgba(14,165,233,0.15);
+}
+
+/* ═══════════════════════════════════════════════
+   § 6. CTA
+   ═══════════════════════════════════════════════ */
+.cta-section {
+  padding: 10rem 2rem;
+  text-align: center;
+  position: relative;
+}
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(14,165,233,0.08), transparent 70%);
+  pointer-events: none;
+}
+.cta-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 1.5rem;
+}
+.cta-sub {
+  font-size: 1.1rem;
+  color: var(--muted);
+  max-width: 500px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.7;
+}
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2.5rem;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(14,165,233,0.3);
+}
+.cta-links {
+  margin-top: 2rem;
+  font-size: 0.85rem;
+  color: var(--dim);
+}
+.cta-links a { margin: 0 1rem; color: var(--muted); transition: color 0.3s; }
+.cta-links a:hover { color: var(--primary); }
+
+/* ═══════════════════════════════════════════════
+   § 7. FOOTER
+   ═══════════════════════════════════════════════ */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 2rem;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--dim);
+}
+footer a { color: var(--muted); }
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .pillar-grid { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .accordion-panels {
+    flex-direction: column;
+    height: auto;
+  }
+  .accordion-panel {
+    height: 80px;
+    transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1), flex 0.6s;
+  }
+  .accordion-panel:hover { height: 280px; }
+  .accordion-panel-title {
+    writing-mode: horizontal-tb;
+    font-size: 1rem;
+  }
+}
+
+/* Fade-up animation class */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s, transform 0.8s;
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════
+     § 1. CURTAIN REVEAL HERO + SCROLL-SYNCED VIDEO
+     ════════════════════════════════════════════════ -->
+<section class="curtain-section">
+  <div class="curtain-sticky">
+    <!-- Video canvas (behind everything) -->
+    <div class="hero-canvas-wrap">
+      <canvas id="heroCanvas"></canvas>
+    </div>
+
+    <!-- Curtain panels -->
+    <div class="curtain-panel curtain-panel--left">
+      <span class="curtain-text">AGILE</span>
+    </div>
+    <div class="curtain-panel curtain-panel--right">
+      <span class="curtain-text curtain-text--glow">INTEL</span>
+    </div>
+
+    <!-- Revealed content -->
+    <div class="hero-revealed" id="heroRevealed">
+      <div class="hero-tag">DDB Group Philippines</div>
+      <h1 class="hero-headline">Data That <span>Drives</span> Decisions</h1>
+      <p class="hero-sub">We transform raw data into competitive intelligence — powering strategy for the Philippines' biggest brands.</p>
+      <a href="#pillars" class="hero-cta">Explore Our Work →</a>
+    </div>
+
+    <div class="scroll-hint">Scroll to reveal</div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     § 2. SPOTLIGHT BORDER — THREE PILLARS
+     ════════════════════════════════════════════════ -->
+<section class="pillars-section" id="pillars">
+  <div class="section-tag fade-up">What We Do</div>
+  <h2 class="section-title fade-up">Three Pillars of Intelligence</h2>
+  <div class="pillar-grid" id="pillarGrid">
+    <div class="pillar-card fade-up">
+      <div class="pillar-icon">📡</div>
+      <div class="pillar-name">Social Intelligence</div>
+      <p class="pillar-desc">We extract valuable hidden insights from social media conversations to enable informed and insightful decision making.</p>
+      <div class="pillar-services">
+        <span>Social Listening</span>
+        <span>Crisis Monitoring</span>
+        <span>Reputation Audit</span>
+        <span>Trend Detection</span>
+      </div>
+    </div>
+    <div class="pillar-card fade-up">
+      <div class="pillar-icon">📊</div>
+      <div class="pillar-name">Digital Analytics</div>
+      <p class="pillar-desc">Data-driven analysis across your entire digital footprint — from web performance to competitive landscape mapping.</p>
+      <div class="pillar-services">
+        <span>Full Digital Audit</span>
+        <span>SEO Diagnostics</span>
+        <span>Web Analytics</span>
+        <span>UX Intelligence</span>
+      </div>
+    </div>
+    <div class="pillar-card fade-up">
+      <div class="pillar-icon">🎯</div>
+      <div class="pillar-name">Performance Media</div>
+      <p class="pillar-desc">Converting consumer intentions into measurable revenue through precision targeting and media optimization.</p>
+      <div class="pillar-services">
+        <span>Media Buying</span>
+        <span>Conversion Optimization</span>
+        <span>Audience Targeting</span>
+        <span>ROI Tracking</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     § 3. ACCORDION SLIDER — SERVICES SHOWCASE
+     ════════════════════════════════════════════════ -->
+<section class="accordion-section">
+  <div class="section-tag fade-up">Our Services</div>
+  <h2 class="section-title fade-up">Deep Capabilities</h2>
+  <div class="accordion-panels fade-up">
+    <div class="accordion-panel">
+      <div class="accordion-panel-bg" style="background:linear-gradient(135deg,#0c4a6e,#075985)"></div>
+      <div class="accordion-panel-overlay"></div>
+      <div class="accordion-panel-content">
+        <div class="accordion-panel-num">01</div>
+        <div class="accordion-panel-title">Social Listening</div>
+        <p class="accordion-panel-desc">Real-time monitoring across every platform. We hear what your customers are saying — even when they're not talking to you.</p>
+      </div>
+    </div>
+    <div class="accordion-panel">
+      <div class="accordion-panel-bg" style="background:linear-gradient(135deg,#164e63,#0e7490)"></div>
+      <div class="accordion-panel-overlay"></div>
+      <div class="accordion-panel-content">
+        <div class="accordion-panel-num">02</div>
+        <div class="accordion-panel-title">Competitive Intel</div>
+        <p class="accordion-panel-desc">Know what your competitors are doing before they do it. Share of voice, sentiment gaps, campaign tracking — all automated.</p>
+      </div>
+    </div>
+    <div class="accordion-panel">
+      <div class="accordion-panel-bg" style="background:linear-gradient(135deg,#1e3a5f,#1e40af)"></div>
+      <div class="accordion-panel-overlay"></div>
+      <div class="accordion-panel-content">
+        <div class="accordion-panel-num">03</div>
+        <div class="accordion-panel-title">Brand Health</div>
+        <p class="accordion-panel-desc">Continuous brand health monitoring with AI-powered sentiment analysis, crisis detection, and reputation scoring.</p>
+      </div>
+    </div>
+    <div class="accordion-panel">
+      <div class="accordion-panel-bg" style="background:linear-gradient(135deg,#312e81,#4338ca)"></div>
+      <div class="accordion-panel-overlay"></div>
+      <div class="accordion-panel-content">
+        <div class="accordion-panel-num">04</div>
+        <div class="accordion-panel-title">SEO & Search</div>
+        <p class="accordion-panel-desc">Full SEO diagnostics, keyword intelligence, and search performance tracking against your entire competitive set.</p>
+      </div>
+    </div>
+    <div class="accordion-panel">
+      <div class="accordion-panel-bg" style="background:linear-gradient(135deg,#1e293b,#334155)"></div>
+      <div class="accordion-panel-overlay"></div>
+      <div class="accordion-panel-content">
+        <div class="accordion-panel-num">05</div>
+        <div class="accordion-panel-title">Media Analytics</div>
+        <p class="accordion-panel-desc">End-to-end media performance measurement. From impression to conversion — every peso tracked, every result optimized.</p>
+      </div>
+    </div>
+    <div class="accordion-panel">
+      <div class="accordion-panel-bg" style="background:linear-gradient(135deg,#0f172a,#1e3a5f)"></div>
+      <div class="accordion-panel-overlay"></div>
+      <div class="accordion-panel-content">
+        <div class="accordion-panel-num">06</div>
+        <div class="accordion-panel-title">Crisis Response</div>
+        <p class="accordion-panel-desc">24/7 alert systems with rapid-response protocols. When issues emerge, we detect and escalate before they trend.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     § 4. ODOMETER STATS
+     ════════════════════════════════════════════════ -->
+<section class="stats-section">
+  <div class="section-tag fade-up">By The Numbers</div>
+  <h2 class="section-title fade-up">Proven at Scale</h2>
+  <div class="stats-grid fade-up">
+    <div class="stat-item">
+      <div class="odometer" data-value="8" data-suffix="+"></div>
+      <div class="stat-label">Years of Intelligence</div>
+    </div>
+    <div class="stat-item">
+      <div class="odometer" data-value="50" data-suffix="M+"></div>
+      <div class="stat-label">Data Points Analyzed</div>
+    </div>
+    <div class="stat-item">
+      <div class="odometer" data-value="30" data-suffix="+"></div>
+      <div class="stat-label">Major Brands Served</div>
+    </div>
+    <div class="stat-item">
+      <div class="odometer" data-value="6"></div>
+      <div class="stat-label">Platforms Monitored</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     § 5. KINETIC MARQUEE — CAPABILITIES
+     ════════════════════════════════════════════════ -->
+<section class="marquee-section">
+  <!-- Giant text -->
+  <div class="marquee-row marquee-giant" data-speed="1" data-direction="left">
+    <div class="marquee-content">
+      <span class="marquee-item">INTELLIGENCE<span class="dot"></span></span>
+      <span class="marquee-item">ANALYTICS<span class="dot"></span></span>
+      <span class="marquee-item">STRATEGY<span class="dot"></span></span>
+      <span class="marquee-item">INSIGHT<span class="dot"></span></span>
+    </div>
+  </div>
+  <!-- Outlined text -->
+  <div class="marquee-row marquee-outline" data-speed="0.7" data-direction="right">
+    <div class="marquee-content">
+      <span class="marquee-item">INTELLIGENCE<span class="dot"></span></span>
+      <span class="marquee-item">ANALYTICS<span class="dot"></span></span>
+      <span class="marquee-item">STRATEGY<span class="dot"></span></span>
+      <span class="marquee-item">INSIGHT<span class="dot"></span></span>
+    </div>
+  </div>
+  <!-- Tag pills -->
+  <div class="marquee-row marquee-tags" data-speed="0.5" data-direction="left" style="margin-top:2rem">
+    <div class="marquee-content">
+      <span class="marquee-item">Brandwatch</span>
+      <span class="marquee-item">Social Listening</span>
+      <span class="marquee-item">AI Classification</span>
+      <span class="marquee-item">Sentiment Analysis</span>
+      <span class="marquee-item">Competitive Intel</span>
+      <span class="marquee-item">Crisis Detection</span>
+      <span class="marquee-item">SEO Diagnostics</span>
+      <span class="marquee-item">Media Optimization</span>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     § 6. CTA
+     ════════════════════════════════════════════════ -->
+<section class="cta-section">
+  <div class="section-tag fade-up">Let's Talk</div>
+  <h2 class="cta-title fade-up">Ready to Turn Data<br>Into Your Advantage?</h2>
+  <p class="cta-sub fade-up">Whether it's a brand audit, campaign measurement, or building an always-on intelligence system — we'll show you what you're missing.</p>
+  <a href="mailto:hello@agileintelligence.ph" class="cta-btn fade-up">Get In Touch →</a>
+  <div class="cta-links fade-up">
+    <a href="https://www.agileintelligence.ph">Current Site</a>
+    <a href="https://www.linkedin.com/company/agile-intelligence-ddb/">LinkedIn</a>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     § 7. FOOTER
+     ════════════════════════════════════════════════ -->
+<footer>
+  <p>&copy; 2026 Agile Intelligence — DDB Group Philippines · 16F Two World Square, McKinley Hill, Taguig City</p>
+</footer>
+
+<!-- ════════════════════════════════════════════════
+     SCRIPTS
+     ════════════════════════════════════════════════ -->
+<script>
+(function() {
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ─── 1. Frame loader ─── */
+  var FRAME_COUNT = 61;
+  var frames = [];
+  var loadedCount = 0;
+  var canvas = document.getElementById('heroCanvas');
+  var ctx = canvas.getContext('2d');
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  function paintFrame(idx) {
+    if (!frames[idx] || !frames[idx].complete) return;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    var img = frames[idx];
+    var scale = Math.max(canvas.width / img.width, canvas.height / img.height);
+    var w = img.width * scale;
+    var h = img.height * scale;
+    ctx.drawImage(img, (canvas.width - w) / 2, (canvas.height - h) / 2, w, h);
+  }
+
+  for (var i = 1; i <= FRAME_COUNT; i++) {
+    var img = new Image();
+    img.src = 'static/frames/frame-' + String(i).padStart(3, '0') + '.jpg';
+    frames.push(img);
+    img.onload = function() {
+      loadedCount++;
+      if (loadedCount === 1) paintFrame(0);
+    };
+  }
+
+  /* ─── 2. Curtain + frame scrub ─── */
+  var leftPanel = document.querySelector('.curtain-panel--left');
+  var rightPanel = document.querySelector('.curtain-panel--right');
+  var heroRevealed = document.getElementById('heroRevealed');
+  var scrollHint = document.querySelector('.scroll-hint');
+  var currentFrame = { value: 0 };
+
+  var curtainTL = gsap.timeline({
+    scrollTrigger: {
+      trigger: '.curtain-section',
+      start: 'top top',
+      end: 'bottom top',
+      scrub: 1,
+      pin: false
+    }
+  });
+
+  curtainTL
+    .to(leftPanel, { xPercent: -100, ease: 'none' }, 0)
+    .to(rightPanel, { xPercent: 100, ease: 'none' }, 0)
+    .to(scrollHint, { opacity: 0, duration: 0.1 }, 0)
+    .to(heroRevealed, { opacity: 1, duration: 0.3 }, 0.4)
+    .to(currentFrame, {
+      value: FRAME_COUNT - 1,
+      ease: 'none',
+      onUpdate: function() {
+        paintFrame(Math.round(currentFrame.value));
+      }
+    }, 0);
+
+  /* ─── 3. Spotlight border tracking ─── */
+  var pillarGrid = document.getElementById('pillarGrid');
+  pillarGrid.addEventListener('mousemove', function(e) {
+    var rect = pillarGrid.getBoundingClientRect();
+    var cards = pillarGrid.querySelectorAll('.pillar-card');
+    cards.forEach(function(card) {
+      var cr = card.getBoundingClientRect();
+      var mx = (e.clientX - cr.left) / cr.width;
+      var my = (e.clientY - cr.top) / cr.height;
+      card.style.setProperty('--mx', mx);
+      card.style.setProperty('--my', my);
+    });
+  });
+
+  /* ─── 4. Odometer ─── */
+  document.querySelectorAll('.odometer').forEach(function(odo) {
+    var val = odo.dataset.value;
+    var suffix = odo.dataset.suffix || '';
+    var digits = val.split('');
+    odo.innerHTML = '';
+    digits.forEach(function(d) {
+      var digit = document.createElement('div');
+      digit.className = 'odo-digit';
+      var strip = document.createElement('div');
+      strip.className = 'odo-strip';
+      for (var n = 0; n <= 9; n++) {
+        var s = document.createElement('span');
+        s.textContent = n;
+        strip.appendChild(s);
+      }
+      digit.appendChild(strip);
+      odo.appendChild(digit);
+    });
+    if (suffix) {
+      var s = document.createElement('span');
+      s.className = 'stat-suffix';
+      s.textContent = suffix;
+      odo.appendChild(s);
+    }
+    ScrollTrigger.create({
+      trigger: odo,
+      start: 'top 85%',
+      once: true,
+      onEnter: function() {
+        var strips = odo.querySelectorAll('.odo-strip');
+        strips.forEach(function(strip, i) {
+          var target = parseInt(digits[i]);
+          var h = strip.children[0].offsetHeight;
+          strip.style.transform = 'translateY(-' + (target * h) + 'px)';
+          strip.style.transitionDelay = (i * 0.12) + 's';
+        });
+      }
+    });
+  });
+
+  /* ─── 5. Kinetic marquee ─── */
+  document.querySelectorAll('.marquee-row').forEach(function(row) {
+    var content = row.querySelector('.marquee-content');
+    var clone = content.cloneNode(true);
+    row.appendChild(clone);
+  });
+
+  var scrollVelocity = 0;
+  ScrollTrigger.create({
+    onUpdate: function(self) {
+      scrollVelocity = Math.abs(self.getVelocity());
+    }
+  });
+
+  var baseSpeed = 60;
+  document.querySelectorAll('.marquee-row').forEach(function(row) {
+    var content = row.querySelector('.marquee-content');
+    var direction = row.dataset.direction === 'right' ? 1 : -1;
+    var speedMult = parseFloat(row.dataset.speed) || 1;
+    var contentWidth = content.offsetWidth;
+    var x = direction === -1 ? 0 : -contentWidth;
+
+    function animate() {
+      var speed = (baseSpeed + scrollVelocity * 0.1) * speedMult;
+      x += direction * -1 * speed / 60;
+      if (direction === -1 && x <= -contentWidth) x += contentWidth;
+      if (direction === 1 && x >= 0) x -= contentWidth;
+      row.style.transform = 'translateX(' + x + 'px)';
+      requestAnimationFrame(animate);
+    }
+    animate();
+  });
+
+  /* ─── 6. Fade-up observer ─── */
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(function(el) {
+    observer.observe(el);
+  });
+
+})();
+</script>
+</body>
+</html>
