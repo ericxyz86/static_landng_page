@@ -1,0 +1,448 @@
+{
+  "version": 1,
+  "updatedAt": "2026-04-13T15:25:00+08:00",
+  "notes": "Canonical AI LABS app registry for apps.html and dashboard monitoring.",
+  "categories": [
+    {
+      "id": "data-extraction-scraping",
+      "label": "Data Extraction & Scraping",
+      "apps": [
+        {
+          "id": "apple-store-reviews",
+          "name": "Apple Store Reviews",
+          "description": "Extract and analyze data from the Apple App Store with ease.",
+          "image": "static/images/app-previews/apple-store-reviews.jpg",
+          "badgeNew": false,
+          "appUrl": "https://appstore.aiailabs.net",
+          "links": [
+            {
+              "label": "Launch App",
+              "url": "https://appstore.aiailabs.net"
+            }
+          ],
+          "monitor": true,
+          "hibernated": false
+        },
+        {
+          "id": "play-store-reviews",
+          "name": "Play Store Reviews",
+          "description": "Extract and analyze data from the Google Play Store efficiently.",
+          "image": "static/images/app-previews/play-store-reviews.jpg",
+          "badgeNew": false,
+          "appUrl": "https://playstore.aiailabs.net",
+          "links": [
+            {
+              "label": "Launch App",
+              "url": "https://playstore.aiailabs.net"
+            }
+          ],
+          "monitor": true,
+          "hibernated": false
+        },
+        {
+          "id": "youtube-comment-extractor",
+          "name": "YouTube Comment Extractor",
+          "description": "Extracts real comments from YouTube videos.",
+          "image": "static/images/app-previews/youtube-comment-extractor.jpg",
+          "badgeNew": false,
+          "appUrl": "https://youtube.aiailabs.net",
+          "links": [
+            {
+              "label": "Launch App",
+              "url": "https://youtube.aiailabs.net"
+            }
+          ],
+          "monitor": true,
+          "hibernated": false
+        },
+        {
+          "id": "reddit-comment-extractor",
+          "name": "Reddit Comment Extractor",
+          "description": "Extracts real Reddit comments using Reddit's official API. Runs locally on your machine.",
+          "image": "static/images/app-previews/reddit-comment-extractor.jpg",
+          "badgeNew": false,
+          "appUrl": "https://reddit.aiailabs.net",
+          "links": [
+            {
+              "label": "Launch App",
+              "url": "https://reddit.aiailabs.net"
+            }
+          ],
+          "monitor": true,
+          "hibernated": false
+        },
+        {
+          "id": "social-media-processor",
+          "name": "Social Media Processor",
+          "description": "Convert your social media data exports into structured CSV format.",
+          "image": "static/images/app-previews/social-media-processor.jpg",
+          "badgeNew": false,
+          "appUrl": "https://txt-csv.aiailabs.net",
+          "links": [
+            {
+              "label": "Launch App",
+              "url": "https://txt-csv.aiailabs.net"
+            }
+          ],
+          "monitor": true,
+          "hibernated": false
+        },
+        {
+          "id": "crawlai",
+          "name": "CrawlAI",
+          "description": "AI-powered website crawler.",
+          "image": "static/images/app-previews/crawlai.jpg",
+          "badgeNew": false,
+          "appUrl": "https://crawl.aiailabs.net",
+          "links": [
+            {
+              "label": "Launch App",
+              "url": "https://crawl.aiailabs.net"
+            }
+          ],
+          "monitor": true,
+          "hibernated": false
+        },
+        {
+          "id": "video-downloader",
+          "name": "Video Downloader",
+          "description": "Download videos from 50+ platforms including YouTube, Twitter/X, TikTok, Instagram, Reddit, and more.",
+          "image": "static/images/app-previews/video-downloader.jpg",
+          "badgeNew": false,
+          "appUrl": "https://videos.aiailabs.net",
+          "links": [
+            {
+              "label": "Launch App",
+              "url": "https://videos.aiailabs.net"
+            }
+          ],
+          "monitor": true,
+          "hibernated": false
+        }
+      ]
+    },
+    {
+      "id": "brand-market-intelligence",
+      "label": "Brand & Market Intelligence",
+      "apps": [
+        {
+          "id": "brand-scores-analyzer",
+          "name": "Brand Scores Analyzer",
+          "description": "Analyze brand perception across Traditional-Progressive and Distinct-Conforming axes.",
+          "image": "static/images/app-previews/brand-scores-analyzer.jpg",
+          "badgeNew": false,
+          "appUrl": "https://brand-scores.aiailabs.net",
+          "links": [
+            {
+              "label": "Launch App",
+              "url": "https://brand-scores.aiailabs.net"
+            }
+          ],
+          "monitor": true,
+          "hibernated": false
+        },
+        {
+          "id": "brand-intelligence-dashboard",
+          "name": "Brand Intelligence Dashboard",
+          "description": "Unified social listening dashboard for BYD & Kia Philippines with LLM-powered sentiment analysis and AI insights.",
+          "image": "static/images/app-previews/brand-intelligence-dashboard.jpg",
+          "badgeNew": false,
+          "appUrl": "https://byd-kia-brand-dashboard.aiailabs.net",
+          "links": [
+            {
+              "label": "Launch App",
+              "url": "https://byd-kia-brand-dashboard.aiailabs.net"
+            }
+          ],
+          "monitor": true,
+          "hibernated": false
+        },
+        {
+          "id": "byd-dealer-analytics",
+          "name": "BYD Dealer Analytics",
+          "description": "Leads performance dashboard for BYD dealers.",
+          "image": "static/images/app-previews/byd-dealer-analytics.jpg",
+          "badgeNew": false,
+          "appUrl": "https://byd-dealer.aiailabs.net",
+          "links": [
+            {
+              "label": "Launch App",
+              "url": "https://byd-dealer.aiailabs.net"
+            }
+          ],
+          "monitor": true,
+          "hibernated": false
+        },
+        {
+          "id": "byd-brand-saliency",
+          "name": "BYD Brand Saliency",
+          "description": "Track consumer perception across brand saliency pillars for BYD Philippines.",
+          "image": "static/images/app-previews/byd-brand-saliency.jpg",
+          "badgeNew": true,
+          "appUrl": "https://byd-salience.aiailabs.net",
+          "links": [
+            {
+              "label": "Launch App",
+              "url": "https://byd-salience.aiailabs.net"
+            }
+          ],
+          "monitor": true,
+          "hibernated": false
+        },
+        {
+          "id": "competitive-ads-dashboard",
+          "name": "Competitive Ads Dashboard",
+          "description": "Monitor competitor ads across Meta, Google, and LinkedIn ad libraries in one unified intelligence dashboard.",
+          "image": "static/images/app-previews/competitive-ads-dashboard.jpg",
+          "badgeNew": true,
+          "appUrl": "https://competitive-ads.aiailabs.net",
+          "links": [
+            {
+              "label": "Launch App",
+              "url": "https://competitive-ads.aiailabs.net"
+            }
+          ],
+          "monitor": true,
+          "hibernated": false
+        },
+        {
+          "id": "pldt-fandom-tracker",
+          "name": "PLDT Fandom Tracker",
+          "description": "Track and analyze PLDT Home's fan communities, content performance, and audience engagement with AI-powered insights.",
+          "image": "static/images/app-previews/pldt-fandom-tracker.jpg",
+          "badgeNew": true,
+          "appUrl": "https://pldt-fandom.aiailabs.net",
+          "healthUrl": "https://pldt-fandom.aiailabs.net/overview",
+          "links": [
+            {
+              "label": "Launch App",
+              "url": "https://pldt-fandom.aiailabs.net"
+            }
+          ],
+          "monitor": true,
+          "hibernated": false
+        },
+        {
+          "id": "valuation-ledger",
+          "name": "Valuation Ledger",
+          "description": "Automate PR and earned media valuation — collects mentions across social platforms, computes monetary value, and generates campaign reports.",
+          "image": "static/images/app-previews/valuation-ledger.jpg",
+          "badgeNew": true,
+          "appUrl": "https://valuation.aiailabs.net",
+          "links": [
+            {
+              "label": "Launch App",
+              "url": "https://valuation.aiailabs.net"
+            }
+          ],
+          "monitor": true,
+          "hibernated": false,
+          "healthHint": "Add public /api/health or CF Access service-token check for deeper monitoring."
+        },
+        {
+          "id": "byd-brand-pillars",
+          "name": "BYD Brand Pillars",
+          "description": "Consumer sentiment dashboard for BYD with pillar scoring, positive rate trends, and AI-powered insights.",
+          "image": "static/images/app-previews/chewy-byd.jpg",
+          "badgeNew": true,
+          "appUrl": "https://chewy-byd.aiailabs.net",
+          "links": [
+            {
+              "label": "Launch App",
+              "url": "https://chewy-byd.aiailabs.net"
+            }
+          ],
+          "monitor": true,
+          "hibernated": false
+        }
+      ]
+    },
+    {
+      "id": "telecom-industry",
+      "label": "Telecom & Industry",
+      "apps": [
+        {
+          "id": "telco-complaints-tracking",
+          "name": "Telco Complaints Tracking",
+          "description": "Tracks complaints from Globe, Converge, PLDT and more with AI classification and geocoded heatmaps.",
+          "image": "static/images/app-previews/telco-complaints-tracking.jpg",
+          "badgeNew": false,
+          "appUrl": "https://isp-complaints.aiailabs.net",
+          "links": [
+            {
+              "label": "Launch App",
+              "url": "https://isp-complaints.aiailabs.net"
+            }
+          ],
+          "monitor": true,
+          "hibernated": false,
+          "openaiProject": "proj_fDr9SCsbqfCL0ZBpbyqV90Xk"
+        },
+        {
+          "id": "philippine-telco-news",
+          "name": "Philippine Telco News",
+          "description": "A news aggregator for the Philippine telecommunications industry.",
+          "image": "static/images/app-previews/philippine-telco-news.jpg",
+          "badgeNew": false,
+          "appUrl": "https://telco-news.aiailabs.net",
+          "links": [
+            {
+              "label": "Launch App",
+              "url": "https://telco-news.aiailabs.net"
+            }
+          ],
+          "monitor": true,
+          "hibernated": false
+        }
+      ]
+    },
+    {
+      "id": "ai-research-tools",
+      "label": "AI & Research Tools",
+      "apps": [
+        {
+          "id": "ddbrain",
+          "name": "DDBrain",
+          "description": "AI-powered SharePoint document search and Q&A using advanced RAG technology.",
+          "image": "static/images/app-previews/ddbrain.jpg",
+          "badgeNew": false,
+          "appUrl": "https://ddb-sharepoint-rag.aiailabs.net",
+          "links": [
+            {
+              "label": "Launch App",
+              "url": "https://ddb-sharepoint-rag.aiailabs.net"
+            }
+          ],
+          "monitor": true,
+          "hibernated": true
+        },
+        {
+          "id": "deep-research",
+          "name": "Deep Research",
+          "description": "An autonomous research agent that plans, executes, and synthesizes multi-step research tasks.",
+          "image": "static/images/app-previews/deep-research.jpg",
+          "badgeNew": false,
+          "appUrl": "https://deep-research.aiailabs.net",
+          "links": [
+            {
+              "label": "Launch App",
+              "url": "https://deep-research.aiailabs.net"
+            }
+          ],
+          "monitor": true,
+          "hibernated": false
+        },
+        {
+          "id": "llm-council",
+          "name": "LLM Council",
+          "description": "Query multiple LLMs via OpenRouter with multi-stage evaluation, then synthesize a higher-quality final answer.",
+          "image": "static/images/app-previews/llm-council.jpg",
+          "badgeNew": false,
+          "appUrl": "https://llm-council.aiailabs.net",
+          "links": [
+            {
+              "label": "Launch App",
+              "url": "https://llm-council.aiailabs.net"
+            }
+          ],
+          "monitor": true,
+          "hibernated": false
+        },
+        {
+          "id": "ai-troll-analyzer",
+          "name": "AI Troll Analyzer",
+          "description": "Advanced tool for detecting and analyzing coordinated trolling behavior on social media platforms.",
+          "image": "static/images/app-previews/ai-troll-analyzer.jpg",
+          "badgeNew": false,
+          "appUrl": "https://troll.aiailabs.net",
+          "links": [
+            {
+              "label": "Launch App",
+              "url": "https://troll.aiailabs.net"
+            }
+          ],
+          "monitor": true,
+          "hibernated": true
+        },
+        {
+          "id": "location-parser-and-classification",
+          "name": "Location Parser and Classification",
+          "description": "Extract locations and classify text with AI.",
+          "image": "static/images/app-previews/location-parser-classification.jpg",
+          "badgeNew": false,
+          "appUrl": "https://location-parser.aiailabs.net",
+          "links": [
+            {
+              "label": "Launch App",
+              "url": "https://location-parser.aiailabs.net"
+            }
+          ],
+          "monitor": true,
+          "hibernated": false
+        }
+      ]
+    },
+    {
+      "id": "productivity-utilities",
+      "label": "Productivity & Utilities",
+      "apps": [
+        {
+          "id": "ai-webpage-summarizer",
+          "name": "AI Webpage Summarizer",
+          "description": "Chrome extension using AI to summarize webpages with key insights and sentiment analysis.",
+          "image": "static/images/app-previews/ai-webpage-summarizer.jpg",
+          "badgeNew": false,
+          "appUrl": "https://chromewebstore.google.com/detail/ai-executive-summary/leglfbaoonknnjkehmbpjkcmgljledne",
+          "links": [
+            {
+              "label": "Install Extension",
+              "url": "https://chromewebstore.google.com/detail/ai-executive-summary/leglfbaoonknnjkehmbpjkcmgljledne"
+            },
+            {
+              "label": "Privacy Policy",
+              "url": "privacy-policy.html"
+            }
+          ],
+          "monitor": false,
+          "hibernated": false
+        },
+        {
+          "id": "google-sheets-ai-script",
+          "name": "Google Sheets AI Script",
+          "description": "Enhance your Google Sheets with AI capabilities using custom App Scripts.",
+          "image": "static/images/app-previews/google-sheets-ai-script.jpg",
+          "badgeNew": false,
+          "appUrl": "appscript.html",
+          "links": [
+            {
+              "label": "View Script",
+              "url": "appscript.html"
+            }
+          ],
+          "monitor": false,
+          "hibernated": false
+        },
+        {
+          "id": "keynote2pdf-converter",
+          "name": "Keynote2PDF Converter",
+          "description": "Convert multiple Keynote files to PDF at once. macOS only.",
+          "image": "static/images/app-previews/keynote2pdf-converter.jpg",
+          "badgeNew": false,
+          "appUrl": "https://github.com/ericxyz86/keynote2pdf/releases/download/v1.0.0-security-fixes/Keynote2PDF-Installer.dmg",
+          "links": [
+            {
+              "label": "Download",
+              "url": "https://github.com/ericxyz86/keynote2pdf/releases/download/v1.0.0-security-fixes/Keynote2PDF-Installer.dmg"
+            },
+            {
+              "label": "User Guide",
+              "url": "https://github.com/ericxyz86/keynote2pdf/blob/main/USER_GUIDE.md"
+            }
+          ],
+          "monitor": false,
+          "hibernated": false
+        }
+      ]
+    }
+  ]
+}
