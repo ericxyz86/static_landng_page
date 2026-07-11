@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-04-13T15:25:00+08:00",
+  "updatedAt": "2026-07-11T11:40:00+08:00",
   "notes": "Canonical AI LABS app registry for apps.html and dashboard monitoring.",
   "categories": [
     {
@@ -250,6 +250,22 @@
             {
               "label": "Launch App",
               "url": "https://chewy-byd.aiailabs.net"
+            }
+          ],
+          "monitor": true,
+          "hibernated": false
+        },
+        {
+          "id": "search-intelligence",
+          "name": "Search Intelligence",
+          "description": "Track search rankings, demand trends, and share of search — plus how brands appear in AI answers across ChatGPT, Gemini, Perplexity, and Claude.",
+          "image": "static/images/app-previews/search-intelligence.jpg",
+          "badgeNew": true,
+          "appUrl": "https://search-intelligence.aiailabs.net",
+          "links": [
+            {
+              "label": "Launch App",
+              "url": "https://search-intelligence.aiailabs.net"
             }
           ],
           "monitor": true,
