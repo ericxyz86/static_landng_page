@@ -89,7 +89,7 @@ npx serve .
 
 Pushes to `main` **auto-deploy to production** (aiailabs.net) via a GitHub webhook into the hosting platform — a push is live within seconds, so treat every push to `main` as a production release. The apex `/` 301-redirects to `/index.html`; Cloudflare proxies the site and injects its email-obfuscation script.
 
-Cloudflare caches static assets (CSS) at the edge but not HTML, so `style-v3.css` is linked with a `?v=YYYYMMDD` cache-busting query. **Whenever the CSS changes, bump the version in every page that links it** (`apps.html`, `appscript.html`, `privacy-policy.html`) — otherwise the old stylesheet keeps being served for hours after deploy.
+Cloudflare caches static assets (CSS) at the edge but not HTML, so `style-v3.css` is linked with a `?v=YYYYMMDD` cache-busting query. **Whenever the CSS changes, bump the version in every page that links it** (`apps.html`, `appscript.html`, `privacy-policy.html`) — otherwise the old stylesheet keeps being served for hours after deploy. After pushing, verify the deploy landed using a throwaway query param (e.g. `?cb=123`), not the new `?v=` URL — Cloudflare permanently caches whatever it first sees under that key, so requesting it mid-deploy poisons it with the old file. If that happens, bump the version suffix again.
 
 ## Code Patterns
 - `navigateToApp(url)` opens external apps in new tabs; catalog buttons use inline `onclick` with `event.preventDefault()`
