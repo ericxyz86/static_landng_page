@@ -20,6 +20,7 @@
   --radius-btn: 8px;
   --radius-img: 8px;
   --nav-h: 64px;
+  --gutter: clamp(2rem, 3vw, 4.5rem);
 }
 
 html.dark {
@@ -59,6 +60,7 @@ button { font: inherit; cursor: pointer; }
   max-width: 1120px; margin: 0 auto; padding: 0 1.5rem; width: 100%;
   display: flex; align-items: center; justify-content: space-between;
 }
+.nav-inner-fluid { max-width: none; padding: 0 var(--gutter); }
 .nav-brand { display: flex; align-items: center; gap: 10px; }
 .nav-brand img { height: 32px; width: auto; }
 .nav-right { display: flex; align-items: center; gap: 1rem; }
@@ -118,7 +120,7 @@ button { font: inherit; cursor: pointer; }
 }
 
 /* ── Sections ── */
-.section { padding: 80px clamp(2rem, 3vw, 4.5rem); }
+.section { padding: 80px var(--gutter); }
 .section-inner { max-width: 1120px; margin: 0 auto; }
 .section-inner-fluid { max-width: none; }
 .section-label {
@@ -265,12 +267,13 @@ button { font: inherit; cursor: pointer; }
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
+  :root { --gutter: 1rem; }
   .hero { padding: calc(var(--nav-h) + 48px) 1.5rem 48px; }
   .hero h1 { font-size: 2rem; }
   .cap-grid { grid-template-columns: 1fr; }
   .footer-inner { flex-direction: column; gap: 1rem; text-align: center; }
   .nav-right .nav-link-text { display: none; }
-  .section { padding: 48px 1rem; }
+  .section { padding: 48px var(--gutter); }
 }
 @media (max-width: 480px) {
   .hero h1 { font-size: 1.75rem; }
