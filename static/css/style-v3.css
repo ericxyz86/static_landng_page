@@ -200,10 +200,12 @@ button { font: inherit; cursor: pointer; }
 
 /* ── Footer ── */
 .footer { padding: 2rem 1.5rem; border-top: 1px solid var(--border); }
+.footer-fluid { padding-left: var(--gutter); padding-right: var(--gutter); }
 .footer-inner {
   max-width: 1120px; margin: 0 auto;
   display: flex; justify-content: space-between; align-items: center;
 }
+.footer-fluid .footer-inner { max-width: none; }
 .footer p { font-size: 0.8125rem; color: var(--text-3); }
 .footer-links { display: flex; align-items: center; gap: 1rem; }
 .footer a { color: var(--text-2); transition: color 150ms ease; }

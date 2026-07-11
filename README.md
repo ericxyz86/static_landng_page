@@ -1,6 +1,6 @@
 # AI LABS Landing Page
 
-The public site for **AI LABS** (Agile Intelligence @ DDB Group Philippines), live at [aiailabs.net](https://aiailabs.net) — a landing page plus a catalog of 26 AI-powered tools for marketing intelligence, data analytics, and competitive research.
+The public site for **AI LABS** (Agile Intelligence @ GGC Group Asia), live at [aiailabs.net](https://aiailabs.net) — a landing page plus a catalog of 26 AI-powered tools for marketing intelligence, data analytics, and competitive research.
 
 Pure HTML/CSS/JS. No framework, no build step, no package manager.
 
