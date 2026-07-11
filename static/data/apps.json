@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-11T11:40:00+08:00",
+  "updatedAt": "2026-07-11T12:20:00+08:00",
   "notes": "Canonical AI LABS app registry for apps.html and dashboard monitoring.",
   "categories": [
     {
@@ -178,7 +178,7 @@
           "name": "BYD Brand Saliency",
           "description": "Track consumer perception across brand saliency pillars for BYD Philippines.",
           "image": "static/images/app-previews/byd-brand-saliency.jpg",
-          "badgeNew": true,
+          "badgeNew": false,
           "appUrl": "https://byd-salience.aiailabs.net",
           "links": [
             {
@@ -194,7 +194,7 @@
           "name": "Competitive Ads Dashboard",
           "description": "Monitor competitor ads across Meta, Google, and LinkedIn ad libraries in one unified intelligence dashboard.",
           "image": "static/images/app-previews/competitive-ads-dashboard.jpg",
-          "badgeNew": true,
+          "badgeNew": false,
           "appUrl": "https://competitive-ads.aiailabs.net",
           "links": [
             {
@@ -210,7 +210,7 @@
           "name": "PLDT Fandom Tracker",
           "description": "Track and analyze PLDT Home's fan communities, content performance, and audience engagement with AI-powered insights.",
           "image": "static/images/app-previews/pldt-fandom-tracker.jpg",
-          "badgeNew": true,
+          "badgeNew": false,
           "appUrl": "https://pldt-fandom.aiailabs.net",
           "healthUrl": "https://pldt-fandom.aiailabs.net/overview",
           "links": [
@@ -227,7 +227,7 @@
           "name": "Valuation Ledger",
           "description": "Automate PR and earned media valuation — collects mentions across social platforms, computes monetary value, and generates campaign reports.",
           "image": "static/images/app-previews/valuation-ledger.jpg",
-          "badgeNew": true,
+          "badgeNew": false,
           "appUrl": "https://valuation.aiailabs.net",
           "links": [
             {
@@ -244,7 +244,7 @@
           "name": "BYD Brand Pillars",
           "description": "Consumer sentiment dashboard for BYD with pillar scoring, positive rate trends, and AI-powered insights.",
           "image": "static/images/app-previews/chewy-byd.jpg",
-          "badgeNew": true,
+          "badgeNew": false,
           "appUrl": "https://chewy-byd.aiailabs.net",
           "links": [
             {
