@@ -118,7 +118,7 @@ button { font: inherit; cursor: pointer; }
 }
 
 /* ── Sections ── */
-.section { padding: 80px 1.5rem; }
+.section { padding: 80px 2.5rem; }
 .section-inner { max-width: 1120px; margin: 0 auto; }
 .section-inner-fluid { max-width: none; }
 .section-label {
