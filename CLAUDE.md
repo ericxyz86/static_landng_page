@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Static landing page for AI LABS (Agile Intelligence @ GGC Group Asia) showcasing 26 AI-powered tools organized in 5 categories. Minimalist dark-first design inspired by Linear/Vercel. No build system, no framework, no package manager — pure HTML/CSS/JS.
+Static landing page for AI LABS (Agile Intelligence @ GGC Group Asia) showcasing 27 AI-powered tools organized in 5 categories. Minimalist dark-first design inspired by Linear/Vercel. No build system, no framework, no package manager — pure HTML/CSS/JS.
 
 This repo is **public** and its files (including this one) are served verbatim on the production site — never commit secrets, tokens, or internal infrastructure identifiers.
 
@@ -60,7 +60,7 @@ Conventions:
 2. **Brand & Market Intelligence** (9 apps)
 3. **Telecom & Industry** (2 apps)
 4. **AI & Research Tools** (5 apps)
-5. **Productivity & Utilities** (3 apps)
+5. **Productivity & Utilities** (4 apps)
 
 ## Design System (style-v3.css)
 - **Dark theme** (default): `#09090b` bg, `#18181b` surfaces, `#27272a` borders
