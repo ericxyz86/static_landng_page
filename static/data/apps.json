@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-11T21:00:00+08:00",
+  "updatedAt": "2026-10-11T21:30:00+08:00",
   "notes": "Canonical AI LABS app registry for apps.html and dashboard monitoring.",
   "categories": [
     {
@@ -469,6 +469,23 @@
             {
               "label": "Launch App",
               "url": "https://ops.aiailabs.net"
+            }
+          ],
+          "monitor": true,
+          "hibernated": false,
+          "healthUrl": "https://checker.aiailabs.net/api/health"
+        },
+        {
+          "id": "seo-aeo-checker-public",
+          "name": "SEO-AEO Checker (Public)",
+          "description": "Check any public webpage for speed, mobile, SEO, and AI discovery readiness.",
+          "image": "static/images/app-previews/seo-aeo-checker.jpg",
+          "badgeNew": true,
+          "appUrl": "https://checker.aiailabs.net",
+          "links": [
+            {
+              "label": "Launch App",
+              "url": "https://checker.aiailabs.net"
             }
           ],
           "monitor": true,
