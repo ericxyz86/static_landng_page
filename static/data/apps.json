@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-11T21:30:00+08:00",
+  "updatedAt": "2026-10-23T23:45:00+08:00",
   "notes": "Canonical AI LABS app registry for apps.html and dashboard monitoring.",
   "categories": [
     {
@@ -270,6 +270,22 @@
           ],
           "monitor": true,
           "hibernated": false
+        },
+        {
+          "id": "issue-spread-tracker",
+          "name": "Issue Spread Tracker",
+          "description": "Track how a client issue spreads across news, Facebook, Instagram, X and YouTube, with AI comment themes, a spread map and branded PDF reports.",
+          "image": "static/images/app-previews/issue-spread-tracker.jpg",
+          "badgeNew": true,
+          "appUrl": "https://issues.aiailabs.net",
+          "links": [
+            {
+              "label": "Launch App",
+              "url": "https://issues.aiailabs.net"
+            }
+          ],
+          "monitor": true,
+          "hibernated": false
         }
       ]
     },
@@ -463,7 +479,7 @@
           "name": "SEO-AEO Checker",
           "description": "Check client websites for SEO and AI discovery readiness, then turn the results into approved PDF reports.",
           "image": "static/images/app-previews/seo-aeo-checker.jpg",
-          "badgeNew": true,
+          "badgeNew": false,
           "appUrl": "https://ops.aiailabs.net",
           "links": [
             {
@@ -480,7 +496,7 @@
           "name": "SEO-AEO Checker (Public)",
           "description": "Check any public webpage for speed, mobile, SEO, and AI discovery readiness.",
           "image": "static/images/app-previews/seo-aeo-checker.jpg",
-          "badgeNew": true,
+          "badgeNew": false,
           "appUrl": "https://checker.aiailabs.net",
           "links": [
             {
