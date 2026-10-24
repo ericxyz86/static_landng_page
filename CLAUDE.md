@@ -17,7 +17,7 @@ This repo is **public** and its files (including this one) are served verbatim o
 - **App catalog**: `apps.html` is a thin shell — cards are rendered client-side by `static/js/apps-catalog.js` from `static/data/apps.json`
 
 ### Key Files
-- `index.html` — Landing page: GSAP curtain-reveal hero, capability pillars, Featured Work accordion slider (8 panels), Nox AI section, tech stack, CTA
+- `index.html` — Landing page: GSAP curtain-reveal hero, capability pillars, Featured Work accordion slider (9 panels), Nox AI section, tech stack, CTA
 - `index-agile.html` — Agile Intelligence cinematic variant: scroll-synced video hero (frame sequence scrubbed via GSAP ScrollTrigger)
 - `apps.html` — Full catalog shell; renders all apps from `apps.json`
 - `appscript.html` — Google Apps Script documentation and code viewer (Prism.js)
